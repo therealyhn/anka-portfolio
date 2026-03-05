@@ -1,0 +1,14 @@
+<svg width="1200" height="820" viewBox="0 0 1200 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="820" fill="#1D1D1D"/>
+  <rect x="30" y="30" width="1140" height="760" rx="24" fill="url(#bg)"/>
+  <path d="M220 620L430 420L610 560L760 470L950 620" stroke="#D8D8D8" stroke-opacity="0.55" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="500" cy="340" r="58" fill="#FF6A2E" fill-opacity="0.75"/>
+  <text x="600" y="180" text-anchor="middle" fill="#F7F7F7" font-family="Manrope, Arial, sans-serif" font-size="62" font-weight="700">Project Preview</text>
+  <text x="600" y="245" text-anchor="middle" fill="#E1E1E1" font-family="Manrope, Arial, sans-serif" font-size="28" font-weight="500">Placeholder image</text>
+  <defs>
+    <linearGradient id="bg" x1="30" y1="30" x2="1170" y2="790" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2E2E2E"/>
+      <stop offset="1" stop-color="#161616"/>
+    </linearGradient>
+  </defs>
+</svg>

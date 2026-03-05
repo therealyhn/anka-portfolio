@@ -26,9 +26,9 @@ function Navbar() {
   }
 
   return (
-    <header className="fixed inset-x-0 top-10 z-50 px-3 sm:px-4 md:top-12 md:px-8">
+    <header className="inset-x-0">
       <div className="relative mx-auto flex max-w-[1400px] items-center justify-center">
-        <nav className="flex w-full max-w-[360px] items-center justify-between rounded-xl bg-brand-surface px-3 py-3 shadow-edge sm:max-w-[640px] sm:px-4 md:px-5 md:py-4 lg:max-w-[760px]">
+        <nav className="fixed top-10 z-50 flex w-full max-w-[320px] items-center justify-between rounded-xl bg-brand-surface px-3 py-3 shadow-edge sm:max-w-[640px] sm:px-4 md:top-12 md:px-5 md:py-4 lg:max-w-[760px]">
           <a
             href="#hero"
             aria-label="Back to top"
@@ -78,6 +78,21 @@ function Navbar() {
             </span>
           </button>
         </nav>
+
+        <button
+          type="button"
+          aria-label={isEnglish ? 'Switch to Serbian' : 'Switch to English'}
+          aria-pressed={!isEnglish}
+          onClick={toggleLanguage}
+          className="absolute right-0 top-8 z-[60] hidden h-10 w-[76px] cursor-pointer items-center rounded-full bg-white/15 px-1 transition-colors duration-300 ease-premium hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent lg:inline-flex"
+        >
+          <span
+            aria-hidden="true"
+            className={`relative z-10 inline-flex h-8 w-8 items-center justify-center rounded-full transition-transform duration-300 ease-premium ${isEnglish ? 'translate-x-0' : 'translate-x-9'}`}
+          >
+            <img src={isEnglish ? englishIcon : serbianIcon} alt={isEnglish ? 'English' : 'Serbian'} className="h-10 w-10" />
+          </span>
+        </button>
 
         <div
           className={`absolute right-0 top-[calc(100%+10px)] w-[min(320px,calc(100vw-24px))] overflow-hidden rounded-2xl border border-brand-line/40 bg-brand-surface p-3 shadow-edge transition-all duration-300 ease-premium sm:w-[360px] lg:hidden ${isMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'}`}

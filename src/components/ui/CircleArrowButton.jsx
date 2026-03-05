@@ -5,6 +5,7 @@ function CircleArrowButton({
   iconClassName = '',
   centerFillOnHover = false,
   fillColorClass = 'bg-brand-ink',
+  fillClassName = '',
   motionPreset = 'diagonal',
 }) {
   const baseIconMotionClass =
@@ -25,7 +26,7 @@ function CircleArrowButton({
       {centerFillOnHover ? (
         <span
           aria-hidden="true"
-          className={`absolute inset-0 scale-0 rounded-full transition-transform duration-300 ease-premium group-hover:scale-100 ${fillColorClass}`}
+          className={`absolute inset-0 scale-0 rounded-full transition-transform duration-300 ease-premium group-hover:scale-100 ${fillColorClass} ${fillClassName}`}
         />
       ) : null}
 

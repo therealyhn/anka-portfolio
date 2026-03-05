@@ -85,7 +85,7 @@ function HeroSection() {
             </a>
           </div>
 
-          <p className="pb-2 text-left text-sm font-semibold text-white/90 sm:text-base md:pb-6 md:pr-6 md:text-right md:text-lg">
+          <p className="pb-2 text-left text-sm font-semibold text-white/90 sm:text-left md:pb-6 md:pr-6 md:text-right md:text-md lg:text-lg">
             Based in Serbia <span className="text-brand-success">{belgradeTime}</span>
           </p>
         </div>
