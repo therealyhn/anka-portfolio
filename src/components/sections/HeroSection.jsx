@@ -33,16 +33,22 @@ function HeroSection() {
 
         <div className="mt-auto flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div className="max-w-[360px]">
-            <p className=" leading-relaxed text-white/90 md:text-xl">
+            <p className="leading-relaxed text-white/90 md:text-xl">
               I design products, platforms, and everything in between, made to make sense the first time you use them.
             </p>
-            <button
-              type="button"
-              className="mt-6 inline-flex items-center gap-3 text-xl font-medium text-white transition-colors duration-300 ease-premium hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent md:text-[27px]"
+            <a
+              href="#projects"
+              className="group mt-6 inline-flex items-center gap-3 text-xl font-medium text-white transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent md:text-[27px]"
             >
               <span className="text-sm tracking-wide">Discover more</span>
-              <CircleArrowButton label="Discover more projects" iconSrc={discoverArrow} centerFillOnHover />
-            </button>
+              <CircleArrowButton
+                iconSrc={discoverArrow}
+                iconHoverSrc={discoverArrow}
+                centerFillOnHover
+                fillColorClass="bg-white"
+                motionPreset="vertical-down"
+              />
+            </a>
           </div>
 
           <p className="pb-6 pr-6 text-right text-base font-semibold text-white/90 md:text-lg">

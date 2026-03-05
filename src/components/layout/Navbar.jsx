@@ -38,16 +38,10 @@ function Navbar() {
 
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 text-base font-semibold text-brand-ink transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface"
+            className="group inline-flex items-center gap-2 text-base font-semibold text-brand-ink transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface"
           >
             <span className="hidden sm:inline">Let&apos;s talk</span>
-            <CircleArrowButton
-              label="Navigate to contact section"
-              iconSrc={navArrow}
-              iconHoverSrc={navArrowHover}
-              ringOffsetClass="ring-offset-brand-surface"
-              centerFillOnHover
-            />
+            <CircleArrowButton iconSrc={navArrow} iconHoverSrc={navArrowHover} centerFillOnHover />
           </a>
         </nav>
 
