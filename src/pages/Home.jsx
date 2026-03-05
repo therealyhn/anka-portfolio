@@ -9,7 +9,7 @@ import FooterSection from '../components/sections/FooterSection'
 function Home() {
   return (
     <SiteShell>
-      <main className="space-y-4">
+      <main className="space-y-3 p-2 sm:space-y-4 sm:p-3 md:p-4">
         <HeroSection />
         <ProjectsSection />
         <ServicesSection />
