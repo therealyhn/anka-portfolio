@@ -10,7 +10,24 @@ export default defineConfig({
   projectId: 'v69k4zml',
   dataset: 'production',
 
-  plugins: [structureTool(), visionTool()],
+  plugins: [
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title('Content')
+          .items([
+            S.listItem()
+              .title('Hero Section')
+              .child(
+                S.editor()
+                  .id('heroSection')
+                  .schemaType('heroSection')
+                  .documentId('heroSection')
+              ),
+          ]),
+    }),
+    visionTool(),
+  ],
 
   schema: {
     types: schemaTypes,

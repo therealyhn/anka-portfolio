@@ -1,8 +1,13 @@
-import { createClient } from "@sanity/client";
+import { createClient } from '@sanity/client'
+
+const projectId = import.meta.env.VITE_SANITY_PROJECT_ID || 'v69k4zml'
+const dataset = import.meta.env.VITE_SANITY_DATASET || 'production'
+const apiVersion = import.meta.env.VITE_SANITY_API_VERSION || '2025-01-01'
+const useCdn = import.meta.env.VITE_SANITY_USE_CDN !== 'false'
 
 export const sanityClient = createClient({
-    projectId: "TVOJ_PROJECT_ID",
-    dataset: "production",
-    useCdn: true,
-    apiVersion: "2025-01-01",
-});
+  projectId,
+  dataset,
+  useCdn,
+  apiVersion,
+})
