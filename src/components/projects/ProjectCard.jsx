@@ -22,16 +22,16 @@ function ProjectCard({ project }) {
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100">
             <span className="pointer-events-auto">
               <CircleArrowButton
-                className="group h-16 w-16"
-                iconClassName="h-5 w-5"
+                className="group !h-16 !w-16"
+                iconClassName="!h-5 !w-5"
                 iconSrc={navArrow}
                 iconHoverSrc={navArrowHover}
                 centerFillOnHover
-                fillClassName="-inset-px group-hover:scale-110"
+                fillClassName="!-inset-px group-hover:scale-110"
               />
             </span>
           </div>
-          <p className="pointer-events-none absolute bottom-3 left-3 rounded-md bg-black/45 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-white opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100">
+          <p className="pointer-events-none absolute bottom-3 left-3 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-white opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100">
             {project.role}
           </p>
         </div>
