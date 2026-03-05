@@ -6,7 +6,7 @@ export default {
       colors: {
         brand: {
           ink: '#121212',
-          charcoal: '#0A0A0A',
+          charcoal: '#121212',
           paper: '#E7E7E7',
           surface: '#F3F3F3',
           line: '#B5B5B5',
@@ -23,7 +23,7 @@ export default {
         frame: '1280px',
       },
       borderRadius: {
-        frame: '18px',
+        frame: '14px',
       },
       boxShadow: {
         edge: '0 2px 14px rgba(0, 0, 0, 0.08)',

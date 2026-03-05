@@ -4,7 +4,7 @@ import AccentDot from '../ui/AccentDot'
 import CircleArrowButton from '../ui/CircleArrowButton'
 import discoverArrow from '../../assets/images/arrows/Discover more (hero section).svg'
 import heroBackground from '../../assets/images/img/Background.png'
-import ankaPortrait from '../../assets/images/img/Anka.png'
+import ankaPortrait from '../../assets/images/img/anka_4x.png'
 import useHeroContent from '../../hooks/useHeroContent'
 
 function HeroSection() {
@@ -32,9 +32,10 @@ function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative h-[95dvh] min-h-[95dvh] overflow-hidden rounded-frame bg-brand-charcoal text-white sm:min-h-[90dvh] lg:min-h-[860px]"
+      className="relative h-[95dvh] min-h-[95dvh] overflow-hidden rounded-[27px] border-[13px] border-brand-paper bg-brand-charcoal text-white sm:min-h-[90dvh] lg:min-h-[860px]"
       aria-label="Hero section"
     >
+
       <img
         src={heroBackground}
         alt=""
@@ -48,17 +49,17 @@ function HeroSection() {
       <img
         src={ankaPortrait}
         alt="Anka portrait"
-        className="pointer-events-none absolute bottom-[205px] md:bottom-0 left-1/2 z-20 w-96 -translate-x-1/2 object-contain sm:w-[380px] md:w-[800px]"
+        className="hidden lg:block pointer-events-none absolute bottom-[205px] md:bottom-0 left-1/2 z-20 w-96 -translate-x-1/2 object-contain sm:w-[380px] md:w-[800px] lg:w-[850px]"
       />
 
       <div className="relative z-10 flex min-h-full flex-col px-4 pb-4 pt-24 sm:px-6 md:px-10 md:pb-6 md:pt-28 lg:px-14">
-        <div className="mx-auto mt-20 max-w-[920px] text-center sm:mt-16 md:mt-10">
+        <div className="mx-auto mt-20 max-w-[1440px] text-center sm:mt-16 md:mt-10">
           <p className="inline-flex items-center gap-2 font-medium text-white/90">
             <AccentDot />
             <span className="text-sm sm:text-base md:text-lg">Available for work</span>
           </p>
 
-          <h1 className="mt-4 text-[48px] font-semibold leading-[0.95] tracking-tight sm:text-[56px] md:text-[88px] lg:mt-5 lg:text-[112px]">
+          <h1 className="mt-4 text-[56px] font-semibold leading-[0.95] tracking-tight sm:text-[56px] md:text-[88px] lg:mt-5 lg:text-[150px]">
             <span className="block">{heroContent.titleLineOne}</span>
             <span className="block">
               <em className="font-serif text-[1.2em] font-medium italic">{heroContent.titleAccent} </em>
@@ -68,7 +69,7 @@ function HeroSection() {
         </div>
 
         <div className="mt-auto flex flex-col justify-between gap-6 pb-2 sm:gap-8 md:flex-row md:items-end">
-          <div className="max-w-[360px]">
+          <div className="max-w-[360px] lg:ml-[3px]">
             <p className="text-base leading-relaxed text-white/90 sm:text-lg md:text-xl">{heroContent.description}</p>
             <a
               href="#projects"
@@ -81,11 +82,12 @@ function HeroSection() {
                 centerFillOnHover
                 fillColorClass="bg-white"
                 motionPreset="vertical-down"
+                className="!w-6 !h-6"
               />
             </a>
           </div>
 
-          <p className="pb-2 text-left text-sm font-semibold text-white/90 sm:text-left md:pb-6 md:pr-6 md:text-right md:text-md lg:text-lg">
+          <p className="pb-2 text-left text-sm font-semibold text-white/90 sm:text-left md:pb-6 md:pr-6 md:text-right md:text-md lg:pr-[3px] lg:text-md">
             Based in Serbia <span className="text-brand-success">{belgradeTime}</span>
           </p>
         </div>

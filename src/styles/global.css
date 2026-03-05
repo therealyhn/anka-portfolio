@@ -37,3 +37,17 @@
       linear-gradient(90deg, rgba(11, 11, 11, 0.95), rgba(3, 3, 3, 0.92));
   }
 }
+
+@layer utilities
+{
+  .no-scrollbar
+  {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar
+  {
+    display: none;
+  }
+}
