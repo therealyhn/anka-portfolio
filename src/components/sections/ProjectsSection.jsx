@@ -22,7 +22,7 @@ function ProjectsSection() {
             Projects
           </p>
           <h2 className="mt-4 text-4xl font-medium leading-tight text-brand-ink sm:text-5xl lg:text-6xl">
-            Latest <em className="font-serif text-[1.3em] font-medium italic">projects</em> I&apos;ve delivered
+            Latest <em className="font-serif text-[1.3em] font-normal italic">projects</em> I&apos;ve delivered
           </h2>
         </div>
 

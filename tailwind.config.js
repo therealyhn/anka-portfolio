@@ -16,8 +16,9 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        serif: ['Cormorant Garamond', 'ui-serif', 'Georgia', 'serif'],
+        sans: ['SF Pro Text', 'SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        display: ['SF Pro Display', 'SF Pro Text', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        serif: ['Amiri', 'ui-serif', 'Georgia', 'serif'],
       },
       maxWidth: {
         frame: '1280px',

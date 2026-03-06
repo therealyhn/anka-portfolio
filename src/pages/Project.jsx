@@ -139,7 +139,7 @@ function Project() {
         <div className="mx-auto max-w-[1280px] text-center">
           <p className="text-sm font-medium uppercase tracking-[0.08em] text-brand-accent">Available for work</p>
           <h2 className="mt-3 text-5xl font-semibold sm:text-6xl lg:text-7xl">
-            Let&apos;s <em className="font-serif text-[1.08em] font-medium italic">Connect</em>
+            Let&apos;s <em className="font-serif text-[1.08em] font-normal italic">Connect</em>
           </h2>
           <p className="mx-auto mt-5 max-w-[560px] text-2xl leading-relaxed text-white/80">
             Always open to new projects and collaborations. Let&apos;s talk about what you&apos;re building.

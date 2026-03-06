@@ -32,7 +32,7 @@ function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative h-[95dvh] min-h-[95dvh] overflow-hidden rounded-[27px] border-[13px] border-brand-paper bg-brand-charcoal text-white sm:min-h-[90dvh] lg:min-h-[860px]"
+      className="relative h-[100dvh] min-h-[100dvh] overflow-hidden rounded-[27px] border-[13px] border-brand-paper bg-brand-charcoal text-white sm:min-h-[90dvh] lg:min-h-[860px]"
       aria-label="Hero section"
     >
 
@@ -56,26 +56,26 @@ function HeroSection() {
         <div className="mx-auto mt-20 max-w-[1440px] text-center sm:mt-16 md:mt-10">
           <p className="inline-flex items-center gap-2 font-medium text-white/90">
             <AccentDot />
-            <span className="text-sm sm:text-base md:text-lg">Available for work</span>
+            <span className="text-sm text-sans font-thin tracking-wide md:text-lg">Available for work</span>
           </p>
 
-          <h1 className="mt-4 text-[56px] font-semibold leading-[0.95] tracking-tight sm:text-[56px] md:text-[88px] lg:mt-5 lg:text-[150px]">
+          <h1 className="mt-4 font-display text-[56px] font-semibold leading-[0.95] tracking-tight sm:text-[56px] md:text-[88px] lg:mt-5 lg:text-[150px]">
             <span className="block">{heroContent.titleLineOne}</span>
             <span className="block">
-              <em className="font-serif text-[1.2em] font-medium italic">{heroContent.titleAccent} </em>
+              <em className="hero-accent-word mr-2 inline-block text-[1em] leading-[0.94] lg:mr-4 lg:text-[190px]">{heroContent.titleAccent}</em>
               <span>{heroContent.titleLineTwo}</span>
             </span>
           </h1>
         </div>
 
-        <div className="mt-auto flex flex-col justify-between gap-6 pb-2 sm:gap-8 md:flex-row md:items-end">
+        <div className="mt-auto flex flex-col justify-between gap-6 pb-10 sm:gap-8 md:flex-row md:items-end">
           <div className="max-w-[360px] lg:ml-[3px]">
             <p className="text-base leading-relaxed text-white/90 sm:text-lg md:text-xl">{heroContent.description}</p>
             <a
               href="#projects"
               className="group mt-5 inline-flex items-center gap-3 text-base font-medium text-white transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:text-lg md:mt-6 md:text-[27px]"
             >
-              <span className="text-sm tracking-wide">Discover more</span>
+              <span className="text-[16px] tracking-wide">Discover more</span>
               <CircleArrowButton
                 iconSrc={discoverArrow}
                 iconHoverSrc={discoverArrow}
@@ -87,7 +87,7 @@ function HeroSection() {
             </a>
           </div>
 
-          <p className="pb-2 text-left text-sm font-semibold text-white/90 sm:text-left md:pb-6 md:pr-6 md:text-right md:text-md lg:pr-[3px] lg:text-md">
+          <p className="text-left font-sans text-[14px] font-semibold text-white/90 sm:text-left md:pr-6 md:text-right md:text-md lg:pr-[3px] lg:text-md">
             Based in Serbia <span className="text-brand-success">{belgradeTime}</span>
           </p>
         </div>

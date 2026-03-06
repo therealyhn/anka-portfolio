@@ -51,7 +51,7 @@ function Navbar() {
   return (
     <header className="relative inset-x-0">
       <div className="relative mx-auto flex max-w-[1400px] items-center justify-center">
-        <nav className="fixed top-10 z-50 flex w-[calc(100%-60px)] items-center justify-between rounded-xl bg-brand-surface px-3 py-3 shadow-edge sm:w-[calc(100%-40px)] sm:px-4 md:top-12 md:w-[calc(100%-56px)] md:px-5 md:py-4 lg:w-full lg:max-w-[760px]">
+        <nav className="fixed top-10 z-50 flex w-[calc(100%-60px)] items-center justify-between rounded-xl bg-brand-surface px-3 py-3 shadow-edge sm:w-[calc(100%-40px)] sm:px-4 md:top-12 md:w-[calc(100%-56px)] md:px-5 md:py-5 lg:w-full lg:max-w-[760px]">
           <a
             href={isHomePage ? '#hero' : '/'}
             aria-label="Back to top"
@@ -66,12 +66,12 @@ function Navbar() {
               <li key={item.label}>
                 <a
                   href={getSectionHref(item.sectionId)}
-                  className="group relative inline-flex h-6 items-center overflow-hidden text-base font-semibold text-brand-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface"
+                  className="group relative inline-flex h-6 items-center overflow-hidden font-sans text-xl font-semibold text-brand-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface"
                 >
                   <span className="transition-transform duration-500 ease-premium group-hover:-translate-y-full">{item.label}</span>
                   <span
                     aria-hidden="true"
-                    className="absolute left-0 top-full text-brand-accent transition-transform duration-500 ease-premium group-hover:-translate-y-full"
+                    className="absolute left-0 top-full transition-transform duration-500 ease-premium group-hover:-translate-y-full"
                   >
                     {item.label}
                   </span>
@@ -82,7 +82,7 @@ function Navbar() {
 
           <a
             href={getSectionHref('contact')}
-            className="group hidden items-center gap-2 text-sm font-semibold text-brand-ink transition-colors duration-500 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface sm:text-base lg:inline-flex"
+            className="group hidden items-center font-sans gap-2 lg:text-lg tracking-wide font-semibold text-brand-ink transition-colors duration-500 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface sm:text-base lg:inline-flex"
           >
             <span className="hidden sm:inline">Let&apos;s talk</span>
             <CircleArrowButton
@@ -164,13 +164,13 @@ function Navbar() {
         aria-label={isEnglish ? 'Switch to Serbian' : 'Switch to English'}
         aria-pressed={!isEnglish}
         onClick={toggleLanguage}
-        className="absolute right-[72px] top-12 z-[60] hidden h-10 w-[90px] cursor-pointer items-center rounded-full bg-white/15 transition-colors duration-500 ease-premium hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent lg:inline-flex"
+        className="absolute right-[59px] top-10 z-[60] hidden h-[50px] w-[100px] cursor-pointer items-center rounded-full bg-white/25 transition-colors duration-500 ease-premium hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent lg:inline-flex"
       >
         <span
           aria-hidden="true"
-          className={`relative z-10 inline-flex h-12 w-12 items-center justify-center rounded-full transition-transform duration-500 ease-premium ${isEnglish ? 'translate-x-[-2px]' : 'translate-x-11'}`}
+          className={`relative z-10 inline-flex h-[50px] w-[50px] items-center justify-center rounded-full transition-transform duration-500 ease-premium ${isEnglish ? 'translate-x-0 translate-y-0' : 'translate-x-12 translate-y-0'}`}
         >
-          <img src={isEnglish ? englishIcon : serbianIcon} alt={isEnglish ? 'English' : 'Serbian'} className="h-10 w-10" />
+          <img src={isEnglish ? englishIcon : serbianIcon} alt={isEnglish ? 'English' : 'Serbian'} className="h-[50px] w-[50px]" />
         </span>
       </button>
     </header>
