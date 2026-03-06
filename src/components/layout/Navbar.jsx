@@ -13,7 +13,7 @@ const NAV_ITEMS = [
   { label: 'About me', sectionId: 'about' },
 ]
 
-function Navbar() {
+function Navbar({ hideLanguageSwitch = false }) {
   const { pathname } = useLocation()
   const [language, setLanguage] = useState('en')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -139,40 +139,44 @@ function Navbar() {
                 <CircleArrowButton iconSrc={navArrow} iconHoverSrc={navArrowHover} centerFillOnHover className="!h-7 !w-7" />
               </a>
             </li>
-            <li className="pt-2">
-              <button
-                type="button"
-                aria-label={isEnglish ? 'Switch to Serbian' : 'Switch to English'}
-                aria-pressed={!isEnglish}
-                onClick={toggleLanguage}
-                className="mx-auto inline-flex h-10 w-[76px] items-center rounded-full bg-brand-ink/10 px-1 transition-colors duration-300 ease-premium hover:bg-brand-ink/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
-              >
-                <span
-                  aria-hidden="true"
-                  className={`relative z-10 inline-flex h-8 w-8 items-center justify-right rounded-full transition-transform duration-500 ease-premium ${isEnglish ? 'translate-x-0' : 'translate-x-9'}`}
+            {!hideLanguageSwitch ? (
+              <li className="pt-2">
+                <button
+                  type="button"
+                  aria-label={isEnglish ? 'Switch to Serbian' : 'Switch to English'}
+                  aria-pressed={!isEnglish}
+                  onClick={toggleLanguage}
+                  className="mx-auto inline-flex h-10 w-[76px] items-center rounded-full bg-brand-ink/10 px-1 transition-colors duration-300 ease-premium hover:bg-brand-ink/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
                 >
-                  <img src={isEnglish ? englishIcon : serbianIcon} alt={isEnglish ? 'English' : 'Serbian'} className="h-8 w-8" />
-                </span>
-              </button>
-            </li>
+                  <span
+                    aria-hidden="true"
+                    className={`relative z-10 inline-flex h-8 w-8 items-center justify-right rounded-full transition-transform duration-500 ease-premium ${isEnglish ? 'translate-x-0' : 'translate-x-9'}`}
+                  >
+                    <img src={isEnglish ? englishIcon : serbianIcon} alt={isEnglish ? 'English' : 'Serbian'} className="h-8 w-8" />
+                  </span>
+                </button>
+              </li>
+            ) : null}
           </ul>
         </div>
       </div>
 
-      <button
-        type="button"
-        aria-label={isEnglish ? 'Switch to Serbian' : 'Switch to English'}
-        aria-pressed={!isEnglish}
-        onClick={toggleLanguage}
-        className="absolute right-[59px] top-10 z-[60] hidden h-[50px] w-[100px] cursor-pointer items-center rounded-full bg-white/25 transition-colors duration-500 ease-premium hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent lg:inline-flex"
-      >
-        <span
-          aria-hidden="true"
-          className={`relative z-10 inline-flex h-[50px] w-[50px] items-center justify-center rounded-full transition-transform duration-500 ease-premium ${isEnglish ? 'translate-x-0 translate-y-0' : 'translate-x-12 translate-y-0'}`}
+      {!hideLanguageSwitch ? (
+        <button
+          type="button"
+          aria-label={isEnglish ? 'Switch to Serbian' : 'Switch to English'}
+          aria-pressed={!isEnglish}
+          onClick={toggleLanguage}
+          className="absolute right-[59px] top-10 z-[60] hidden h-[50px] w-[100px] cursor-pointer items-center rounded-full bg-white/25 transition-colors duration-500 ease-premium hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent lg:inline-flex"
         >
-          <img src={isEnglish ? englishIcon : serbianIcon} alt={isEnglish ? 'English' : 'Serbian'} className="h-[50px] w-[50px]" />
-        </span>
-      </button>
+          <span
+            aria-hidden="true"
+            className={`relative z-10 inline-flex h-[50px] w-[50px] items-center justify-center rounded-full transition-transform duration-500 ease-premium ${isEnglish ? 'translate-x-0 translate-y-0' : 'translate-x-12 translate-y-0'}`}
+          >
+            <img src={isEnglish ? englishIcon : serbianIcon} alt={isEnglish ? 'English' : 'Serbian'} className="h-[50px] w-[50px]" />
+          </span>
+        </button>
+      ) : null}
     </header>
   )
 }
