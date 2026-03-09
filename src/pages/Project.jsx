@@ -21,91 +21,84 @@ function Project() {
 
   return (
     <main className="min-h-screen bg-brand-charcoal text-white">
-      <section className="w-full px-4 sm:px-6 lg:pl-[56px] lg:pr-[14px]">
-        <div className="w-full">
+      <section className="w-full px-4 pt-6 sm:px-8 xl:px-0">
+        <div className="mx-auto w-full max-w-[1440px]">
           <Navbar hideLanguageSwitch />
 
-          <h1 className="mt-[250px] w-full font-display text-[clamp(96px,11.3vw,225px)] font-semibold leading-[0.92] tracking-tighter xl:whitespace-nowrap">
-            {project.client}
-          </h1>
+          <div className="mt-28 xl:relative xl:mt-0 xl:h-[1134px]">
+            <div className="xl:absolute xl:left-[72px] xl:top-[190px] xl:h-[174px] xl:w-[1179px]">
+              <h1 className="font-display text-[56px] font-medium leading-[1.08] tracking-[-0.03em] sm:text-[84px] xl:text-[150px] xl:leading-[1.16] xl:tracking-[-12px]">
+                {project.client}
+              </h1>
+            </div>
 
-          <div className="mt-[38px] grid items-start gap-8 xl:grid-cols-[430px_minmax(0,1fr)] xl:gap-[30px]">
-            <aside className="xl:pt-[100px] max-w-[420px]">
-              <p className="text-md font-thin leading-none text-brand-accent xl:text-[18px]">overview</p>
-              <p className="mt-5 max-w-[420px] text-[18px] leading-[1.34] text-white/92 xl:leading-[1.36]">
-                Designed the advertiser analytics dashboard for the House of Summary platform, focusing on clear data hierarchy and scannable performance insights.
-                Structured key metrics such as clicks, views, CPC, audience demographics,
-                and geographic data into modular components, enabling advertisers to quickly understand campaign performance and identify trends.
-              </p>
-            </aside>
+            <div className="mt-10 space-y-8 xl:absolute xl:left-0 xl:top-[384px] xl:mt-0 xl:h-[750px] xl:w-[475px] xl:space-y-0">
+              <div className="xl:absolute xl:left-[72px] xl:top-[50px] xl:h-[231px] xl:w-[331px]">
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">overview</p>
+                <p className="mt-[14px] text-base leading-[1.4] text-white xl:w-[331px]">
+                  Designed the advertiser analytics dashboard for the House of Summary platform, focusing on clear data hierarchy and scannable performance insights.
+                  Structured key metrics such as clicks, views, CPC, audience demographics, and geographic data into modular components, enabling advertisers to quickly understand campaign performance and identify trends.
+                </p>
+              </div>
 
-            <div className="no-scrollbar space-y-[10px] xl:max-h-[92vh] xl:overflow-y-auto xl:pr-[2px]">
-              <div className="overflow-hidden rounded-[2px] border border-white/15 bg-[#050B1A]">
+              <div className="grid grid-cols-2 gap-x-7 gap-y-7 xl:absolute xl:left-[72px] xl:top-[436px] xl:gap-y-[65px]">
+                <div className="w-[152px]">
+                  <p className="text-sm font-light leading-[1.22] text-brand-accent">client</p>
+                  <p className="text-base leading-[1.22] text-white">{project.client}</p>
+                </div>
+                <div className="w-[152px]">
+                  <p className="text-sm font-light leading-[1.22] text-brand-accent">year</p>
+                  <p className="text-base leading-[1.22] text-white">2026</p>
+                </div>
+                <div className="w-[152px]">
+                  <p className="text-sm font-light leading-[1.22] text-brand-accent">location</p>
+                  <p className="text-base leading-[1.22] text-white">Remote</p>
+                </div>
+                <div className="w-[152px]">
+                  <p className="text-sm font-light leading-[1.22] text-brand-accent">duration</p>
+                  <p className="text-base leading-[1.22] text-white">3 weeks</p>
+                </div>
+                <div className="w-[152px]">
+                  <p className="text-sm font-light leading-[1.22] text-brand-accent">stack</p>
+                  <p className="text-base leading-[1.25] text-white">Figma</p>
+                </div>
+                <div className="w-[152px]">
+                  <p className="text-sm font-light leading-[1.22] text-brand-accent">services</p>
+                  <p className="text-base leading-[1.25] text-white">Web Design<br />UI Design</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="no-scrollbar mt-8 space-y-[13px] xl:absolute xl:left-[475px] xl:top-[384px] xl:mt-0 xl:h-[750px] xl:w-[965px] xl:overflow-y-auto">
+              <div className="overflow-hidden rounded-[15px] bg-white xl:ml-[13px] xl:w-[939px]">
                 <img
                   src={project.image}
                   alt={`${project.title} cover`}
                   loading="lazy"
                   decoding="async"
-                  className="h-[420px] w-full object-cover sm:h-[560px] xl:h-[852px]"
+                  className="h-[380px] w-full object-cover sm:h-[520px] xl:h-[550px]"
                 />
               </div>
 
-              <div className="overflow-hidden rounded-[2px] border border-white/15 bg-[#050B1A]">
+              <div className="overflow-hidden rounded-[15px] bg-black xl:ml-[13px] xl:w-[939px]">
                 <img
                   src={project.image}
                   alt={`${project.title} second screen`}
                   loading="lazy"
                   decoding="async"
-                  className="h-[420px] w-full object-cover sm:h-[560px] xl:h-[852px]"
+                  className="h-[420px] w-full object-cover sm:h-[560px] xl:h-[600px]"
                 />
               </div>
 
-              <div className="overflow-hidden rounded-[2px] border border-white/15 bg-[#050B1A]">
+              <div className="overflow-hidden rounded-[15px] bg-white xl:ml-[13px] xl:w-[939px]">
                 <img
                   src={project.image}
                   alt={`${project.title} third screen`}
                   loading="lazy"
                   decoding="async"
-                  className="h-[420px] w-full object-cover sm:h-[560px] xl:h-[852px]"
+                  className="h-[420px] w-full object-cover sm:h-[560px] xl:h-[600px]"
                 />
               </div>
-
-              <div className="overflow-hidden rounded-[2px] border border-white/15 bg-[#050B1A]">
-                <img
-                  src={project.image}
-                  alt={`${project.title} fourth screen`}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-[420px] w-full object-cover sm:h-[560px] xl:h-[852px]"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-16 grid grid-cols-2 gap-x-8 gap-y-8 xl:max-w-[760px] xl:gap-x-10 xl:gap-y-10">
-            <div>
-              <p className="text-xl font-medium leading-none text-brand-accent xl:text-[34px]">client</p>
-              <p className="mt-2 text-xl leading-tight text-white/90 sm:text-2xl xl:text-[34px]">{project.client}</p>
-            </div>
-            <div>
-              <p className="text-xl font-medium leading-none text-brand-accent xl:text-[34px]">year</p>
-              <p className="mt-2 text-xl leading-tight text-white/90 sm:text-2xl xl:text-[34px]">2026</p>
-            </div>
-            <div>
-              <p className="text-xl font-medium leading-none text-brand-accent xl:text-[34px]">location</p>
-              <p className="mt-2 text-xl leading-tight text-white/90 sm:text-2xl xl:text-[34px]">Remote</p>
-            </div>
-            <div>
-              <p className="text-xl font-medium leading-none text-brand-accent xl:text-[34px]">duration</p>
-              <p className="mt-2 text-xl leading-tight text-white/90 sm:text-2xl xl:text-[34px]">3 weeks</p>
-            </div>
-            <div>
-              <p className="text-xl font-medium leading-none text-brand-accent xl:text-[34px]">stack</p>
-              <p className="mt-2 text-xl leading-tight text-white/90 sm:text-2xl xl:text-[34px]">Figma</p>
-            </div>
-            <div>
-              <p className="text-xl font-medium leading-none text-brand-accent xl:text-[34px]">services</p>
-              <p className="mt-2 text-xl leading-[1.08] text-white/90 sm:text-2xl xl:text-[34px]">UI Design<br />Dashboard Design<br />Data Visualization</p>
             </div>
           </div>
         </div>
