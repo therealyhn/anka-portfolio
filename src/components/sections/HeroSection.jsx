@@ -32,7 +32,7 @@ function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative h-[100dvh] min-h-[100dvh] overflow-hidden rounded-[27px] border-[13px] border-brand-paper bg-brand-charcoal text-white sm:min-h-[90dvh] lg:h-[759px] lg:min-h-[759px]"
+      className="relative h-[100dvh] min-h-[100dvh] overflow-hidden rounded-[27px] border-[13px] border-brand-paper bg-brand-charcoal text-white"
       aria-label="Hero section"
     >
 
@@ -49,7 +49,7 @@ function HeroSection() {
       <img
         src={ankaPortrait}
         alt="Anka portrait"
-        className="pointer-events-none absolute bottom-0 left-1/2 z-30 hidden w-[650px] -translate-x-1/2 object-contain xl:block"
+        className="pointer-events-none absolute bottom-0 left-1/2 z-30 hidden w-[920px] -translate-x-1/2 object-contain xl:block"
       />
 
       <div className="relative z-20 min-h-[calc(100dvh-26px)] px-4 pt-24 sm:px-6 md:px-10 xl:px-0 xl:pt-0">
@@ -59,10 +59,10 @@ function HeroSection() {
             <span className="text-sm font-thin tracking-wide xl:text-[16px]">Available for work</span>
           </p>
 
-          <h1 className="mt-4 font-display text-[56px] font-semibold leading-[0.95] tracking-tight sm:text-[56px] md:text-[88px] xl:mt-[18px] xl:text-[76px] xl:leading-[0.96] xl:tracking-[-0.03em]">
+          <h1 className="mt-4 font-display text-[56px] font-semibold leading-[0.95] tracking-tight sm:text-[56px] md:text-[88px] xl:mt-[18px] xl:text-[120px] xl:leading-[0.95] xl:tracking-[-0.032em]">
             <span className="block">{heroContent.titleLineOne}</span>
             <span className="block">
-              <em className="hero-accent-word mr-2 inline-block text-[1em] leading-[0.94] xl:mr-3 xl:text-[86px]">{heroContent.titleAccent}</em>
+              <em className="hero-accent-word mr-2 inline-block text-[1em] leading-[0.94] xl:mr-3 xl:text-[150px]">{heroContent.titleAccent}</em>
               <span>{heroContent.titleLineTwo}</span>
             </span>
           </h1>
@@ -72,7 +72,7 @@ function HeroSection() {
       <div className="relative z-40 mt-16 px-4 pb-10 sm:px-6 md:px-10 xl:absolute xl:bottom-[28px] xl:left-[59px] xl:right-[59px] xl:mt-0 xl:px-0 xl:pb-0">
         <div className="flex flex-col justify-between gap-6 sm:gap-8 md:flex-row md:items-end xl:items-end">
           <div className="max-w-[360px] xl:max-w-[260px]">
-            <p className="text-base leading-relaxed text-white/90 xl:text-[14px] xl:leading-[1.42]">{heroContent.description}</p>
+            <p className="text-base leading-relaxed text-white/90 xl:text-[16px] xl:leading-[1.42]">{heroContent.description}</p>
             <a
               href="#projects"
               className="group mt-5 inline-flex items-center gap-3 text-base font-medium text-white transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent xl:mt-8 xl:gap-2"

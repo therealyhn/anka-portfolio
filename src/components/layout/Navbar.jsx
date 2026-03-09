@@ -51,7 +51,8 @@ function Navbar({ hideLanguageSwitch = false }) {
   return (
     <header className="relative inset-x-0">
       <div className="relative mx-auto flex max-w-[1400px] items-center justify-center">
-        <nav className="fixed top-10 z-50 flex w-[calc(100%-60px)] items-center justify-between rounded-xl bg-brand-surface px-3 py-3 shadow-edge sm:w-[calc(100%-40px)] sm:px-4 md:top-10 md:w-[calc(100%-56px)] md:px-5 md:py-3 lg:w-full lg:max-w-[760px]">
+        <nav className="fixed top-10 z-50 flex w-[calc(100%-60px)] items-center justify-between rounded-xl
+         bg-brand-surface px-3 py-3 shadow-edge sm:w-[calc(100%-40px)] sm:px-4 md:top-6 md:w-[calc(100%-56px)] md:px-3 md:py-3 lg:w-full lg:max-w-[760px]">
           <a
             href={isHomePage ? '#hero' : '/'}
             aria-label="Back to top"
@@ -167,7 +168,7 @@ function Navbar({ hideLanguageSwitch = false }) {
           aria-label={isEnglish ? 'Switch to Serbian' : 'Switch to English'}
           aria-pressed={!isEnglish}
           onClick={toggleLanguage}
-          className="absolute right-[59px] top-10 z-[60] hidden h-[32px] w-[72px] cursor-pointer items-center rounded-full bg-white/20 transition-colors duration-500 ease-premium hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent lg:inline-flex"
+          className="absolute right-[59px] top-6 z-[60] hidden h-[32px] w-[72px] cursor-pointer items-center rounded-full bg-white/20 transition-colors duration-500 ease-premium hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent lg:inline-flex"
         >
           <span
             aria-hidden="true"
