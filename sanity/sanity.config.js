@@ -24,6 +24,9 @@ export default defineConfig({
                   .schemaType('heroSection')
                   .documentId('heroSection')
               ),
+            S.listItem()
+              .title('Projects')
+              .child(S.documentTypeList('project').title('Projects')),
           ]),
     }),
     visionTool(),

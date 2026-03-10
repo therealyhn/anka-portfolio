@@ -2,16 +2,17 @@ import { useState } from 'react'
 import AccentDot from '../ui/AccentDot'
 import CircleArrowButton from '../ui/CircleArrowButton'
 import ProjectsGrid from '../projects/ProjectsGrid'
-import { projectsData } from '../../lib/projectsData'
+import useProjectsContent from '../../hooks/useProjectsContent'
 import seeMoreArrow from '../../assets/images/arrows/See more projects (projects section).svg'
 import seeMoreArrowHover from '../../assets/images/arrows/See more projects (projects section) HOVER.svg'
 
 function ProjectsSection() {
   const INITIAL_VISIBLE_PROJECTS = 6
   const [isExpanded, setIsExpanded] = useState(false)
+  const { data: projects } = useProjectsContent()
 
-  const hasHiddenProjects = projectsData.length > INITIAL_VISIBLE_PROJECTS
-  const visibleProjects = isExpanded ? projectsData : projectsData.slice(0, INITIAL_VISIBLE_PROJECTS)
+  const hasHiddenProjects = projects.length > INITIAL_VISIBLE_PROJECTS
+  const visibleProjects = isExpanded ? projects : projects.slice(0, INITIAL_VISIBLE_PROJECTS)
 
   return (
     <section id="projects" className="rounded-frame bg-brand-paper px-4 py-14 sm:px-8 sm:py-16 lg:px-12 lg:py-20 2xl:py-[102px]" aria-label="Projects section">

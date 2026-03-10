@@ -1,20 +1,28 @@
 import { useEffect } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { getProjectBySlug, projectsData } from '../lib/projectsData'
+import CircleArrowButton from '../components/ui/CircleArrowButton'
 import Footer from '../components/layout/Footer'
 import Navbar from '../components/layout/Navbar'
+import useProjectsContent from '../hooks/useProjectsContent'
+import navArrow from '../assets/images/arrows/Nav bar.svg'
+import navArrowHover from '../assets/images/arrows/Nav bar HOVER.svg'
 
 const DEFAULT_OVERVIEW =
   'Designed the advertiser analytics dashboard for the House of Summary platform, focusing on clear data hierarchy and scannable performance insights. Structured key metrics such as clicks, views, CPC, audience demographics, and geographic data into modular components, enabling advertisers to quickly understand campaign performance and identify trends.'
 
 function Project() {
   const { slug } = useParams()
-  const project = getProjectBySlug(slug)
-  const relatedProjects = projectsData.filter((item) => item.slug !== slug).slice(0, 2)
+  const { loading, data: projects } = useProjectsContent()
+  const project = projects.find((item) => item.slug === slug)
+  const relatedProjects = projects.filter((item) => item.slug !== slug).slice(0, 2)
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [slug])
+
+  if (!project && loading) {
+    return <main className="min-h-screen bg-brand-charcoal" />
+  }
 
   if (!project) {
     return <Navigate to="/" replace />
@@ -117,16 +125,32 @@ function Project() {
               <Link
                 key={item.id}
                 to={`/projects/${item.slug}`}
-                className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
+                className="group/project block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
               >
-                <div className="overflow-hidden rounded-[10px] min-[1920px]:w-[550px]">
+                <div className="relative overflow-hidden rounded-[10px] min-[1920px]:w-[550px]">
                   <img
                     src={item.image}
                     alt={`${item.title} preview`}
                     loading="lazy"
                     decoding="async"
-                    className="h-[220px] w-full object-cover transition-transform duration-500 ease-premium group-hover:scale-[1.03] sm:h-[300px] min-[1920px]:h-[407px]"
+                    className="h-[220px] w-full object-cover transition-transform duration-500 ease-premium group-hover/project:scale-[1.03] sm:h-[300px] min-[1920px]:h-[407px]"
                   />
+                  <div className="pointer-events-none absolute inset-0 bg-brand-ink/45 opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100" />
+                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100">
+                    <span className="pointer-events-auto">
+                      <CircleArrowButton
+                        className="group !h-16 !w-16"
+                        iconClassName="!h-5 !w-5"
+                        iconSrc={navArrow}
+                        iconHoverSrc={navArrowHover}
+                        centerFillOnHover
+                        fillClassName="!-inset-px group-hover:scale-110"
+                      />
+                    </span>
+                  </div>
+                  <p className="pointer-events-none absolute bottom-3 left-3 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-white opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100">
+                    {item.role}
+                  </p>
                 </div>
                 <h3 className="mt-3 text-xl font-semibold text-white sm:text-2xl min-[1920px]:mt-[12px] min-[1920px]:text-[39px] min-[1920px]:leading-[1.12]">
                   {item.title} <span className="font-medium text-white/55">| {item.client}</span>

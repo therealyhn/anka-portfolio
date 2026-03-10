@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react'
 import { sanityClient } from '../lib/sanityClient'
 
 const HERO_QUERY = `
-  *[_type == "heroSection"][0]{
+  coalesce(
+    *[_type == "heroSection" && _id == "heroSection"][0],
+    *[_type == "heroSection"] | order(_updatedAt desc)[0]
+  ){
     "titleLineOne": coalesce(titleLineOne, headingLineOne, heroTitleLineOne),
     "titleAccent": coalesce(titleAccent, headingAccent, heroTitleAccent),
     "titleLineTwo": coalesce(titleLineTwo, headingLineTwo, heroTitleLineTwo),
