@@ -118,22 +118,22 @@ function Project() {
       </section>
 
       <section className="px-4 pb-14 pt-16 sm:px-8 min-[1920px]:px-0 min-[1920px]:pb-[86px] min-[1920px]:pt-[106px]">
-        <div className="mx-auto max-w-[1295px] min-[1920px]:max-w-[1727px]">
+        <div className="mx-auto max-w-[1295px] min-[1920px]:max-w-[1788px]">
           <h2 className="text-5xl font-medium tracking-tight min-[1920px]:text-[68px] min-[1920px]:leading-[1.1] min-[1920px]:tracking-[-0.04em]">More projects like this</h2>
-          <div className="mt-8 grid gap-6 md:grid-cols-2 min-[1920px]:mt-[52px] min-[1920px]:grid-cols-[repeat(2,550px)] min-[1920px]:justify-start min-[1920px]:gap-x-[22px]">
+          <div className="mt-8 grid gap-6 md:grid-cols-2 min-[1920px]:mt-[52px] min-[1920px]:grid-cols-[repeat(2,580px)] min-[1920px]:justify-start min-[1920px]:gap-x-[28px]">
             {relatedProjects.map((item) => (
               <Link
                 key={item.id}
                 to={`/projects/${item.slug}`}
                 className="group/project block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
               >
-                <div className="relative overflow-hidden rounded-[10px] min-[1920px]:w-[550px]">
+                <div className="relative overflow-hidden rounded-[10px] min-[1920px]:w-[580px]">
                   <img
                     src={item.image}
                     alt={`${item.title} preview`}
                     loading="lazy"
                     decoding="async"
-                    className="h-[220px] w-full object-cover transition-transform duration-500 ease-premium group-hover/project:scale-[1.03] sm:h-[300px] min-[1920px]:h-[407px]"
+                    className="h-[220px] w-full object-cover transition-transform duration-500 ease-premium group-hover/project:scale-[1.03] sm:h-[300px] min-[1920px]:h-[428px]"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-brand-ink/45 opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100" />
                   <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100">
@@ -152,7 +152,7 @@ function Project() {
                     {item.role}
                   </p>
                 </div>
-                <h3 className="mt-3 text-xl font-semibold text-white sm:text-2xl min-[1920px]:mt-[12px] min-[1920px]:text-[39px] min-[1920px]:leading-[1.12]">
+                <h3 className="mt-3 text-md font-semibold text-white sm:text-xl 2xl:mt-[8px] 2xl:text-[21px] 2xl:leading-[1.26]">
                   {item.title} <span className="font-medium text-white/55">| {item.client}</span>
                 </h3>
               </Link>

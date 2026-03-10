@@ -16,13 +16,13 @@ function ProjectsSection() {
 
   return (
     <section id="projects" className="rounded-frame bg-brand-paper px-4 py-14 sm:px-8 sm:py-16 lg:px-12 lg:py-20 2xl:py-[102px]" aria-label="Projects section">
-      <div className="mx-auto max-w-[1295px]">
+      <div className="mx-auto max-w-[1295px] min-[1920px]:max-w-[1728px]">
         <div className="text-center">
-          <p className="inline-flex items-center gap-3 text-sm font-medium uppercase tracking-[0.08em] text-brand-accent 2xl:text-[14px]">
+          <p className="inline-flex items-center gap-3 text-sm font-medium uppercase tracking-[0.08em] text-brand-accent 2xl:text-[18px]">
             <AccentDot />
             Projects
           </p>
-          <h2 className="mt-4 text-4xl font-medium leading-tight text-brand-ink sm:text-5xl lg:text-6xl 2xl:text-[51px] 2xl:leading-[1.26] 2xl:tracking-[-0.04em]">
+          <h2 className="mt-4 text-4xl font-normal leading-tight text-brand-ink sm:text-5xl lg:text-6xl 2xl:text-[51px] 2xl:leading-[1.26] 2xl:tracking-[-0.04em]">
             Latest <em className="font-serif text-[1.3em] font-normal italic">projects</em> I&apos;ve delivered
           </h2>
         </div>

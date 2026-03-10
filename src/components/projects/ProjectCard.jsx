@@ -16,7 +16,7 @@ function ProjectCard({ project }) {
             alt={`${project.title} project preview`}
             loading="lazy"
             decoding="async"
-            className="h-[220px] w-full object-cover transition-transform duration-500 ease-premium group-hover/project:scale-[1.03] sm:h-[250px] lg:h-[285px] 2xl:h-[306px]"
+            className="h-[220px] w-full object-cover transition-transform duration-500 ease-premium group-hover/project:scale-[1.03] sm:h-[250px] lg:h-[285px] 2xl:h-[306px] min-[1920px]:h-[364px]"
           />
           <div className="pointer-events-none absolute inset-0 bg-brand-ink/45 opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100" />
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100">
