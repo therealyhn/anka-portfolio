@@ -10,13 +10,13 @@ function ProjectCard({ project }) {
       className="group/project block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-paper"
     >
       <article>
-        <div className="relative overflow-hidden rounded-2xl">
+        <div className="relative overflow-hidden rounded-[10px]">
           <img
             src={project.image}
             alt={`${project.title} project preview`}
             loading="lazy"
             decoding="async"
-            className="h-[220px] w-full object-cover transition-transform duration-500 ease-premium group-hover/project:scale-[1.03] sm:h-[250px] lg:h-[285px]"
+            className="h-[220px] w-full object-cover transition-transform duration-500 ease-premium group-hover/project:scale-[1.03] sm:h-[250px] lg:h-[285px] 2xl:h-[306px]"
           />
           <div className="pointer-events-none absolute inset-0 bg-brand-ink/45 opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100" />
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100">
@@ -36,7 +36,7 @@ function ProjectCard({ project }) {
           </p>
         </div>
 
-        <h3 className="mt-3 text-md font-semibold text-brand-ink sm:text-xl">
+        <h3 className="mt-3 text-md font-semibold text-brand-ink sm:text-xl 2xl:mt-[8px] 2xl:text-[21px] 2xl:leading-[1.26]">
           {project.title} <span className="font-medium text-brand-muted">| {project.client}</span>
         </h3>
       </article>

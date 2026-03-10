@@ -51,23 +51,22 @@ function Navbar({ hideLanguageSwitch = false }) {
   return (
     <header className="relative inset-x-0">
       <div className="relative mx-auto flex max-w-[1400px] items-center justify-center">
-        <nav className="fixed top-10 z-50 flex w-[calc(100%-60px)] items-center justify-between rounded-xl
-         bg-brand-surface px-3 py-3 shadow-edge sm:w-[calc(100%-40px)] sm:px-4 md:top-6 md:w-[calc(100%-56px)] md:px-3 md:py-3 lg:w-full lg:max-w-[760px]">
+        <nav className="fixed top-10 z-50 flex w-[calc(100%-60px)] items-center justify-between rounded-xl bg-brand-surface px-3 py-3 shadow-edge sm:w-[calc(100%-40px)] sm:px-4 md:top-6 md:w-[calc(100%-56px)] md:px-3 md:py-3 lg:h-[52px] lg:w-[571px] lg:rounded-[10px] lg:px-[15px] lg:py-0">
           <a
             href={isHomePage ? '#hero' : '/'}
             aria-label="Back to top"
             onClick={closeMenu}
             className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface"
           >
-            <img src={logoBlackText} alt="Anka Design" className="h-auto w-[118px] sm:w-[130px] md:w-[140px]" />
+            <img src={logoBlackText} alt="Anka Design" className="h-auto w-[118px] sm:w-[130px] md:w-[140px] lg:w-[114px]" />
           </a>
 
-          <ul className="hidden items-center gap-6 lg:flex">
+          <ul className="hidden items-center gap-5 lg:flex">
             {NAV_ITEMS.map((item) => (
               <li key={item.label}>
                 <a
                   href={getSectionHref(item.sectionId)}
-                  className="group relative inline-flex h-6 items-center overflow-hidden font-sans text-xl font-semibold text-brand-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface"
+                  className="group relative inline-flex h-[15px] items-center overflow-hidden font-sans text-[14px] font-medium leading-[1.26] text-brand-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface"
                 >
                   <span className="transition-transform duration-500 ease-premium group-hover:-translate-y-full">{item.label}</span>
                   <span
@@ -83,14 +82,14 @@ function Navbar({ hideLanguageSwitch = false }) {
 
           <a
             href={getSectionHref('contact')}
-            className="group hidden items-center font-sans gap-2 lg:text-lg tracking-wide font-semibold text-brand-ink transition-colors duration-500 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface sm:text-base lg:inline-flex"
+            className="group hidden items-center gap-[5px] font-sans text-[14px] font-medium leading-[1.26] text-brand-ink transition-colors duration-500 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface lg:inline-flex"
           >
             <span className="hidden sm:inline">Let&apos;s talk</span>
             <CircleArrowButton
               iconSrc={navArrow}
               iconHoverSrc={navArrowHover}
               centerFillOnHover
-              className="!w-7 !h-7"
+              className="!h-7 !w-7"
             />
           </a>
           <button

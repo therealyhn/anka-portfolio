@@ -14,36 +14,37 @@ function ProjectsSection() {
   const visibleProjects = isExpanded ? projectsData : projectsData.slice(0, INITIAL_VISIBLE_PROJECTS)
 
   return (
-    <section id="projects" className="rounded-frame bg-brand-paper px-4 py-14 sm:px-8 sm:py-16 lg:px-12 lg:py-20" aria-label="Projects section">
-      <div className="mx-auto max-w-[1280px]">
+    <section id="projects" className="rounded-frame bg-brand-paper px-4 py-14 sm:px-8 sm:py-16 lg:px-12 lg:py-20 2xl:py-[102px]" aria-label="Projects section">
+      <div className="mx-auto max-w-[1295px]">
         <div className="text-center">
-          <p className="inline-flex items-center gap-3 text-sm font-medium uppercase tracking-[0.08em] text-brand-accent sm:text-base">
+          <p className="inline-flex items-center gap-3 text-sm font-medium uppercase tracking-[0.08em] text-brand-accent 2xl:text-[14px]">
             <AccentDot />
             Projects
           </p>
-          <h2 className="mt-4 text-4xl font-medium leading-tight text-brand-ink sm:text-5xl lg:text-6xl">
+          <h2 className="mt-4 text-4xl font-medium leading-tight text-brand-ink sm:text-5xl lg:text-6xl 2xl:text-[51px] 2xl:leading-[1.26] 2xl:tracking-[-0.04em]">
             Latest <em className="font-serif text-[1.3em] font-normal italic">projects</em> I&apos;ve delivered
           </h2>
         </div>
 
-        <div className="mt-10 sm:mt-12">
+        <div className="mt-10 sm:mt-12 2xl:mt-[53px]">
           <ProjectsGrid projects={visibleProjects} />
         </div>
 
         {hasHiddenProjects ? (
-          <div className="mt-10 flex justify-center sm:mt-12">
+          <div className="mt-10 flex justify-center sm:mt-12 2xl:mt-[28px]">
             <button
               type="button"
               onClick={() => setIsExpanded((current) => !current)}
-              className="group inline-flex items-center gap-3 text-base font-semibold text-brand-ink transition-colors duration-300 ease-premium hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
+              className="group inline-flex items-center gap-3 text-base font-semibold text-brand-ink transition-colors duration-300 ease-premium hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent 2xl:gap-2"
             >
-              <span>{isExpanded ? 'See less projects' : 'See more projects'}</span>
+              <span className="2xl:text-[12px]">{isExpanded ? 'See less projects' : 'See more projects'}</span>
               <CircleArrowButton
                 iconSrc={seeMoreArrow}
                 iconHoverSrc={seeMoreArrowHover}
                 centerFillOnHover
                 fillColorClass="bg-brand-ink"
-                className={isExpanded ? 'rotate-180' : ''}
+                className={`2xl:!h-[16px] 2xl:!w-[16px] ${isExpanded ? 'rotate-180' : ''}`}
+                iconClassName="2xl:!h-[8px] 2xl:!w-[8px]"
               />
             </button>
           </div>

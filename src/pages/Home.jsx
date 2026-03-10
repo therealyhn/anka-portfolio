@@ -5,8 +5,7 @@ import HeroSection from '../components/sections/HeroSection'
 import ProjectsSection from '../components/sections/ProjectsSection'
 import ServicesSection from '../components/sections/ServicesSection'
 import AboutSection from '../components/sections/AboutSection'
-import ContactSection from '../components/sections/ContactSection'
-import FooterSection from '../components/sections/FooterSection'
+import Footer from '../components/layout/Footer'
 
 function Home() {
   const { hash } = useLocation()
@@ -34,8 +33,7 @@ function Home() {
         <ProjectsSection />
         <ServicesSection />
         <AboutSection />
-        <ContactSection />
-        <FooterSection />
+        <Footer />
       </main>
     </SiteShell>
   )
