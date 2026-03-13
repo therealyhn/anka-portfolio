@@ -15,7 +15,7 @@ function ProjectsSection() {
   const visibleProjects = isExpanded ? projects : projects.slice(0, INITIAL_VISIBLE_PROJECTS)
 
   return (
-    <section id="projects" className="rounded-frame bg-brand-paper px-4 py-14 sm:px-8 sm:py-16 lg:px-12 lg:py-20 2xl:py-[102px]" aria-label="Projects section">
+    <section id="projects" className="rounded-frame bg-brand-paper px-4 py-14 sm:px-8 sm:py-16 lg:px-12 lg:py-20 2xl:pt-[102px] 2xl:pb-[132px]" aria-label="Projects section">
       <div className="mx-auto max-w-[1295px] min-[1920px]:max-w-[1728px]">
         <div className="text-center">
           <p className="inline-flex items-center gap-3 text-sm font-medium uppercase tracking-[0.08em] text-brand-accent 2xl:text-[18px]">
@@ -32,20 +32,20 @@ function ProjectsSection() {
         </div>
 
         {hasHiddenProjects ? (
-          <div className="mt-10 flex justify-center sm:mt-12 2xl:mt-[28px]">
+          <div className="mt-10 flex justify-center sm:mt-12 2xl:mt-[74px]">
             <button
               type="button"
               onClick={() => setIsExpanded((current) => !current)}
-              className="group inline-flex items-center gap-3 text-base font-semibold text-brand-ink transition-colors duration-300 ease-premium hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent 2xl:gap-2"
+              className="group inline-flex items-center gap-3 text-base font-semibold text-brand-ink transition-colors duration-300 ease-premium hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent 2xl:gap-[8px]"
             >
-              <span className="2xl:text-[12px]">{isExpanded ? 'See less projects' : 'See more projects'}</span>
+              <span className="2xl:text-[18px]">{isExpanded ? 'See less projects' : 'See more projects'}</span>
               <CircleArrowButton
                 iconSrc={seeMoreArrow}
                 iconHoverSrc={seeMoreArrowHover}
                 centerFillOnHover
                 fillColorClass="bg-brand-ink"
-                className={`2xl:!h-[16px] 2xl:!w-[16px] ${isExpanded ? 'rotate-180' : ''}`}
-                iconClassName="2xl:!h-[8px] 2xl:!w-[8px]"
+                className={`2xl:!h-[34px] 2xl:!w-[34px] ${isExpanded ? 'rotate-180' : ''}`}
+                iconClassName="2xl:!h-[10px] 2xl:!w-[10px]"
               />
             </button>
           </div>
