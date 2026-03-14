@@ -1,63 +1,11 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import AccentDot from '../ui/AccentDot'
-import useProjectsContent from '../../hooks/useProjectsContent'
-import projectPlaceholder from '../../assets/images/projects/project-placeholder.svg'
-
-const SERVICES_ITEMS = [
-  {
-    id: 'brand-visual',
-    label: 'Brand & Visual Design',
-    hoverLabel: 'Logos, colors, and visuals that actually get along.',
-    description:
-      'Creating cohesive visual identities, from logos to colors and graphics, that feel intentional, polished, and just... right.',
-    tags: ['Logo Design', 'Brand Identity', 'Visual Identity', 'Graphic Design'],
-    previewSlug: 'logo-design',
-  },
-  {
-    id: 'web-product',
-    label: 'Web & Product Design',
-    hoverLabel: 'Websites and products that feel clear from the first click.',
-    description:
-      'Designing interfaces and product flows that reduce friction, support business goals, and make complex actions feel simple.',
-    tags: ['UX Design', 'UI Systems', 'Landing Pages', 'Product Flows'],
-    previewSlug: 'media-website',
-  },
-  {
-    id: 'marketing',
-    label: 'Marketing Design',
-    hoverLabel: 'Campaign visuals that stay on-brand and easy to scale.',
-    description:
-      'Building campaign-ready assets across channels, keeping messaging consistent while adapting visuals for each platform.',
-    tags: ['Campaign Assets', 'Social Creatives', 'Ad Visuals', 'Email Banners'],
-    previewSlug: 'instagram-posts',
-  },
-  {
-    id: 'presentations',
-    label: 'Presentations & Decks',
-    hoverLabel: 'Decks that tell complex stories in a simple flow.',
-    description:
-      'Structuring and designing decks that communicate clearly, hold attention, and help teams present ideas with confidence.',
-    tags: ['Pitch Decks', 'Sales Decks', 'Case Studies', 'Narrative Design'],
-    previewSlug: 'newsletter',
-  },
-]
+import useServicesContent from '../../hooks/useServicesContent'
 
 function ServicesSection() {
-  const { data: projects } = useProjectsContent()
+  const { data: servicesContent } = useServicesContent()
   const [openServiceId, setOpenServiceId] = useState(null)
-
-  const projectImageBySlug = useMemo(() => (
-    projects.reduce((acc, project) => {
-      if (project?.slug && project?.image) {
-        acc[project.slug] = project.image
-      }
-      return acc
-    }, {})
-  ), [projects])
-
-  const resolvePreviewImage = (previewSlug) => {
-    return projectImageBySlug[previewSlug] || projectPlaceholder
-  }
+  const serviceItems = servicesContent?.items || []
 
   const handleToggleService = (serviceId) => {
     setOpenServiceId((current) => (current === serviceId ? null : serviceId))
@@ -70,20 +18,22 @@ function ServicesSection() {
           <div className="min-[1200px]:w-[55%] min-[1920px]:w-[1040px]">
             <p className="inline-flex items-center gap-3 text-[15px] font-normal uppercase tracking-[0.01em] text-brand-accent min-[1920px]:text-[24px]">
               <AccentDot className="h-4 w-4 min-[1920px]:h-2.5 min-[1920px]:w-2.5" />
-              Services
+              {servicesContent?.eyebrowLabel || 'Services'}
             </p>
             <h2 className="mt-4 max-w-[620px] text-4xl leading-tight text-brand-ink sm:text-5xl lg:text-6xl min-[1920px]:mt-[18px] min-[1920px]:max-w-[600px] min-[1920px]:text-[68px] min-[1920px]:leading-[1.1] min-[1920px]:tracking-[-0.04em]">
-              What I can <em className="font-serif text-[1.3em] font-normal italic">design</em> for your team
+              {servicesContent?.titleLineOne || 'What I can'}{' '}
+              <em className="font-serif text-[1.3em] font-normal italic">{servicesContent?.titleAccent || 'design'}</em>{' '}
+              {servicesContent?.titleLineTwo || 'for your team'}
             </h2>
           </div>
 
           <p className="max-w-[1000px] text-base leading-relaxed font-thin text-black min-[1200px]:w-[42%] min-[1920px]:w-[640px] min-[1920px]:pt-[56px] min-[1920px]:text-[24px] min-[1920px]:leading-[1.5]">
-            Delivering thoughtful and engaging design across brands, websites, and marketing assets - all created to be clear, consistent, and just a bit fun along the way.
+            {servicesContent?.description}
           </p>
         </div>
 
         <ul className="mt-10 border-t border-black/35 min-[1920px]:mt-[62px]">
-          {SERVICES_ITEMS.map((item) => {
+          {serviceItems.map((item) => {
             const isOpen = openServiceId === item.id
 
             return (
@@ -146,7 +96,7 @@ function ServicesSection() {
 
                       <div className="overflow-hidden rounded-[12px] bg-brand-ink/6 min-[1920px]:h-[352px] min-[1920px]:w-[574px]">
                         <img
-                          src={resolvePreviewImage(item.previewSlug)}
+                          src={item.previewImage}
                           alt={`${item.label} preview`}
                           loading="lazy"
                           decoding="async"

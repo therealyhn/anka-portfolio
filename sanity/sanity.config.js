@@ -25,6 +25,14 @@ export default defineConfig({
                   .documentId('heroSection')
               ),
             S.listItem()
+              .title('Services Section')
+              .child(
+                S.editor()
+                  .id('servicesSection')
+                  .schemaType('servicesSection')
+                  .documentId('servicesSection')
+              ),
+            S.listItem()
               .title('Projects')
               .child(S.documentTypeList('project').title('Projects')),
           ]),
