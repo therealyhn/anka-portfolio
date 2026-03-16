@@ -1,11 +1,38 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import AccentDot from '../ui/AccentDot'
 import useServicesContent from '../../hooks/useServicesContent'
+import useProjectsContent from '../../hooks/useProjectsContent'
+
+const SERVICE_PREVIEW_SLUGS = {
+  'brand-visual': 'logo-design',
+  'web-product': 'media-website',
+  marketing: 'instagram-posts',
+  presentations: 'newsletter',
+}
 
 function ServicesSection() {
   const { data: servicesContent } = useServicesContent()
+  const { data: projects } = useProjectsContent()
   const [openServiceId, setOpenServiceId] = useState(null)
   const serviceItems = servicesContent?.items || []
+
+  const projectImageBySlug = useMemo(() => (
+    projects.reduce((acc, project) => {
+      if (project?.slug && project?.image) {
+        acc[project.slug] = project.image
+      }
+      return acc
+    }, {})
+  ), [projects])
+
+  const resolvePreviewImage = (item) => {
+    const hasRealImage = typeof item?.previewImage === 'string' && !item.previewImage.includes('project-placeholder')
+    if (hasRealImage) return item.previewImage
+
+    const fallbackSlug = SERVICE_PREVIEW_SLUGS[item?.id]
+    const fallbackImage = fallbackSlug ? projectImageBySlug[fallbackSlug] : null
+    return fallbackImage || item?.previewImage
+  }
 
   const handleToggleService = (serviceId) => {
     setOpenServiceId((current) => (current === serviceId ? null : serviceId))
@@ -38,7 +65,7 @@ function ServicesSection() {
 
             return (
               <li key={item.id} className="border-b border-black/35">
-                <div className="px-4 py-5 sm:px-5 min-[1920px]:px-[60px] min-[1920px]:py-[33px]">
+                <div className="px-4 py-5 sm:px-5 min-[1920px]:px-[60px] min-[1920px]:py-[32px]">
                   <button
                     type="button"
                     onClick={() => handleToggleService(item.id)}
@@ -76,7 +103,7 @@ function ServicesSection() {
                   </button>
 
                   {isOpen ? (
-                    <div className="mt-5 grid gap-6 min-[1200px]:grid-cols-[minmax(0,1fr)_minmax(260px,520px)] min-[1920px]:mt-[34px] min-[1920px]:gap-x-[30px] min-[1920px]:pb-[4px]">
+                    <div className="mt-5 grid gap-6 min-[1200px]:grid-cols-[minmax(0,1fr)_minmax(260px,560px)] min-[1920px]:mt-[34px] min-[1920px]:gap-x-[42px] min-[1920px]:pb-[4px]">
                       <div>
                         <p className="max-w-[860px] text-base leading-[1.45] text-brand-ink sm:text-lg min-[1920px]:text-[21px] min-[1920px]:leading-[1.36]">
                           {item.description}
@@ -94,9 +121,9 @@ function ServicesSection() {
                         </div>
                       </div>
 
-                      <div className="overflow-hidden rounded-[12px] bg-brand-ink/6 min-[1920px]:h-[352px] min-[1920px]:w-[574px]">
+                      <div className="overflow-hidden rounded-[12px] bg-brand-ink/6 min-[1200px]:mr-auto min-[1920px]:h-[304px] min-[1920px]:w-[500px]">
                         <img
-                          src={item.previewImage}
+                          src={resolvePreviewImage(item)}
                           alt={`${item.label} preview`}
                           loading="lazy"
                           decoding="async"

@@ -18,7 +18,7 @@ function ProjectsSection() {
     <section id="projects" className="rounded-frame bg-brand-paper px-4 py-14 sm:px-8 sm:py-16 lg:px-12 lg:py-20 2xl:pt-[102px] 2xl:pb-[132px]" aria-label="Projects section">
       <div className="mx-auto max-w-[1295px] min-[1920px]:max-w-[1728px]">
         <div className="text-center">
-          <p className="inline-flex items-center gap-3 text-sm font-medium uppercase tracking-[0.08em] text-brand-accent 2xl:text-[18px]">
+          <p className="inline-flex items-center gap-3 text-[15px] font-normal uppercase tracking-[0.01em] text-brand-accent min-[1920px]:text-[24px]">
             <AccentDot />
             Projects
           </p>
