@@ -51,14 +51,14 @@ function Navbar({ hideLanguageSwitch = false }) {
   return (
     <header className="relative inset-x-0">
       <div className="relative mx-auto flex max-w-[1400px] items-center justify-center">
-        <nav className="fixed top-10 z-50 flex w-[calc(100%-60px)] items-center justify-between rounded-xl bg-brand-surface px-3 py-3 shadow-edge sm:w-[calc(100%-40px)] sm:px-4 md:top-6 md:w-[calc(100%-56px)] md:px-3 md:py-3 lg:h-[52px] lg:w-[571px] lg:rounded-[10px] lg:px-[15px] lg:py-0">
+        <nav className="fixed top-6 z-50 flex w-[calc(100%-32px)] items-center justify-between rounded-xl bg-brand-surface px-3 py-2.5 shadow-lg sm:top-8 sm:w-[calc(100%-40px)] sm:px-4 sm:py-3 md:top-6 md:w-[calc(100%-56px)] md:px-3 md:py-3 lg:h-[52px] lg:w-[571px] lg:rounded-[10px] lg:px-[15px] lg:py-0">
           <a
             href={isHomePage ? '#hero' : '/'}
             aria-label="Back to top"
             onClick={closeMenu}
             className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface"
           >
-            <img src={logoBlackText} alt="Anka Design" className="h-auto w-[118px] sm:w-[130px] md:w-[140px] lg:w-[114px]" />
+            <img src={logoBlackText} alt="Anka Design" className="h-auto w-[100px] sm:w-[118px] md:w-[130px] lg:w-[114px]" />
           </a>
 
           <ul className="hidden items-center gap-5 lg:flex">
@@ -97,12 +97,12 @@ function Navbar({ hideLanguageSwitch = false }) {
             aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen((current) => !current)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-brand-ink/5 text-brand-ink transition-colors duration-300 ease-premium hover:bg-brand-ink/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:h-10 sm:w-10 lg:hidden"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-ink/5 text-brand-ink transition-colors duration-300 ease-premium hover:bg-brand-ink/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:h-9 sm:w-9 md:h-10 md:w-10 lg:hidden"
           >
-            <span className="relative h-3.5 w-4">
-              <span className={`absolute left-0 top-0 block h-0.5 w-4 bg-current transition-all duration-300 ease-premium ${isMenuOpen ? 'top-[6px] rotate-45' : ''}`} />
-              <span className={`absolute left-0 top-[6px] block h-0.5 w-4 bg-current transition-all duration-300 ease-premium ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
-              <span className={`absolute left-0 top-3 block h-0.5 w-4 bg-current transition-all duration-300 ease-premium ${isMenuOpen ? 'top-[6px] -rotate-45' : ''}`} />
+            <span className="relative h-3 w-3.5 sm:h-3.5 sm:w-4">
+              <span className={`absolute left-0 top-0 block h-0.5 w-full bg-current transition-all duration-300 ease-premium ${isMenuOpen ? 'top-[5px] rotate-45 sm:top-[6px]' : ''}`} />
+              <span className={`absolute left-0 top-[5px] block h-0.5 w-full bg-current transition-all duration-300 ease-premium sm:top-[6px] ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
+              <span className={`absolute left-0 top-[10px] block h-0.5 w-full bg-current transition-all duration-300 ease-premium sm:top-3 ${isMenuOpen ? 'top-[5px] -rotate-45 sm:top-[6px]' : ''}`} />
             </span>
           </button>
         </nav>
@@ -115,7 +115,7 @@ function Navbar({ hideLanguageSwitch = false }) {
         />
 
         <div
-          className={`fixed left-1/2 top-[110px] z-[55] w-[calc(100%-60px)] -translate-x-1/2 overflow-hidden rounded-2xl border border-brand-line/40 bg-brand-surface p-3 shadow-edge transition-all duration-300 ease-premium sm:top-[106px] sm:w-[calc(100%-40px)] md:top-[130px] md:w-[calc(100%-56px)] lg:hidden ${isMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'}`}
+          className={`fixed left-1/2 top-[80px] z-[55] w-[calc(100%-32px)] -translate-x-1/2 overflow-hidden rounded-2xl border border-brand-line/40 bg-brand-surface p-3 shadow-edge transition-all duration-300 ease-premium sm:top-[100px] sm:w-[calc(100%-40px)] md:top-[100px] md:w-[calc(100%-56px)] lg:hidden ${isMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'}`}
         >
           <ul className="space-y-1">
             {NAV_ITEMS.map((item) => (
@@ -150,7 +150,7 @@ function Navbar({ hideLanguageSwitch = false }) {
                 >
                   <span
                     aria-hidden="true"
-                    className={`relative z-10 inline-flex h-8 w-8 items-center justify-right rounded-full transition-transform duration-500 ease-premium ${isEnglish ? 'translate-x-0' : 'translate-x-9'}`}
+                    className={`relative z-10 inline-flex h-8 w-8 items-center justify-center rounded-full transition-transform duration-500 ease-premium ${isEnglish ? 'translate-x-0' : 'translate-x-9'}`}
                   >
                     <img src={isEnglish ? englishIcon : serbianIcon} alt={isEnglish ? 'English' : 'Serbian'} className="h-8 w-8" />
                   </span>

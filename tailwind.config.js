@@ -7,7 +7,7 @@ export default {
         brand: {
           ink: '#121212',
           charcoal: '#121212',
-          paper: '#FFFFFF',
+          paper: '#FAFAFA',
           surface: '#F3F3F3',
           line: '#B5B5B5',
           muted: '#6F6F6F',
