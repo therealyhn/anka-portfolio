@@ -1,8 +1,8 @@
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export const aboutSection = defineType({
   name: 'aboutSection',
-  title: 'About + Testimonial',
+  title: 'About Section',
   type: 'document',
   fields: [
     defineField({
@@ -59,14 +59,14 @@ export const aboutSection = defineType({
       name: 'portraitImage',
       title: 'Portrait Image',
       type: 'image',
-      options: { hotspot: true },
+      options: {hotspot: true},
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'earthImage',
       title: 'Location Background Image',
       type: 'image',
-      options: { hotspot: true },
+      options: {hotspot: true},
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -137,7 +137,7 @@ export const aboutSection = defineType({
               name: 'icon',
               title: 'Tool Icon',
               type: 'image',
-              options: { hotspot: true },
+              options: {hotspot: true},
               validation: (Rule) => Rule.required(),
             }),
           ],
@@ -147,7 +147,7 @@ export const aboutSection = defineType({
               subtitle: 'description',
               media: 'icon',
             },
-            prepare({ title, subtitle, media }) {
+            prepare({title, subtitle, media}) {
               return {
                 title: title || 'Tool',
                 subtitle: subtitle || 'No description',
@@ -159,39 +159,66 @@ export const aboutSection = defineType({
       ],
     }),
     defineField({
-      name: 'quoteLineOne',
-      title: 'Quote Line One',
-      type: 'text',
-      rows: 3,
-      validation: (Rule) => Rule.required().max(260),
-    }),
-    defineField({
-      name: 'quoteLineTwo',
-      title: 'Quote Line Two',
-      type: 'text',
-      rows: 4,
-      validation: (Rule) => Rule.required().max(360),
-    }),
-    defineField({
-      name: 'testimonialName',
-      title: 'Testimonial Name',
-      type: 'string',
-      initialValue: 'Vida Antonijevic',
-      validation: (Rule) => Rule.required().max(80),
-    }),
-    defineField({
-      name: 'testimonialRole',
-      title: 'Testimonial Role',
-      type: 'string',
-      initialValue: 'Head of Operations, House of Summary',
-      validation: (Rule) => Rule.required().max(140),
-    }),
-    defineField({
-      name: 'testimonialAvatar',
-      title: 'Testimonial Avatar',
-      type: 'image',
-      options: { hotspot: true },
-      validation: (Rule) => Rule.required(),
+      name: 'testimonials',
+      title: 'Testimonials Slider',
+      description: 'Each testimonial is one slide in the About section swiper.',
+      type: 'array',
+      validation: (Rule) => Rule.required().min(1).max(20),
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'testimonialItem',
+          fields: [
+            defineField({
+              name: 'quoteLineOne',
+              title: 'Quote Line One',
+              type: 'text',
+              rows: 3,
+              validation: (Rule) => Rule.required().max(260),
+            }),
+            defineField({
+              name: 'quoteLineTwo',
+              title: 'Quote Line Two',
+              type: 'text',
+              rows: 4,
+              validation: (Rule) => Rule.max(360),
+            }),
+            defineField({
+              name: 'name',
+              title: 'Author Name',
+              type: 'string',
+              validation: (Rule) => Rule.required().max(80),
+            }),
+            defineField({
+              name: 'role',
+              title: 'Author Role',
+              type: 'string',
+              validation: (Rule) => Rule.required().max(140),
+            }),
+            defineField({
+              name: 'avatar',
+              title: 'Author Avatar',
+              type: 'image',
+              options: {hotspot: true},
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'name',
+              subtitle: 'role',
+              media: 'avatar',
+            },
+            prepare({title, subtitle, media}) {
+              return {
+                title: title || 'Testimonial',
+                subtitle: subtitle || 'No role',
+                media,
+              }
+            },
+          },
+        }),
+      ],
     }),
   ],
   preview: {
@@ -201,7 +228,7 @@ export const aboutSection = defineType({
       titleLineTwo: 'titleLineTwo',
       media: 'portraitImage',
     },
-    prepare({ titleLineOne, titleAccent, titleLineTwo, media }) {
+    prepare({titleLineOne, titleAccent, titleLineTwo, media}) {
       return {
         title: `${titleLineOne || ''} ${titleAccent || ''} ${titleLineTwo || ''}`.trim() || 'About Section',
         subtitle: 'Homepage About Content',

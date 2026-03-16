@@ -33,6 +33,14 @@ const ABOUT_QUERY = `
     "portraitImage": coalesce(portraitImage.asset->url, ankaPortrait.asset->url),
     "earthImage": coalesce(earthImage.asset->url, locationImage.asset->url),
     "testimonialAvatar": coalesce(testimonialAvatar.asset->url, authorAvatar.asset->url),
+    "testimonials": coalesce(testimonials, [])[]{
+      _key,
+      "quoteLineOne": coalesce(quoteLineOne, quote, lineOne, testimonialLineOne),
+      "quoteLineTwo": coalesce(quoteLineTwo, lineTwo, testimonialLineTwo),
+      "name": coalesce(name, testimonialName, authorName),
+      "role": coalesce(role, testimonialRole, authorRole),
+      "avatar": coalesce(avatar.asset->url, image.asset->url, testimonialAvatar.asset->url)
+    },
     "tools": coalesce(tools, toolItems, [])[]{
       _key,
       "title": coalesce(title, label, name),
@@ -66,6 +74,18 @@ const DEFAULT_ABOUT_CONTENT = {
   portraitImage: ankaImageFallback,
   earthImage: earthImageFallback,
   testimonialAvatar: ankaImageFallback,
+  testimonials: [
+    {
+      id: 'testimonial-vida',
+      quoteLineOne:
+        'Anka approached the work with no ego and a strong focus on team outcomes; she was extremely collaborative and easy to work with.',
+      quoteLineTwo:
+        'She owned the design process from the beginning to the end, responded quickly to feedback, and managed to respect the tight deadlines. She brought more than execution - she understood the context, suggested solutions, and improved our ideas.',
+      name: 'Vida Antonijevic',
+      role: 'Head of Operations, House of Summary',
+      avatar: ankaImageFallback,
+    },
+  ],
   tools: [
     {
       id: 'after-effects',
@@ -120,6 +140,56 @@ function normalizeTools(rawTools, fallbackTools) {
   return normalized.length > 0 ? normalized : fallbackTools
 }
 
+function trimLeadingQuote(value) {
+  return String(value || '').trim().replace(/^["'“”]+/, '')
+}
+
+function trimTrailingQuote(value) {
+  return String(value || '').trim().replace(/["'“”]+$/, '')
+}
+
+function normalizeTestimonials(rawTestimonials, rawContent, fallbackTestimonials) {
+  if (Array.isArray(rawTestimonials) && rawTestimonials.length > 0) {
+    const normalized = rawTestimonials
+      .map((item, index) => {
+        const fallback = fallbackTestimonials[index % fallbackTestimonials.length]
+        const quoteLineOne = trimLeadingQuote(item?.quoteLineOne || fallback?.quoteLineOne || '')
+        const quoteLineTwo = trimTrailingQuote(item?.quoteLineTwo || fallback?.quoteLineTwo || '')
+
+        if (!quoteLineOne && !quoteLineTwo) return null
+
+        return {
+          id: item?._key || `testimonial-${index + 1}`,
+          quoteLineOne,
+          quoteLineTwo,
+          name: item?.name || fallback?.name || 'Anonymous',
+          role: item?.role || fallback?.role || '',
+          avatar: item?.avatar || fallback?.avatar || ankaImageFallback,
+        }
+      })
+      .filter(Boolean)
+
+    if (normalized.length > 0) return normalized
+  }
+
+  const legacyQuoteLineOne = trimLeadingQuote(rawContent?.quoteLineOne || fallbackTestimonials[0]?.quoteLineOne || '')
+  const legacyQuoteLineTwo = trimTrailingQuote(rawContent?.quoteLineTwo || fallbackTestimonials[0]?.quoteLineTwo || '')
+  const legacyName = rawContent?.testimonialName || fallbackTestimonials[0]?.name || 'Anonymous'
+  const legacyRole = rawContent?.testimonialRole || fallbackTestimonials[0]?.role || ''
+  const legacyAvatar = rawContent?.testimonialAvatar || fallbackTestimonials[0]?.avatar || ankaImageFallback
+
+  return [
+    {
+      id: 'testimonial-legacy',
+      quoteLineOne: legacyQuoteLineOne,
+      quoteLineTwo: legacyQuoteLineTwo,
+      name: legacyName,
+      role: legacyRole,
+      avatar: legacyAvatar,
+    },
+  ]
+}
+
 function normalizeAboutContent(rawContent) {
   const fallback = DEFAULT_ABOUT_CONTENT
 
@@ -144,6 +214,7 @@ function normalizeAboutContent(rawContent) {
     portraitImage: rawContent?.portraitImage || fallback.portraitImage,
     earthImage: rawContent?.earthImage || fallback.earthImage,
     testimonialAvatar: rawContent?.testimonialAvatar || fallback.testimonialAvatar,
+    testimonials: normalizeTestimonials(rawContent?.testimonials, rawContent, fallback.testimonials),
     tools: normalizeTools(rawContent?.tools, fallback.tools),
   }
 }
