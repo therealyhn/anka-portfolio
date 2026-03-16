@@ -68,7 +68,7 @@
     display: flex;
     gap: 16px;
     width: max-content;
-    animation: about-tools-marquee-left 15s linear infinite;
+    animation: about-tools-marquee-left 30s linear infinite;
     will-change: transform;
   }
 

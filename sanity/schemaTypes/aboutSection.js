@@ -1,8 +1,8 @@
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const aboutSection = defineType({
   name: 'aboutSection',
-  title: 'About Section',
+  title: 'About + Testimonial',
   type: 'document',
   fields: [
     defineField({
@@ -59,14 +59,14 @@ export const aboutSection = defineType({
       name: 'portraitImage',
       title: 'Portrait Image',
       type: 'image',
-      options: {hotspot: true},
+      options: { hotspot: true },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'earthImage',
       title: 'Location Background Image',
       type: 'image',
-      options: {hotspot: true},
+      options: { hotspot: true },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -137,7 +137,7 @@ export const aboutSection = defineType({
               name: 'icon',
               title: 'Tool Icon',
               type: 'image',
-              options: {hotspot: true},
+              options: { hotspot: true },
               validation: (Rule) => Rule.required(),
             }),
           ],
@@ -147,7 +147,7 @@ export const aboutSection = defineType({
               subtitle: 'description',
               media: 'icon',
             },
-            prepare({title, subtitle, media}) {
+            prepare({ title, subtitle, media }) {
               return {
                 title: title || 'Tool',
                 subtitle: subtitle || 'No description',
@@ -190,7 +190,7 @@ export const aboutSection = defineType({
       name: 'testimonialAvatar',
       title: 'Testimonial Avatar',
       type: 'image',
-      options: {hotspot: true},
+      options: { hotspot: true },
       validation: (Rule) => Rule.required(),
     }),
   ],
@@ -201,7 +201,7 @@ export const aboutSection = defineType({
       titleLineTwo: 'titleLineTwo',
       media: 'portraitImage',
     },
-    prepare({titleLineOne, titleAccent, titleLineTwo, media}) {
+    prepare({ titleLineOne, titleAccent, titleLineTwo, media }) {
       return {
         title: `${titleLineOne || ''} ${titleAccent || ''} ${titleLineTwo || ''}`.trim() || 'About Section',
         subtitle: 'Homepage About Content',

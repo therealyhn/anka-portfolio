@@ -79,14 +79,14 @@ function AboutSection() {
 
           <article className="flex h-full flex-col justify-between rounded-[8px] bg-[#F5F5F5] p-5 sm:rounded-[10px] sm:p-6 xl:col-start-2 xl:row-start-2 xl:rounded-[12px] xl:px-[30px] xl:py-[30px]">
             <p className="text-5xl leading-none text-brand-ink sm:text-6xl min-[1920px]:text-[72px]">{data.yearsValue}</p>
-            <p className="mt-6 max-w-[240px] text-lg leading-[1.4] text-brand-ink/90 sm:text-base 2xl:max-w-[260px] 2xl:text-[28px]">
+            <p className="mt-6 max-w-[240px] text-lg leading-[1.4] text-brand-ink/90 sm:text-xl 2xl:max-w-[260px] 2xl:text-[28px]">
               {data.yearsLabel}
             </p>
           </article>
 
           <article className="flex h-full flex-col justify-between rounded-[8px] bg-[#F5F5F5] p-5 sm:rounded-[10px] sm:p-6 xl:col-start-3 xl:row-start-2 xl:rounded-[12px] xl:px-[30px] xl:py-[30px]">
             <p className="text-5xl leading-none text-brand-ink sm:text-6xl min-[1920px]:text-[72px]">{data.assetsValue}</p>
-            <p className="mt-6 max-w-[300px] text-lg leading-[1.4] text-brand-ink/90 sm:text-base 2xl:text-[28px]">
+            <p className="mt-6 max-w-[300px] text-lg leading-[1.4] text-brand-ink/90 sm:text-xl 2xl:text-[28px]">
               {data.assetsLabel}
             </p>
           </article>
@@ -113,28 +113,35 @@ function AboutSection() {
           </div>
         </div>
 
-        <div className="relative mt-10 px-2 pb-2 pt-10 text-center sm:mt-14 sm:px-4 sm:pt-12 2xl:mt-[88px] 2xl:px-0 2xl:pt-[78px]">
+        <div className="relative mt-10 px-2 pb-2 pt-10 text-center sm:mt-14 sm:px-4 sm:pt-12 xl:mt-[60px] 2xl:mt-[88px] 2xl:px-0 2xl:pt-[90px]">
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 text-[100px] leading-none text-brand-ink/[0.07] sm:text-[140px] min-[1920px]:text-[170px]"
+            className="pointer-events-none absolute left-1/2 top-4 -translate-x-1/2 text-brand-ink/[0.04] sm:top-6 xl:top-8 min-[1920px]:top-[20px]"
           >
-            "
+            <svg
+              className="h-[100px] w-auto sm:h-[140px] xl:h-[200px] 2xl:h-[230px] min-[1920px]:h-[260px]"
+              viewBox="0 0 190 150"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M60 0h50L50 150H0zM140 0h50l-60 150H80z" />
+            </svg>
           </span>
 
-          <blockquote className="mx-auto max-w-[980px] text-base font-light italic leading-[1.5] text-brand-ink sm:text-lg md:text-xl 2xl:max-w-[1160px] 2xl:text-[22px] 2xl:leading-[1.48]">
-            <p>{data.quoteLineOne}</p>
-            <p className="mt-4 sm:mt-5 2xl:mt-[22px]">{data.quoteLineTwo}</p>
+          <blockquote className="relative z-10 mx-auto max-w-[980px] text-base font-light italic leading-[1.6] text-brand-ink sm:text-lg md:text-xl xl:max-w-[1040px] xl:text-[24px] 2xl:max-w-[1160px] 2xl:text-[26px] 2xl:leading-[1.6] min-[1920px]:max-w-[1240px] min-[1920px]:text-[32px]">
+            <p>"{data.quoteLineOne}</p>
+            <p className="mt-4 sm:mt-5 2xl:mt-[24px]">{data.quoteLineTwo}"</p>
           </blockquote>
 
-          <div className="mx-auto mt-6 h-px w-[70%] bg-black/20 sm:mt-8 2xl:mt-[30px] 2xl:w-[620px]" />
+          <div className="mx-auto mt-6 h-px w-[80%] bg-black/[0.15] sm:mt-8 xl:mt-[40px] xl:w-[70%] 2xl:mt-[50px] 2xl:w-[760px] min-[1920px]:w-[800px]" />
 
-          <div className="mt-5 inline-flex items-center gap-2 sm:mt-6 sm:gap-3 2xl:mt-[22px] 2xl:gap-[12px]">
-            <span className="inline-flex h-8 w-8 overflow-hidden rounded-full bg-[#D7D7D7] sm:h-10 sm:w-10 min-[1920px]:h-[48px] min-[1920px]:w-[48px]">
+          <div className="mt-5 inline-flex items-center gap-3 sm:mt-6 sm:gap-4 xl:mt-[32px] 2xl:mt-[42px] min-[1920px]:gap-[16px]">
+            <span className="inline-flex h-10 w-10 overflow-hidden rounded-full bg-[#D7D7D7] sm:h-12 sm:w-12 xl:h-[60px] xl:w-[60px] 2xl:h-[68px] 2xl:w-[68px] min-[1920px]:h-[80px] min-[1920px]:w-[80px]">
               <img src={data.testimonialAvatar} alt="" aria-hidden="true" className="h-full w-full object-cover object-top" />
             </span>
             <span className="text-left">
-              <span className="block text-xs font-medium text-brand-ink sm:text-sm 2xl:text-[22px]">{data.testimonialName}</span>
-              <span className="mt-0.5 block text-[10px] text-brand-muted sm:text-xs 2xl:text-[11px]">{data.testimonialRole}</span>
+              <span className="block text-sm font-medium text-brand-ink sm:text-base xl:text-[18px] 2xl:text-[20px] min-[1920px]:text-[24px]">{data.testimonialName}</span>
+              <span className="mt-0.5 block text-xs font-light text-brand-muted/80 sm:text-sm xl:text-[13px] 2xl:text-[14px] min-[1920px]:mt-[2px] min-[1920px]:text-[16px]">{data.testimonialRole}</span>
             </span>
           </div>
         </div>

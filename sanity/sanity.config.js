@@ -1,7 +1,7 @@
-import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemaTypes'
+import { defineConfig } from 'sanity'
+import { structureTool } from 'sanity/structure'
+import { visionTool } from '@sanity/vision'
+import { schemaTypes } from './schemaTypes'
 
 export default defineConfig({
   name: 'default',
@@ -31,6 +31,14 @@ export default defineConfig({
                   .id('servicesSection')
                   .schemaType('servicesSection')
                   .documentId('servicesSection')
+              ),
+            S.listItem()
+              .title('About + Testimonial')
+              .child(
+                S.editor()
+                  .id('aboutSection')
+                  .schemaType('aboutSection')
+                  .documentId('aboutSection')
               ),
             S.listItem()
               .title('Projects')
