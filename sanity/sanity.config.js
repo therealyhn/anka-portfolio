@@ -41,6 +41,14 @@ export default defineConfig({
                   .documentId('aboutSection')
               ),
             S.listItem()
+              .title('Footer Section')
+              .child(
+                S.editor()
+                  .id('footerSection')
+                  .schemaType('footerSection')
+                  .documentId('footerSection')
+              ),
+            S.listItem()
               .title('Projects')
               .child(S.documentTypeList('project').title('Projects')),
           ]),
