@@ -3,6 +3,7 @@ import CircleArrowButton from '../ui/CircleArrowButton'
 import navArrow from '../../assets/images/arrows/Nav bar.svg'
 import navArrowHover from '../../assets/images/arrows/Nav bar HOVER.svg'
 import footerBackground from '../../assets/images/img/Background.png'
+import AccentDot from '../ui/AccentDot'
 
 function Footer() {
   return (
@@ -17,8 +18,9 @@ function Footer() {
       >
         <div className="mx-auto flex min-h-[84svh] max-w-[600px] flex-col text-center sm:max-w-[800px] lg:max-w-[1280px] min-[1920px]:max-w-[1700px]">
           <div className="flex flex-1 flex-col items-center justify-center py-12 sm:py-16">
-            <p className="text-xs font-medium tracking-[0.08em] text-brand-accent sm:text-sm min-[1920px]:text-[21px]">
-              Available for work
+            <p className="inline-flex items-center gap-2 font-medium text-white/90 xl:gap-[10px]">
+              <AccentDot />
+              <span className="text-xs font-thin tracking-wide sm:text-sm xl:text-[16px]">Available for work</span>
             </p>
             <h2 className="mt-2 text-4xl font-semibold sm:mt-3 sm:text-5xl md:text-6xl lg:text-7xl min-[1920px]:mt-4 min-[1920px]:text-[105px] min-[1920px]:leading-[1.03]">
               Let&apos;s <em className="font-serif text-[1.08em] font-normal italic">Connect</em>

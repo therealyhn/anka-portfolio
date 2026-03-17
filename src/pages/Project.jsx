@@ -13,6 +13,7 @@ const DEFAULT_OVERVIEW =
 function Project() {
   const { slug } = useParams()
   const { loading, data: projects } = useProjectsContent()
+
   const project = projects.find((item) => item.slug === slug)
   const relatedProjects = projects.filter((item) => item.slug !== slug).slice(0, 2)
 
@@ -43,97 +44,154 @@ function Project() {
 
   return (
     <main className="min-h-screen overflow-x-clip bg-brand-charcoal text-white">
-      <section className="w-full overflow-x-clip px-4 pt-6 sm:px-8 min-[1920px]:px-0">
-        <div className="mx-auto w-full min-[1920px]:max-w-[1920px]">
+      <section className="w-full overflow-x-clip px-4 pt-6 sm:px-8">
+        <div className="mx-auto w-full max-w-[1920px]">
           <Navbar hideLanguageSwitch />
 
-          <div className="mt-28 min-[1920px]:relative min-[1920px]:mt-0 min-[1920px]:h-[1512px]">
-            <div className="min-[1920px]:absolute min-[1920px]:left-[96px] min-[1920px]:top-[254px] min-[1920px]:h-[232px] min-[1920px]:w-[1572px]">
-              <h1 className="max-w-full font-display text-[64px] font-medium leading-[1.03] tracking-[-0.03em] sm:text-[94px] min-[1920px]:text-[200px] min-[1920px]:leading-[1.16] min-[1920px]:tracking-[-16px]">
-                {project.client}
-              </h1>
+          <div className="mt-28 space-y-8 sm:hidden">
+            <h1 className="max-w-full font-display text-[64px] font-medium leading-[1.03] tracking-[-0.03em]">
+              {project.client}
+            </h1>
+
+            <div>
+              <p className="text-sm font-light leading-[1.22] text-brand-accent">overview</p>
+              <p className="mt-3 text-base leading-[1.4] text-white">{overview}</p>
             </div>
 
-            <div className="mt-10 space-y-8 min-[1920px]:absolute min-[1920px]:left-0 min-[1920px]:top-[512px] min-[1920px]:mt-0 min-[1920px]:h-[1000px] min-[1920px]:w-[633px] min-[1920px]:space-y-0">
-              <div className="min-[1920px]:absolute min-[1920px]:left-[96px] min-[1920px]:top-[67px] min-[1920px]:h-[308px] min-[1920px]:w-[441px]">
-                <p className="text-sm font-light leading-[1.22] text-brand-accent min-[1920px]:text-[19px]">overview</p>
-                <p className="mt-3 text-base leading-[1.4] text-white min-[1920px]:mt-[19px] min-[1920px]:w-[441px] min-[1920px]:text-[21px] min-[1920px]:leading-[1.4]">
-                  {overview}
+            <div className="grid grid-cols-2 gap-x-7 gap-y-7">
+              <div className="w-[152px]">
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">client</p>
+                <p className="text-base leading-[1.22] text-white">{project.client}</p>
+              </div>
+              <div className="w-[152px]">
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">year</p>
+                <p className="text-base leading-[1.22] text-white">{year}</p>
+              </div>
+              <div className="w-[152px]">
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">location</p>
+                <p className="text-base leading-[1.22] text-white">{location}</p>
+              </div>
+              <div className="w-[152px]">
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">duration</p>
+                <p className="text-base leading-[1.22] text-white">{duration}</p>
+              </div>
+              <div className="w-[152px]">
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">stack</p>
+                <p className="text-base leading-[1.25] text-white">{stack}</p>
+              </div>
+              <div className="w-[152px]">
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">services</p>
+                <p className="text-base leading-[1.25] text-white">
+                  {services.map((service, index) => (
+                    <span key={`${project.slug}-service-${index}`}>
+                      {service}
+                      {index < services.length - 1 ? <br /> : null}
+                    </span>
+                  ))}
                 </p>
               </div>
-
-              <div className="grid grid-cols-2 gap-x-7 gap-y-7 min-[1920px]:absolute min-[1920px]:left-[96px] min-[1920px]:top-[581px] min-[1920px]:gap-x-9 min-[1920px]:gap-y-[87px]">
-                <div className="w-[152px] min-[1920px]:w-[203px]">
-                  <p className="text-sm font-light leading-[1.22] text-brand-accent min-[1920px]:text-[19px]">client</p>
-                  <p className="text-base leading-[1.22] text-white min-[1920px]:text-[21px]">{project.client}</p>
-                </div>
-                <div className="w-[152px] min-[1920px]:w-[203px]">
-                  <p className="text-sm font-light leading-[1.22] text-brand-accent min-[1920px]:text-[19px]">year</p>
-                  <p className="text-base leading-[1.22] text-white min-[1920px]:text-[21px]">{year}</p>
-                </div>
-                <div className="w-[152px] min-[1920px]:w-[203px]">
-                  <p className="text-sm font-light leading-[1.22] text-brand-accent min-[1920px]:text-[19px]">location</p>
-                  <p className="text-base leading-[1.22] text-white min-[1920px]:text-[21px]">{location}</p>
-                </div>
-                <div className="w-[152px] min-[1920px]:w-[203px]">
-                  <p className="text-sm font-light leading-[1.22] text-brand-accent min-[1920px]:text-[19px]">duration</p>
-                  <p className="text-base leading-[1.22] text-white min-[1920px]:text-[21px]">{duration}</p>
-                </div>
-                <div className="w-[152px] min-[1920px]:w-[203px]">
-                  <p className="text-sm font-light leading-[1.22] text-brand-accent min-[1920px]:text-[19px]">stack</p>
-                  <p className="text-base leading-[1.25] text-white min-[1920px]:text-[21px]">{stack}</p>
-                </div>
-                <div className="w-[152px] min-[1920px]:w-[203px]">
-                  <p className="text-sm font-light leading-[1.22] text-brand-accent min-[1920px]:text-[19px]">services</p>
-                  <p className="text-base leading-[1.25] text-white min-[1920px]:text-[21px]">
-                    {services.map((service, index) => (
-                      <span key={`${project.slug}-service-${index}`}>
-                        {service}
-                        {index < services.length - 1 ? <br /> : null}
-                      </span>
-                    ))}
-                  </p>
-                </div>
-              </div>
             </div>
 
-            <div className="no-scrollbar mt-8 space-y-[13px] min-[1920px]:absolute min-[1920px]:left-[633px] min-[1920px]:right-[24px] min-[1920px]:top-[512px] min-[1920px]:mt-0 min-[1920px]:h-[1000px] min-[1920px]:overflow-y-auto">
+            <div className="no-scrollbar mt-8 space-y-[13px]">
               {galleryImages.map((image, index) => (
-                <div
-                  key={`${project.slug}-gallery-${index}`}
-                  className="overflow-hidden rounded-[15px] bg-black min-[1920px]:w-full min-[1920px]:rounded-[20px]"
-                >
+                <div key={`${project.slug}-gallery-mobile-${index}`} className="overflow-hidden rounded-[15px] bg-black">
                   <img
                     src={image}
                     alt={`${project.title} screen ${index + 1}`}
                     loading="lazy"
                     decoding="async"
-                    className={`w-full object-cover ${index === 0 ? 'h-[380px] sm:h-[520px] min-[1920px]:h-[733px]' : 'h-[420px] sm:h-[560px] min-[1920px]:h-[800px]'}`}
+                    className={`w-full object-cover ${index === 0 ? 'h-[380px]' : 'h-[420px]'}`}
                   />
                 </div>
               ))}
             </div>
           </div>
+
+          <div className="mt-[100px] lg:mt-[150px] xl:mt-[168px] hidden sm:block pb-24 lg:ml-[32px] xl:ml-[64px] lg:mr-[16px] xl:mr-[-8px]">
+            <h1 className="max-w-full font-display text-[80px] md:text-[120px] lg:text-[160px] xl:text-[200px] font-medium leading-[1.16] tracking-[-0.04em] xl:tracking-[-16px]">
+              {project.client}
+            </h1>
+
+            <div className="mt-12 lg:mt-[16px] xl:mt-[26px] flex flex-col lg:flex-row gap-12 lg:gap-[64px] xl:gap-[96px] items-start">
+              <div className="w-full lg:w-[360px] xl:w-[441px] shrink-0 lg:sticky lg:top-[120px] pt-0 lg:pt-[67px]">
+                <div className="mb-12 xl:mb-[87px]">
+                  <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">overview</p>
+                  <p className="mt-4 xl:mt-[19px] text-lg xl:text-[21px] leading-[1.4] text-white lg:pr-0">
+                    {overview}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-x-6 gap-y-10 xl:gap-x-9 xl:gap-y-[87px]">
+                  <div>
+                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">client</p>
+                    <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.22] text-white break-words">{project.client}</p>
+                  </div>
+                  <div>
+                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">year</p>
+                    <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.22] text-white">{year}</p>
+                  </div>
+                  <div>
+                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">location</p>
+                    <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.22] text-white">{location}</p>
+                  </div>
+                  <div>
+                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">duration</p>
+                    <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.22] text-white">{duration}</p>
+                  </div>
+                  <div>
+                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">stack</p>
+                    <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.25] text-white break-words">{stack}</p>
+                  </div>
+                  <div>
+                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">services</p>
+                    <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.25] text-white break-words">
+                      {services.map((service, index) => (
+                        <span key={`${project.slug}-service-desktop-${index}`}>
+                          {service}
+                          {index < services.length - 1 ? <br /> : null}
+                        </span>
+                      ))}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex-1 w-full min-w-0 flex flex-col gap-[13px] lg:h-[calc(100vh-140px)] overflow-y-auto no-scrollbar lg:sticky lg:top-[120px]">
+                {galleryImages.map((image, index) => (
+                  <div key={`${project.slug}-gallery-desktop-${index}`} className="w-full shrink-0 overflow-hidden rounded-[20px] bg-black">
+                    <img
+                      src={image}
+                      alt={`${project.title} screen ${index + 1}`}
+                      loading="lazy"
+                      decoding="async"
+                      className={`w-full object-cover ${index === 0 ? 'h-[500px] xl:h-[733px]' : 'h-[600px] xl:h-[800px]'}`}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="px-4 pb-14 pt-16 sm:px-8 min-[1920px]:px-0 min-[1920px]:pb-[86px] min-[1920px]:pt-[106px]">
-        <div className="mx-auto max-w-[1295px] min-[1920px]:max-w-[1788px]">
-          <h2 className="text-5xl font-medium tracking-tight min-[1920px]:text-[68px] min-[1920px]:leading-[1.1] min-[1920px]:tracking-[-0.04em]">More projects like this</h2>
-          <div className="mt-8 grid gap-6 md:grid-cols-2 min-[1920px]:mt-[52px] min-[1920px]:grid-cols-[repeat(2,580px)] min-[1920px]:justify-start min-[1920px]:gap-x-[28px]">
+      <section className="w-full overflow-x-clip px-4 pb-14 pt-16 sm:px-8">
+        <div className="mx-auto w-full max-w-[1920px]">
+          <div className="lg:ml-[32px] xl:ml-[64px] max-w-[1295px]">
+            <h2 className="text-4xl sm:text-5xl font-medium tracking-tight">More projects like this</h2>
+            <div className="mt-8 grid gap-6 md:grid-cols-2">
             {relatedProjects.map((item) => (
               <Link
                 key={item.id}
                 to={`/projects/${item.slug}`}
                 className="group/project block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
               >
-                <div className="relative overflow-hidden rounded-[10px] min-[1920px]:w-[580px]">
+                <div className="relative overflow-hidden rounded-[10px]">
                   <img
                     src={item.image}
                     alt={`${item.title} preview`}
                     loading="lazy"
                     decoding="async"
-                    className="h-[220px] w-full object-cover transition-transform duration-500 ease-premium group-hover/project:scale-[1.03] sm:h-[300px] min-[1920px]:h-[428px]"
+                    className="h-[220px] w-full object-cover transition-transform duration-500 ease-premium group-hover/project:scale-[1.03] sm:h-[300px]"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-brand-ink/45 opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100" />
                   <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100">
@@ -152,11 +210,12 @@ function Project() {
                     {item.role}
                   </p>
                 </div>
-                <h3 className="mt-3 text-md font-semibold text-white sm:text-xl 2xl:mt-[8px] 2xl:text-[21px] 2xl:leading-[1.26]">
+                <h3 className="mt-3 text-md font-semibold text-white sm:text-xl">
                   {item.title} <span className="font-medium text-white/55">| {item.client}</span>
                 </h3>
               </Link>
             ))}
+          </div>
           </div>
         </div>
       </section>
