@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import CircleArrowButton from '../ui/CircleArrowButton'
 import logoBlackText from '../../assets/images/logo/SVG black text.svg'
 import englishIcon from '../../assets/images/icons/english icon.svg'
@@ -80,8 +80,8 @@ function Navbar({ hideLanguageSwitch = false }) {
             ))}
           </ul>
 
-          <a
-            href={getSectionHref('contact')}
+          <Link
+            to="/contact"
             className="group hidden items-center gap-[5px] font-sans text-[14px] font-medium leading-[1.26] text-brand-ink transition-colors duration-500 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface lg:inline-flex"
           >
             <span className="hidden sm:inline">Let&apos;s talk</span>
@@ -91,7 +91,7 @@ function Navbar({ hideLanguageSwitch = false }) {
               centerFillOnHover
               className="!h-7 !w-7"
             />
-          </a>
+          </Link>
           <button
             type="button"
             aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -130,14 +130,14 @@ function Navbar({ hideLanguageSwitch = false }) {
               </li>
             ))}
             <li>
-              <a
-                href={getSectionHref('contact')}
+              <Link
+                to="/contact"
                 onClick={closeMenu}
                 className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-ink px-3 py-2 text-sm font-semibold text-white transition-colors duration-300 ease-premium hover:bg-brand-accent hover:text-brand-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
               >
                 <span>Let&apos;s talk</span>
                 <CircleArrowButton iconSrc={navArrow} iconHoverSrc={navArrowHover} centerFillOnHover className="!h-7 !w-7" />
-              </a>
+              </Link>
             </li>
             {!hideLanguageSwitch ? (
               <li className="pt-2">
