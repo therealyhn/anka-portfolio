@@ -18,8 +18,14 @@ const SERVICES_QUERY = `
       "hoverLabel": coalesce(hoverLabel, teaser, subtitle),
       "description": coalesce(description, details, copy),
       "tags": array::compact(coalesce(tags, keywords, [])),
+      "previewProjectSlug": coalesce(
+        previewProject->slug.current,
+        previewProject->slug
+      ),
       "previewImage": coalesce(
         previewImage.asset->url,
+        image.asset->url,
+        media.asset->url,
         previewProject->thumbnail.asset->url,
         previewProject->image.asset->url,
         previewProject->coverImage.asset->url
@@ -111,6 +117,7 @@ function normalizeItem(rawItem, fallbackItem) {
     hoverLabel,
     description: rawItem?.description || fallback.description || '',
     tags: normalizeTags(rawItem?.tags, fallback.tags || []),
+    previewProjectSlug: rawItem?.previewProjectSlug || '',
     previewImage: rawItem?.previewImage || fallback.previewImage || projectPlaceholder,
   }
 }

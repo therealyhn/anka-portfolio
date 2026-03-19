@@ -52,6 +52,14 @@ export const servicesSection = defineType({
           type: 'object',
           name: 'serviceItem',
           title: 'Service Item',
+          validation: (Rule) =>
+            Rule.custom((value) => {
+              const hasPreviewImage = Boolean(value?.previewImage?.asset?._ref || value?.previewImage?.asset?._id)
+              const hasPreviewProject = Boolean(value?.previewProject?._ref)
+
+              if (hasPreviewImage || hasPreviewProject) return true
+              return 'Set Preview Image or Preview Project for this service item.'
+            }),
           fields: [
             defineField({
               name: 'label',

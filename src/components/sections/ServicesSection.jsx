@@ -29,6 +29,9 @@ function ServicesSection() {
     const hasRealImage = typeof item?.previewImage === 'string' && !item.previewImage.includes('project-placeholder')
     if (hasRealImage) return item.previewImage
 
+    const previewProjectImage = item?.previewProjectSlug ? projectImageBySlug[item.previewProjectSlug] : null
+    if (previewProjectImage) return previewProjectImage
+
     const fallbackSlug = SERVICE_PREVIEW_SLUGS[item?.id]
     const fallbackImage = fallbackSlug ? projectImageBySlug[fallbackSlug] : null
     return fallbackImage || item?.previewImage
