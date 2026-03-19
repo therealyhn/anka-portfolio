@@ -37,7 +37,6 @@ function Navbar({ hideLanguageSwitch = false }) {
       document.body.style.overflow = ''
       return
     }
-
     document.body.style.overflow = 'hidden'
     return () => {
       document.body.style.overflow = ''
@@ -52,6 +51,7 @@ function Navbar({ hideLanguageSwitch = false }) {
     <header className="relative inset-x-0">
       <div className="relative mx-auto flex max-w-[1400px] items-center justify-center">
         <nav className="fixed top-6 z-50 flex w-[calc(100%-32px)] items-center justify-between rounded-xl bg-brand-surface px-3 py-2.5 shadow-lg sm:top-8 sm:w-[calc(100%-40px)] sm:px-4 sm:py-3 md:top-6 md:w-[calc(100%-56px)] md:px-3 md:py-3 lg:h-[52px] lg:w-[571px] lg:rounded-[10px] lg:px-[15px] lg:py-0">
+          {/* Logo */}
           <a
             href={isHomePage ? '#hero' : '/'}
             aria-label="Back to top"
@@ -61,6 +61,7 @@ function Navbar({ hideLanguageSwitch = false }) {
             <img src={logoBlackText} alt="Anka Design" className="h-auto w-[100px] sm:w-[118px] md:w-[130px] lg:w-[114px]" />
           </a>
 
+          {/* Desktop nav items */}
           <ul className="hidden items-center gap-5 lg:flex">
             {NAV_ITEMS.map((item) => (
               <li key={item.label}>
@@ -80,6 +81,7 @@ function Navbar({ hideLanguageSwitch = false }) {
             ))}
           </ul>
 
+          {/* Desktop CTA */}
           <Link
             to="/contact"
             className="group hidden items-center gap-[5px] font-sans text-[14px] font-medium leading-[1.26] text-brand-ink transition-colors duration-500 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface lg:inline-flex"
@@ -92,21 +94,43 @@ function Navbar({ hideLanguageSwitch = false }) {
               className="!h-7 !w-7"
             />
           </Link>
-          <button
-            type="button"
-            aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            aria-expanded={isMenuOpen}
-            onClick={() => setIsMenuOpen((current) => !current)}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-ink/5 text-brand-ink transition-colors duration-300 ease-premium hover:bg-brand-ink/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:h-9 sm:w-9 md:h-10 md:w-10 lg:hidden"
-          >
-            <span className="relative h-3 w-3.5 sm:h-3.5 sm:w-4">
-              <span className={`absolute left-0 top-0 block h-0.5 w-full bg-current transition-all duration-300 ease-premium ${isMenuOpen ? 'top-[5px] rotate-45 sm:top-[6px]' : ''}`} />
-              <span className={`absolute left-0 top-[5px] block h-0.5 w-full bg-current transition-all duration-300 ease-premium sm:top-[6px] ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
-              <span className={`absolute left-0 top-[10px] block h-0.5 w-full bg-current transition-all duration-300 ease-premium sm:top-3 ${isMenuOpen ? 'top-[5px] -rotate-45 sm:top-[6px]' : ''}`} />
-            </span>
-          </button>
+
+          {/* Mobile right controls: language toggle + hamburger */}
+          <div className="flex items-center gap-2 lg:hidden">
+            {!hideLanguageSwitch && (
+              <button
+                type="button"
+                aria-label={isEnglish ? 'Switch to Serbian' : 'Switch to English'}
+                aria-pressed={!isEnglish}
+                onClick={toggleLanguage}
+                className="relative inline-flex h-8 w-[56px] items-center rounded-full bg-brand-ink/10 px-1 transition-colors duration-300 ease-premium hover:bg-brand-ink/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:h-9 sm:w-[62px] md:h-10 md:w-[66px]"
+              >
+                <span
+                  aria-hidden="true"
+                  className={`inline-flex h-6 w-6 items-center justify-center rounded-full transition-transform duration-500 ease-premium sm:h-7 sm:w-7 md:h-8 md:w-8 ${isEnglish ? 'translate-x-0' : 'translate-x-6 sm:translate-x-[26px] md:translate-x-[26px]'}`}
+                >
+                  <img src={isEnglish ? englishIcon : serbianIcon} alt="" className="h-full w-full rounded-full" />
+                </span>
+              </button>
+            )}
+
+            <button
+              type="button"
+              aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={isMenuOpen}
+              onClick={() => setIsMenuOpen((current) => !current)}
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-ink/5 text-brand-ink transition-colors duration-300 ease-premium hover:bg-brand-ink/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:h-9 sm:w-9 md:h-10 md:w-10"
+            >
+              <span className="relative h-3 w-3.5 sm:h-3.5 sm:w-4">
+                <span className={`absolute left-0 top-0 block h-0.5 w-full bg-current transition-all duration-300 ease-premium ${isMenuOpen ? 'top-[5px] rotate-45 sm:top-[6px]' : ''}`} />
+                <span className={`absolute left-0 top-[5px] block h-0.5 w-full bg-current transition-all duration-300 ease-premium sm:top-[6px] ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
+                <span className={`absolute left-0 top-[10px] block h-0.5 w-full bg-current transition-all duration-300 ease-premium sm:top-3 ${isMenuOpen ? 'top-[5px] -rotate-45 sm:top-[6px]' : ''}`} />
+              </span>
+            </button>
+          </div>
         </nav>
 
+        {/* Backdrop */}
         <button
           type="button"
           aria-label="Close navigation menu backdrop"
@@ -114,18 +138,22 @@ function Navbar({ hideLanguageSwitch = false }) {
           className={`fixed inset-0 z-40 bg-black/35 transition-opacity duration-300 ease-premium lg:hidden ${isMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
         />
 
+        {/* Mobile dropdown menu */}
         <div
-          className={`fixed left-1/2 top-[80px] z-[55] w-[calc(100%-32px)] -translate-x-1/2 overflow-hidden rounded-2xl border border-brand-line/40 bg-brand-surface p-3 shadow-edge transition-all duration-300 ease-premium sm:top-[100px] sm:w-[calc(100%-40px)] md:top-[100px] md:w-[calc(100%-56px)] lg:hidden ${isMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'}`}
+          className={`fixed left-1/2 top-[80px] z-[55] w-[calc(100%-32px)] -translate-x-1/2 overflow-hidden rounded-2xl border border-brand-line/40 bg-brand-surface px-5 pb-6 pt-4 shadow-edge transition-all duration-300 ease-premium sm:top-[100px] sm:w-[calc(100%-40px)] md:top-[100px] md:w-[calc(100%-56px)] lg:hidden ${isMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'}`}
         >
-          <ul className="space-y-1">
+          <ul className="flex flex-col">
             {NAV_ITEMS.map((item) => (
               <li key={`${item.label}-mobile`}>
                 <a
                   href={getSectionHref(item.sectionId)}
                   onClick={closeMenu}
-                  className="block rounded-lg px-3 py-2 text-sm font-semibold text-brand-ink transition-colors duration-300 ease-premium hover:bg-brand-ink/5 hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
+                  className="group flex items-center justify-end gap-2.5 py-2.5 text-[22px] font-medium text-brand-ink transition-colors duration-300 ease-premium hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:py-3 sm:text-[26px]"
                 >
-                  {item.label}
+                  <span>{item.label}</span>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="shrink-0 sm:h-[18px] sm:w-[18px]">
+                    <path d="M2.5 13.5L13.5 2.5M13.5 2.5H5.5M13.5 2.5V10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </a>
               </li>
             ))}
@@ -133,34 +161,21 @@ function Navbar({ hideLanguageSwitch = false }) {
               <Link
                 to="/contact"
                 onClick={closeMenu}
-                className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-ink px-3 py-2 text-sm font-semibold text-white transition-colors duration-300 ease-premium hover:bg-brand-accent hover:text-brand-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
+                className="group flex items-center justify-end gap-2.5 py-2.5 text-[22px] font-medium text-brand-ink transition-colors duration-300 ease-premium hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:py-3 sm:text-[26px]"
               >
-                <span>Let&apos;s talk</span>
-                <CircleArrowButton iconSrc={navArrow} iconHoverSrc={navArrowHover} centerFillOnHover className="!h-7 !w-7" />
+                <span>Contact</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="shrink-0 sm:h-[18px] sm:w-[18px]">
+                  <path d="M2.5 13.5L13.5 2.5M13.5 2.5H5.5M13.5 2.5V10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </Link>
             </li>
-            {!hideLanguageSwitch ? (
-              <li className="pt-2">
-                <button
-                  type="button"
-                  aria-label={isEnglish ? 'Switch to Serbian' : 'Switch to English'}
-                  aria-pressed={!isEnglish}
-                  onClick={toggleLanguage}
-                  className="mx-auto inline-flex h-10 w-[76px] items-center rounded-full bg-brand-ink/10 px-1 transition-colors duration-300 ease-premium hover:bg-brand-ink/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
-                >
-                  <span
-                    aria-hidden="true"
-                    className={`relative z-10 inline-flex h-8 w-8 items-center justify-center rounded-full transition-transform duration-500 ease-premium ${isEnglish ? 'translate-x-0' : 'translate-x-9'}`}
-                  >
-                    <img src={isEnglish ? englishIcon : serbianIcon} alt={isEnglish ? 'English' : 'Serbian'} className="h-8 w-8" />
-                  </span>
-                </button>
-              </li>
-            ) : null}
           </ul>
+
+          <p className="mt-4 text-right text-sm text-brand-ink/40">hello@ankaljusic.com</p>
         </div>
       </div>
 
+      {/* Desktop language toggle (absolute, outside nav pill) */}
       {!hideLanguageSwitch ? (
         <button
           type="button"

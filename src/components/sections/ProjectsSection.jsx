@@ -7,7 +7,7 @@ import seeMoreArrow from '../../assets/images/arrows/See more projects (projects
 import seeMoreArrowHover from '../../assets/images/arrows/See more projects (projects section) HOVER.svg'
 
 function ProjectsSection() {
-  const INITIAL_VISIBLE_PROJECTS = 6
+  const INITIAL_VISIBLE_PROJECTS = window.matchMedia('(max-width: 1023px)').matches ? 3 : 6
   const [isExpanded, setIsExpanded] = useState(false)
   const { data: projects } = useProjectsContent()
 
