@@ -30,7 +30,11 @@ const ABOUT_QUERY = `
     "quoteLineTwo": coalesce(quoteLineTwo, testimonialLineTwo),
     "testimonialName": coalesce(testimonialName, authorName),
     "testimonialRole": coalesce(testimonialRole, authorRole),
-    "portraitImage": coalesce(portraitImage.asset->url, ankaPortrait.asset->url),
+    "portraitImage": {
+      "url": coalesce(portraitImage.asset->url, ankaPortrait.asset->url),
+      "width": coalesce(portraitImage.asset->metadata.dimensions.width, null),
+      "height": coalesce(portraitImage.asset->metadata.dimensions.height, null)
+    },
     "earthImage": coalesce(earthImage.asset->url, locationImage.asset->url),
     "testimonialAvatar": coalesce(testimonialAvatar.asset->url, authorAvatar.asset->url),
     "testimonials": coalesce(testimonials, [])[]{
@@ -71,7 +75,7 @@ const DEFAULT_ABOUT_CONTENT = {
     'She owned the design process from the beginning to the end, responded quickly to feedback, and managed to respect the tight deadlines. She brought more than execution - she understood the context, suggested solutions, and improved our ideas."',
   testimonialName: 'Vida Antonijevic',
   testimonialRole: 'Head of Operations, House of Summary',
-  portraitImage: ankaImageFallback,
+  portraitImage: { url: ankaImageFallback, width: null, height: null },
   earthImage: earthImageFallback,
   testimonialAvatar: ankaImageFallback,
   testimonials: [
@@ -211,7 +215,9 @@ function normalizeAboutContent(rawContent) {
     quoteLineTwo: rawContent?.quoteLineTwo || fallback.quoteLineTwo,
     testimonialName: rawContent?.testimonialName || fallback.testimonialName,
     testimonialRole: rawContent?.testimonialRole || fallback.testimonialRole,
-    portraitImage: rawContent?.portraitImage || fallback.portraitImage,
+    portraitImage: rawContent?.portraitImage?.url
+      ? rawContent.portraitImage
+      : fallback.portraitImage,
     earthImage: rawContent?.earthImage || fallback.earthImage,
     testimonialAvatar: rawContent?.testimonialAvatar || fallback.testimonialAvatar,
     testimonials: normalizeTestimonials(rawContent?.testimonials, rawContent, fallback.testimonials),

@@ -28,24 +28,25 @@ function AboutBentoGrid({ data }) {
         </div>
       </article>
 
-      <article className="relative overflow-hidden rounded-[8px] bg-[#D8D8D8] sm:rounded-[10px] xl:col-start-1 xl:row-start-2 xl:rounded-[12px]">
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,#8eb0cc_0%,#6e8aa3_45%,#3f5b72_100%)]" />
+      <article className="relative min-h-[380px] overflow-hidden rounded-[8px] sm:min-h-[440px] sm:rounded-[10px] xl:min-h-0 xl:col-start-1 xl:row-start-2 xl:rounded-[12px]">
         <img
-          src={data.portraitImage}
+          src={data.portraitImage.url}
           alt="Anka portrait"
+          width={data.portraitImage.width ?? undefined}
+          height={data.portraitImage.height ?? undefined}
           loading="lazy"
           decoding="async"
-          className="relative h-full w-full object-cover object-center scale-125 md:scale-100 xl:object-contain"
+          className="relative w-full h-full object-cover scale-125 md:scale-100 md:object-right"
         />
         <div className="absolute inset-x-0 top-0 p-5 sm:p-6 xl:hidden">
           <h3 className="text-xl font-normal text-white sm:text-2xl">{data.experienceTitle}</h3>
-          <p className="mt-3 text-sm leading-[1.45] text-white sm:text-base">
+          <p className="mt-3 text-md leading-[1.45] text-white sm:text-base">
             {data.experienceText}
           </p>
         </div>
       </article>
 
-      <div className="grid grid-cols-2 gap-3 xl:contents xl:gap-0">
+      <div className="grid grid-cols-2 gap-3 md:h-full xl:contents xl:gap-0">
         <article className="flex h-full flex-col justify-between rounded-[8px] bg-[#F5F5F5] p-5 sm:rounded-[10px] sm:p-6 xl:col-start-2 xl:row-start-2 xl:rounded-[12px] xl:px-[30px] xl:py-[30px]">
           <p className="text-5xl leading-none text-brand-ink sm:text-6xl min-[1920px]:text-[72px]">{data.yearsValue}</p>
           <p className="mt-6 max-w-[240px] text-lg leading-[1.4] text-brand-ink/90 sm:text-xl 2xl:max-w-[260px] 2xl:text-[28px]">
