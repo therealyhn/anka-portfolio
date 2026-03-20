@@ -22,7 +22,7 @@ function AboutToolsRow({ tools }) {
           >
             <div className="flex items-center gap-2 sm:w-full sm:items-start sm:justify-between sm:gap-3">
               <h3 className="hidden sm:block text-base font-semibold text-brand-ink sm:text-lg min-[1920px]:text-[22px]">{item.title}</h3>
-              <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] p-1.5 sm:h-8 sm:w-8 sm:rounded-[8px] min-[1920px]:h-[50px] min-[1920px]:w-[50px]">
+              <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] p-1.5 sm:h-8 sm:w-8 sm:rounded-[8px] xl:h-10 xl:w-10 2xl:h-12 2xl:w-12 min-[1920px]:h-[56px] min-[1920px]:w-[56px]">
                 <img src={item.icon} alt="" aria-hidden="true" className="h-full w-full object-contain" />
               </span>
             </div>
