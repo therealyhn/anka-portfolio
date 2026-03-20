@@ -2,6 +2,24 @@ import { Link } from 'react-router-dom'
 import logoWhiteText from '../assets/images/logo/SVG white text.svg'
 import heroBackground from '../assets/images/img/Background.png'
 import { useContactForm, INTEREST_OPTIONS, BUDGET_RANGES } from '../hooks/useContactForm'
+import useFooterContent from '../hooks/useFooterContent'
+import linkedinIcon from '../assets/images/icons/Linekdin icon (footer).svg'
+import upworkIcon from '../assets/images/icons/Upwork icon (footer).svg'
+import fiverrIcon from '../assets/images/icons/Fiver icon (footer).svg'
+import dribbbleIcon from '../assets/images/icons/Dribbble icon (footer).svg'
+import instagramIcon from '../assets/images/icons/Instagram icon (footer).svg'
+
+const SOCIAL_ICON_MAP = {
+  linkedin: linkedinIcon,
+  upwork: upworkIcon,
+  fiverr: fiverrIcon,
+  dribbble: dribbbleIcon,
+  instagram: instagramIcon,
+}
+
+function normalizePlatform(platform) {
+  return String(platform || '').toLowerCase().trim()
+}
 
 const STEP_SUBTITLES = {
   '1_initial': "Fill out the form and I'll get back to you as soon as possible.",
@@ -32,6 +50,8 @@ function Stepper({ step }) {
 }
 
 function Contact() {
+  const { data: footerData } = useFooterContent()
+
   const {
     step,
     interests,
@@ -77,9 +97,9 @@ function Contact() {
   ]
 
   return (
-    <main className="min-h-screen h-[100svh] bg-brand-paper p-1.5 sm:p-2.5 font-sans overflow-hidden">
+    <main className="min-h-screen lg:h-[100svh] bg-brand-paper p-1.5 sm:p-2.5 font-sans lg:overflow-hidden">
       <section
-        className="relative h-full w-full overflow-hidden rounded-[16px] border border-white/10 bg-brand-charcoal text-white sm:rounded-[18px]"
+        className="relative lg:h-full w-full overflow-hidden rounded-[16px] border border-white/10 bg-brand-charcoal text-white sm:rounded-[18px]"
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.56), rgba(0,0,0,0.56)), url(${heroBackground})`,
           backgroundSize: 'cover',
@@ -90,7 +110,7 @@ function Contact() {
           Outer container: flex column so footer always sticks to bottom.
           Padding scales per breakpoint. max-w-[1440px] handles FHD/2K centering.
         */}
-        <div className="relative z-10 flex h-full flex-col px-5 py-6 sm:px-10 sm:py-10 md:px-14 lg:px-[80px] lg:pt-[70px] lg:pb-[50px] xl:px-[120px] max-w-[1440px] mx-auto">
+        <div className="relative z-10 flex lg:h-full flex-col px-5 py-6 sm:px-10 sm:py-10 md:px-14 lg:px-[80px] lg:pt-[70px] lg:pb-[50px] xl:px-[120px] max-w-[1440px] mx-auto">
 
           {/*
             Main content area.
@@ -98,10 +118,10 @@ function Contact() {
             lg+: 2-column grid — left sidebar | form.
             min-h-0 is required for flex children to scroll correctly.
           */}
-          <div className="flex-1 min-h-0 flex flex-col lg:grid lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-x-16 xl:gap-x-24 w-full">
+          <div className="lg:flex-1 lg:min-h-0 flex flex-col lg:grid lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-x-16 xl:gap-x-24 w-full">
 
             {/* Left column: Logo + Contact Info */}
-            <aside className="shrink-0 flex flex-col pt-1 lg:pt-0">
+            <aside className="shrink-0 flex flex-col pt-1 lg:pt-0 mb-6 lg:mb-0">
               {/* Logo margin collapses on mobile to save vertical space */}
               <header className="mb-4 sm:mb-6 lg:mb-[100px] xl:mb-[120px]">
                 <Link to="/" aria-label="Back to home" className="inline-block transition-opacity hover:opacity-80">
@@ -114,7 +134,7 @@ function Contact() {
               </header>
 
               {/* Contact info: hidden below lg — no vertical space wasted on mobile */}
-              <div className="hidden lg:flex flex-col gap-y-8 xl:gap-y-[32px] mt-2">
+              <div className="flex flex-col gap-y-4 mt-2 lg:gap-y-8 xl:gap-y-[32px]">
                 <div>
                   <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide uppercase">email</p>
                   <a
@@ -141,7 +161,7 @@ function Contact() {
             </aside>
 
             {/* Right column: Title + Stepper + Form content */}
-            <section className="flex-1 min-h-0 w-full max-w-[720px] lg:pt-[10px] flex flex-col">
+            <section className="lg:flex-1 lg:min-h-0 w-full max-w-[720px] lg:pt-[10px] flex flex-col">
 
               {/* Title — font scales across all breakpoints */}
               <h1 className="font-display text-[38px] font-thin leading-[0.95] tracking-tight sm:text-[52px] md:text-[66px] lg:text-[72px] xl:text-[86px] xl:tracking-[-0.032em] text-white mb-4 sm:mb-5 lg:mb-6 xl:mb-10 shrink-0">
@@ -158,7 +178,7 @@ function Contact() {
 
               {/* ── Step 1: Project Info ── */}
               {step === 1 && (
-                <div className="flex-1 overflow-y-auto no-scrollbar space-y-8 sm:space-y-10 lg:space-y-12 xl:space-y-16 pr-1 pb-4">
+                <div className="lg:flex-1 lg:overflow-y-auto no-scrollbar space-y-8 sm:space-y-10 lg:space-y-12 xl:space-y-16 pr-1 pb-4">
 
                   <div>
                     <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-4 sm:mb-5">
@@ -241,7 +261,7 @@ function Contact() {
 
               {/* ── Step 2: Contact Info ── */}
               {step === 2 && (
-                <div className="flex-1 overflow-y-auto no-scrollbar">
+                <div className="lg:flex-1 lg:overflow-y-auto no-scrollbar">
                   <div className="divide-y divide-[#2a2a2a]">
                     {contactFields.map((field) => (
                       /*
@@ -298,47 +318,86 @@ function Contact() {
           </div>
 
           {/* Footer bar */}
-          <div className="mt-4 sm:mt-6 lg:mt-8 flex items-end justify-between w-full shrink-0">
-            <div className="text-[12px] sm:text-[13px] font-medium text-[#8E8D8D] flex items-center flex-nowrap gap-x-2 sm:gap-x-2.5 pb-1 sm:pb-2">
-              <span>&copy;Anka Ljusic, 2026</span>
-              <span className="text-[#525252]">|</span>
-              <span className="hidden sm:inline">Personal Portfolio</span>
-              <Link to="/privacy" className="text-[#525252] hover:text-white transition-colors duration-300 sm:ml-1">
-                Privacy Policy
-              </Link>
+          <div className="mt-4 sm:mt-6 lg:mt-8 shrink-0 border-t border-white/10">
+
+            {/* Row: copyright (desktop only) + action buttons */}
+            <div className="pt-4 sm:pt-5 flex items-end justify-between w-full">
+              <div className="hidden lg:flex text-[12px] sm:text-[13px] font-medium text-[#8E8D8D] items-center gap-x-2 sm:gap-x-2.5 pb-1 sm:pb-2">
+                <span>&copy;Anka Ljusic, 2026</span>
+                <span className="text-[#525252]">|</span>
+                <span>Personal Portfolio</span>
+                <Link to="/privacy" className="text-[#525252] hover:text-white transition-colors duration-300 ml-1">
+                  Privacy Policy
+                </Link>
+              </div>
+
+              <div className="ml-auto lg:ml-0">
+                {step === 1 && (
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    disabled={!isStep1Valid}
+                    className="inline-flex items-center gap-1.5 rounded-[4px] bg-white pl-5 pr-4 py-2.5 sm:pl-6 sm:pr-5 xl:py-3.5 text-[13px] sm:text-[14px] font-medium leading-none text-brand-ink shadow-sm transition-all duration-300 hover:bg-white/90 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white"
+                  >
+                    <span>Next</span>
+                    <span aria-hidden="true" className="text-[16px] font-light leading-none -mt-0.5">&rsaquo;</span>
+                  </button>
+                )}
+
+                {step === 2 && (
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <button
+                      type="button"
+                      onClick={handlePrev}
+                      className="text-[13px] sm:text-[14px] font-medium text-[#8E8D8D] hover:text-white transition-colors duration-300"
+                    >
+                      Previous
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleSubmit}
+                      disabled={!isStep2Valid || isSubmitting}
+                      className="inline-flex items-center gap-1.5 rounded-[4px] bg-white pl-5 pr-4 py-2.5 sm:pl-6 sm:pr-5 xl:py-3.5 text-[13px] sm:text-[14px] font-medium leading-none text-brand-ink shadow-sm transition-all duration-300 hover:bg-white/90 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white"
+                    >
+                      {isSubmitting ? 'Sending...' : 'Send'}
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
 
-            {step === 1 && (
-              <button
-                type="button"
-                onClick={handleNext}
-                disabled={!isStep1Valid}
-                className="inline-flex items-center gap-1.5 rounded-[4px] bg-white pl-5 pr-4 py-2.5 sm:pl-6 sm:pr-5 xl:py-3.5 text-[13px] sm:text-[14px] font-medium leading-none text-brand-ink shadow-sm transition-all duration-300 hover:bg-white/90 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white"
+            {/* Mobile only: Privacy Policy + copyright + social icons */}
+            <div className="lg:hidden mt-3 mb-1 flex flex-col items-center gap-2">
+              <Link
+                to="/privacy"
+                className="text-[11px] text-[#525252] hover:text-white transition-colors duration-300"
               >
-                <span>Next</span>
-                <span aria-hidden="true" className="text-[16px] font-light leading-none -mt-0.5">&rsaquo;</span>
-              </button>
-            )}
-
-            {step === 2 && (
-              <div className="flex items-center gap-3 sm:gap-4">
-                <button
-                  type="button"
-                  onClick={handlePrev}
-                  className="text-[13px] sm:text-[14px] font-medium text-[#8E8D8D] hover:text-white transition-colors duration-300"
-                >
-                  Previous
-                </button>
-                <button
-                  type="button"
-                  onClick={handleSubmit}
-                  disabled={!isStep2Valid || isSubmitting}
-                  className="inline-flex items-center gap-1.5 rounded-[4px] bg-white pl-5 pr-4 py-2.5 sm:pl-6 sm:pr-5 xl:py-3.5 text-[13px] sm:text-[14px] font-medium leading-none text-brand-ink shadow-sm transition-all duration-300 hover:bg-white/90 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white"
-                >
-                  {isSubmitting ? 'Sending...' : 'Send'}
-                </button>
+                Privacy Policy
+              </Link>
+              <p className="text-[11px] font-medium text-[#8E8D8D]">
+                &copy;Anka Ljusic, 2026 &nbsp;|&nbsp; Personal Portfolio
+              </p>
+              <div className="flex items-center gap-3 mt-0.5">
+                {footerData.socials.map((social) => {
+                  const platform = normalizePlatform(social.platform)
+                  const icon = SOCIAL_ICON_MAP[platform]
+                  if (!icon) return null
+                  return (
+                    <a
+                      key={social.id}
+                      href={social.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={platform}
+                      className="inline-flex h-6 w-6 items-center justify-center text-white/70 transition-colors duration-300 hover:text-white"
+                    >
+                      <img src={icon} alt="" aria-hidden="true" className="h-full w-full object-contain" />
+                    </a>
+                  )
+                })}
               </div>
-            )}
+            </div>
+
           </div>
 
         </div>

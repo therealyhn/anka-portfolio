@@ -90,9 +90,23 @@
     }
   }
 
+  .project-title-marquee
+  {
+    overflow: hidden;
+  }
+
+  .project-title-track
+  {
+    display: flex;
+    width: max-content;
+    animation: about-tools-marquee-left 10s linear infinite;
+    will-change: transform;
+  }
+
   @media (prefers-reduced-motion: reduce)
   {
-    .about-tools-track
+    .about-tools-track,
+    .project-title-track
     {
       animation: none;
     }

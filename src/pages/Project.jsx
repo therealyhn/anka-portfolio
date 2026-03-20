@@ -48,59 +48,54 @@ function Project() {
         <div className="mx-auto w-full max-w-[1920px]">
           <Navbar hideLanguageSwitch />
 
-          <div className="mt-28 space-y-8 sm:hidden">
-            <h1 className="max-w-full font-display text-[64px] font-medium leading-[1.03] tracking-[-0.03em]">
-              {project.client}
-            </h1>
-
-            <div>
-              <p className="text-sm font-light leading-[1.22] text-brand-accent">overview</p>
-              <p className="mt-3 text-base leading-[1.4] text-white">{overview}</p>
+          <div className="mt-28 sm:hidden">
+            <div className="project-title-marquee" aria-label={project.client}>
+              <div className="project-title-track">
+                <span aria-hidden="true" className="whitespace-nowrap pr-16 font-display text-[80px] font-medium leading-[1.03] tracking-[-0.03em]">{project.client}</span>
+                <span aria-hidden="true" className="whitespace-nowrap pr-16 font-display text-[80px] font-medium leading-[1.03] tracking-[-0.03em]">{project.client}</span>
+              </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-x-7 gap-y-7">
-              <div className="w-[152px]">
+            <div className="mt-8 space-y-6">
+              <div>
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">overview</p>
+                <p className="mt-2 text-base leading-[1.4]">{overview}</p>
+              </div>
+              <div>
                 <p className="text-sm font-light leading-[1.22] text-brand-accent">client</p>
-                <p className="text-base leading-[1.22] text-white">{project.client}</p>
+                <p className="mt-1 text-base leading-[1.22]">{project.client}</p>
               </div>
-              <div className="w-[152px]">
-                <p className="text-sm font-light leading-[1.22] text-brand-accent">year</p>
-                <p className="text-base leading-[1.22] text-white">{year}</p>
-              </div>
-              <div className="w-[152px]">
-                <p className="text-sm font-light leading-[1.22] text-brand-accent">location</p>
-                <p className="text-base leading-[1.22] text-white">{location}</p>
-              </div>
-              <div className="w-[152px]">
-                <p className="text-sm font-light leading-[1.22] text-brand-accent">duration</p>
-                <p className="text-base leading-[1.22] text-white">{duration}</p>
-              </div>
-              <div className="w-[152px]">
-                <p className="text-sm font-light leading-[1.22] text-brand-accent">stack</p>
-                <p className="text-base leading-[1.25] text-white">{stack}</p>
-              </div>
-              <div className="w-[152px]">
+              <div>
                 <p className="text-sm font-light leading-[1.22] text-brand-accent">services</p>
-                <p className="text-base leading-[1.25] text-white">
-                  {services.map((service, index) => (
-                    <span key={`${project.slug}-service-${index}`}>
-                      {service}
-                      {index < services.length - 1 ? <br /> : null}
-                    </span>
-                  ))}
-                </p>
+                <p className="mt-1 text-base leading-[1.25]">{services.join(', ')}</p>
+              </div>
+              <div>
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">stack</p>
+                <p className="mt-1 text-base leading-[1.25]">{stack}</p>
+              </div>
+              <div>
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">duration</p>
+                <p className="mt-1 text-base leading-[1.22]">{duration}</p>
+              </div>
+              <div>
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">location</p>
+                <p className="mt-1 text-base leading-[1.22]">{location}</p>
+              </div>
+              <div>
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">year</p>
+                <p className="mt-1 text-base leading-[1.22]">{year}</p>
               </div>
             </div>
 
-            <div className="no-scrollbar mt-8 space-y-[13px]">
+            <div className="mt-8 space-y-[13px]">
               {galleryImages.map((image, index) => (
-                <div key={`${project.slug}-gallery-mobile-${index}`} className="overflow-hidden rounded-[15px] bg-black">
+                <div key={`${project.slug}-gallery-mobile-${index}`} className="overflow-hidden rounded-[15px]">
                   <img
                     src={image}
                     alt={`${project.title} screen ${index + 1}`}
                     loading="lazy"
                     decoding="async"
-                    className={`w-full object-cover ${index === 0 ? 'h-[380px]' : 'h-[420px]'}`}
+                    className="w-full h-auto block"
                   />
                 </div>
               ))}
@@ -164,7 +159,7 @@ function Project() {
                       alt={`${project.title} screen ${index + 1}`}
                       loading="lazy"
                       decoding="async"
-                      className={`w-full object-cover ${index === 0 ? 'h-[500px] xl:h-[733px]' : 'h-[600px] xl:h-[800px]'}`}
+                      className="w-full h-auto block"
                     />
                   </div>
                 ))}
@@ -178,44 +173,59 @@ function Project() {
         <div className="mx-auto w-full max-w-[1920px]">
           <div className="lg:ml-[32px] xl:ml-[64px] max-w-[1295px]">
             <h2 className="text-4xl sm:text-5xl font-medium tracking-tight">More projects like this</h2>
-            <div className="mt-8 grid gap-6 md:grid-cols-2">
-            {relatedProjects.map((item) => (
-              <Link
-                key={item.id}
-                to={`/projects/${item.slug}`}
-                className="group/project block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
-              >
-                <div className="relative overflow-hidden rounded-[10px]">
-                  <img
-                    src={item.image}
-                    alt={`${item.title} preview`}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-[220px] w-full object-cover transition-transform duration-500 ease-premium group-hover/project:scale-[1.03] sm:h-[300px]"
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-brand-ink/45 opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100" />
-                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100">
-                    <span className="pointer-events-auto">
-                      <CircleArrowButton
-                        className="group !h-16 !w-16"
-                        iconClassName="!h-5 !w-5"
-                        iconSrc={navArrow}
-                        iconHoverSrc={navArrowHover}
-                        centerFillOnHover
-                        fillClassName="!-inset-px group-hover:scale-110"
-                      />
-                    </span>
+            <div className="mt-8 grid grid-cols-2 gap-3 md:gap-6">
+              {relatedProjects.map((item) => (
+                <Link
+                  key={item.id}
+                  to={`/projects/${item.slug}`}
+                  className="group/project block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
+                >
+                  <div className="relative overflow-hidden rounded-[10px]">
+                    <img
+                      src={item.image}
+                      alt={`${item.title} preview`}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-[160px] w-full object-cover transition-transform duration-500 ease-premium group-hover/project:scale-[1.03] sm:h-[300px]"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-brand-ink/45 opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100" />
+                    <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100">
+                      <span className="pointer-events-auto">
+                        <CircleArrowButton
+                          className="group !h-16 !w-16"
+                          iconClassName="!h-5 !w-5"
+                          iconSrc={navArrow}
+                          iconHoverSrc={navArrowHover}
+                          centerFillOnHover
+                          fillClassName="!-inset-px group-hover:scale-110"
+                        />
+                      </span>
+                    </div>
+                    <p className="pointer-events-none absolute bottom-3 left-3 rounded-[3px] bg-white/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-white backdrop-blur-sm transition-opacity duration-300 ease-premium sm:opacity-0 sm:group-hover/project:opacity-100">
+                      {item.role}
+                    </p>
                   </div>
-                  <p className="pointer-events-none absolute bottom-3 left-3 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-white opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100">
-                    {item.role}
-                  </p>
-                </div>
-                <h3 className="mt-3 text-md font-semibold text-white sm:text-xl">
-                  {item.title} <span className="font-medium text-white/55">| {item.client}</span>
-                </h3>
-              </Link>
-            ))}
-          </div>
+                  <div className="mt-2 sm:mt-3">
+                    <p className="text-sm font-semibold text-white sm:text-xl">{item.title}</p>
+                    <p className="mt-0.5 text-xs font-medium text-white/50 sm:text-base">{item.client}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            <Link
+              to="/projects"
+              className="group mt-8 inline-flex items-center gap-2.5 sm:hidden"
+            >
+              <span className="text-base font-medium">See all projects</span>
+              <CircleArrowButton
+                iconSrc={navArrow}
+                iconHoverSrc={navArrowHover}
+                centerFillOnHover
+                fillColorClass="bg-brand-ink"
+                className="!h-8 !w-8"
+              />
+            </Link>
           </div>
         </div>
       </section>
