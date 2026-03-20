@@ -72,7 +72,7 @@ function AboutTestimonialsSlider({ testimonials }) {
         >
           {safeTestimonials.map((testimonial) => (
             <SwiperSlide key={testimonial.id}>
-              <blockquote className="mx-auto max-w-[980px] text-base font-light italic leading-[1.6] text-brand-ink sm:text-lg md:text-xl xl:max-w-[1040px] xl:text-[24px] 2xl:max-w-[1160px] 2xl:text-[26px] 2xl:leading-[1.6] min-[1920px]:max-w-[1240px] min-[1920px]:text-[32px]">
+              <blockquote className="mx-auto max-w-[980px] px-10 text-base font-light italic leading-[1.6] text-brand-ink sm:px-0 sm:text-lg md:text-xl xl:max-w-[1040px] xl:text-[24px] 2xl:max-w-[1160px] 2xl:text-[26px] 2xl:leading-[1.6] min-[1920px]:max-w-[1240px] min-[1920px]:text-[32px]">
                 <p>"{testimonial.quoteLineOne}</p>
                 {testimonial.quoteLineTwo ? <p className="mt-4 sm:mt-5 2xl:mt-[24px]">{testimonial.quoteLineTwo}"</p> : null}
               </blockquote>

@@ -50,14 +50,14 @@ function ServicesSection() {
               <AccentDot className="h-4 w-4 xl:h-2 xl:w-2 min-[1920px]:h-2.5 min-[1920px]:w-2.5" />
               {servicesContent?.eyebrowLabel || 'Services'}
             </p>
-            <h2 className="mt-3 max-w-[620px] text-[28px] leading-tight text-brand-ink sm:mt-4 sm:text-4xl md:text-5xl lg:text-6xl xl:mt-[12px] xl:max-w-[700px] xl:text-[56px] 2xl:mt-[16px] 2xl:text-[60px] min-[1920px]:mt-[18px] min-[1920px]:max-w-[600px] min-[1920px]:text-[56px] min-[1920px]:leading-[1.1] min-[1920px]:tracking-[-0.04em]">
+            <h2 className="mt-3 max-w-[250px] text-[28px] leading-tight text-brand-ink sm:mt-4 sm:text-4xl md:text-5xl lg:text-6xl xl:mt-[12px] xl:max-w-[700px] xl:text-[56px] 2xl:mt-[16px] 2xl:text-[60px] min-[1920px]:mt-[18px] min-[1920px]:max-w-[600px] min-[1920px]:text-[56px] min-[1920px]:leading-[1.1] min-[1920px]:tracking-[-0.04em]">
               {servicesContent?.titleLineOne || 'What I can'}{' '}
               <em className="font-serif text-[1.3em] font-normal italic">{servicesContent?.titleAccent || 'design'}</em>{' '}
               {servicesContent?.titleLineTwo || 'for your team'}
             </h2>
           </div>
 
-          <p className="max-w-[1000px] text-sm leading-relaxed font-thin text-black sm:text-base min-[1200px]:w-[42%] min-[1200px]:self-end xl:w-[45%] xl:text-[18px] 2xl:w-[42%] 2xl:text-[20px] min-[1920px]:w-[640px] min-[1920px]:text-[20px] min-[1920px]:leading-[1.6] pb-2">
+          <p className="max-w-[1000px] text-md leading-relaxed font-thin text-black/70 sm:text-base min-[1200px]:w-[42%] min-[1200px]:self-end xl:w-[45%] xl:text-[18px] 2xl:w-[42%] 2xl:text-[20px] min-[1920px]:w-[640px] min-[1920px]:text-[20px] min-[1920px]:leading-[1.6] pb-2">
             {servicesContent?.description}
           </p>
         </div>

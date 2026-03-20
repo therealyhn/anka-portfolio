@@ -50,7 +50,7 @@ function Navbar({ hideLanguageSwitch = false }) {
   return (
     <header className="relative inset-x-0">
       <div className="relative mx-auto flex max-w-[1400px] items-center justify-center">
-        <nav className="fixed top-6 z-50 flex w-[calc(100%-32px)] items-center justify-between rounded-xl bg-brand-surface px-3 py-2.5 shadow-lg sm:top-8 sm:w-[calc(100%-40px)] sm:px-4 sm:py-3 md:top-6 md:w-[calc(100%-56px)] md:px-3 md:py-3 lg:h-[52px] lg:w-[571px] lg:rounded-[10px] lg:px-[15px] lg:py-0">
+        <nav className="fixed top-6 z-50 flex w-[calc(100%-40px)] items-center justify-between rounded-xl bg-brand-surface px-3 py-2.5 shadow-lg sm:top-8 sm:w-[calc(100%-44px)] sm:px-4 sm:py-3 md:top-6 md:w-[calc(100%-56px)] md:px-3 md:py-3 lg:h-[52px] lg:w-[571px] lg:rounded-[10px] lg:px-[15px] lg:py-0">
           {/* Logo */}
           <a
             href={isHomePage ? '#hero' : '/'}

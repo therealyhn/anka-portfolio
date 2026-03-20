@@ -85,6 +85,13 @@ function Footer() {
             </FooterLink>
           </div>
 
+          <FooterLink
+            href={data.privacyHref}
+            className="mb-4 block text-center text-xs text-white/35 transition-colors duration-300 ease-premium hover:text-brand-paper sm:hidden"
+          >
+            {data.privacyLabel}
+          </FooterLink>
+
           <div className="flex flex-col gap-4 border-t border-white/15 py-6 sm:py-8">
             <div className="flex flex-col items-center justify-between gap-4 text-sm sm:flex-row sm:text-base lg:text-lg min-[1920px]:text-[21px]">
               <div className="flex flex-col items-center gap-1 text-white/80 sm:items-start">
@@ -94,7 +101,7 @@ function Footer() {
                   <span>{data.portfolioLabel}</span>
                   <FooterLink
                     href={data.privacyHref}
-                    className="text-white/35 transition-colors duration-300 ease-premium hover:text-brand-paper"
+                    className="hidden text-white/35 transition-colors duration-300 ease-premium hover:text-brand-paper sm:inline"
                   >
                     {data.privacyLabel}
                   </FooterLink>
