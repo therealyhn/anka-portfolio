@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import CircleArrowButton from '../components/ui/CircleArrowButton'
 import Footer from '../components/layout/Footer'
@@ -17,9 +17,35 @@ function Project() {
   const project = projects.find((item) => item.slug === slug)
   const relatedProjects = projects.filter((item) => item.slug !== slug).slice(0, 2)
 
+  const galleryRef = useRef(null)
+
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [slug])
+
+  useEffect(() => {
+    const handleWheel = (e) => {
+      if (window.innerWidth < 1024) return
+
+      const gallery = galleryRef.current
+      if (!gallery) return
+
+      const rect = gallery.getBoundingClientRect()
+      if (rect.top >= window.innerHeight || rect.bottom <= 0) return
+
+      const { scrollTop, scrollHeight, clientHeight } = gallery
+      const atBottom = scrollTop + clientHeight >= scrollHeight - 2
+      const atTop = scrollTop <= 0
+
+      if ((e.deltaY > 0 && !atBottom) || (e.deltaY < 0 && !atTop)) {
+        e.preventDefault()
+        gallery.scrollBy({ top: e.deltaY })
+      }
+    }
+
+    window.addEventListener('wheel', handleWheel, { passive: false })
+    return () => window.removeEventListener('wheel', handleWheel)
+  }, [])
 
   if (!project && loading) {
     return <main className="min-h-screen bg-brand-charcoal" />
@@ -89,13 +115,13 @@ function Project() {
 
             <div className="mt-8 space-y-[13px]">
               {galleryImages.map((image, index) => (
-                <div key={`${project.slug}-gallery-mobile-${index}`} className="overflow-hidden rounded-[15px]">
+                <div key={`${project.slug}-gallery-mobile-${index}`}>
                   <img
                     src={image}
                     alt={`${project.title} screen ${index + 1}`}
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-auto block"
+                    className={`w-full h-auto block ${index === 0 ? 'rounded-b-[15px]' : 'rounded-[15px]'}`}
                   />
                 </div>
               ))}
@@ -151,15 +177,15 @@ function Project() {
                 </div>
               </div>
 
-              <div className="flex-1 w-full min-w-0 flex flex-col gap-[13px] lg:h-[calc(100vh-140px)] overflow-y-auto no-scrollbar lg:sticky lg:top-[120px]">
+              <div ref={galleryRef} className="flex-1 w-full min-w-0 flex flex-col gap-[13px] lg:h-[calc(100vh-140px)] overflow-y-auto no-scrollbar lg:sticky lg:top-[120px]">
                 {galleryImages.map((image, index) => (
-                  <div key={`${project.slug}-gallery-desktop-${index}`} className="w-full shrink-0 overflow-hidden rounded-[20px] bg-black">
+                  <div key={`${project.slug}-gallery-desktop-${index}`} className="w-full shrink-0 bg-brand-charcoal">
                     <img
                       src={image}
                       alt={`${project.title} screen ${index + 1}`}
                       loading="lazy"
                       decoding="async"
-                      className="w-full h-auto block"
+                      className={`w-full h-auto block ${index === 0 ? 'rounded-b-[20px]' : 'rounded-[20px]'}`}
                     />
                   </div>
                 ))}
@@ -171,7 +197,7 @@ function Project() {
 
       <section className="w-full overflow-x-clip px-4 pb-14 pt-16 sm:px-8">
         <div className="mx-auto w-full max-w-[1920px]">
-          <div className="lg:ml-[32px] xl:ml-[64px] max-w-[1295px]">
+          <div className="lg:ml-[32px] xl:ml-[64px] max-w-[900px]">
             <h2 className="text-4xl sm:text-5xl font-medium tracking-tight">More projects like this</h2>
             <div className="mt-8 grid grid-cols-2 gap-3 md:gap-6">
               {relatedProjects.map((item) => (
