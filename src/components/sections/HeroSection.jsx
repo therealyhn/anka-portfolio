@@ -18,11 +18,11 @@ function HeroSection() {
   const sr = (en, srVal) => lang === 'sr' ? (srVal || en) : en
 
   useEffect(() => {
-    const formatter = new Intl.DateTimeFormat('en-US', {
+    const formatter = new Intl.DateTimeFormat(lang === 'sr' ? 'sr-RS' : 'en-US', {
       timeZone: 'Europe/Belgrade',
       hour: 'numeric',
       minute: '2-digit',
-      hour12: true,
+      hour12: lang !== 'sr',
     })
 
     const updateTime = () => {
@@ -33,13 +33,13 @@ function HeroSection() {
     const intervalId = setInterval(updateTime, 60000)
 
     return () => clearInterval(intervalId)
-  }, [])
+  }, [lang])
 
   return (
     <section
       id="hero"
       className="relative flex h-[100dvh] min-h-[100dvh] flex-col overflow-hidden rounded-[16px] border-[8px] border-brand-paper bg-brand-charcoal text-white sm:rounded-[20px] sm:border-[10px] lg:rounded-[27px] lg:border-[13px]"
-      aria-label="Hero section"
+      aria-label={t('hero.sectionAria')}
     >
       <img
         src={heroBackground}

@@ -138,6 +138,13 @@ export const servicesSection = defineType({
               validation: (Rule) => Rule.max(8),
             }),
             defineField({
+              name: 'tags_sr',
+              title: 'Tags (Srpski)',
+              type: 'array',
+              of: [{type: 'string'}],
+              validation: (Rule) => Rule.max(8),
+            }),
+            defineField({
               name: 'previewProject',
               title: 'Preview Project (Optional)',
               description:

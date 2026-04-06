@@ -53,7 +53,7 @@ function Navbar({ hideLanguageSwitch = false }) {
           {/* Logo */}
           <a
             href={isHomePage ? '#hero' : '/'}
-            aria-label="Back to top"
+            aria-label={t('nav.backToTop')}
             onClick={closeMenu}
             className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface"
           >
@@ -99,7 +99,7 @@ function Navbar({ hideLanguageSwitch = false }) {
             {!hideLanguageSwitch && (
               <button
                 type="button"
-                aria-label={isEnglish ? 'Switch to Serbian' : 'Switch to English'}
+                aria-label={isEnglish ? t('nav.switchToSerbian') : t('nav.switchToEnglish')}
                 aria-pressed={!isEnglish}
                 onClick={toggle}
                 className="relative inline-flex h-8 w-[56px] items-center rounded-full bg-brand-ink/10 px-1 transition-colors duration-300 ease-premium hover:bg-brand-ink/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:h-9 sm:w-[62px] md:h-10 md:w-[66px]"
@@ -108,14 +108,14 @@ function Navbar({ hideLanguageSwitch = false }) {
                   aria-hidden="true"
                   className={`inline-flex h-6 w-6 items-center justify-center rounded-full transition-transform duration-500 ease-premium sm:h-7 sm:w-7 md:h-8 md:w-8 ${isEnglish ? 'translate-x-0' : 'translate-x-6 sm:translate-x-[26px] md:translate-x-[26px]'}`}
                 >
-                  <img src={isEnglish ? englishIcon : serbianIcon} alt="" className="h-full w-full rounded-full" />
+                  <img src={isEnglish ? englishIcon : serbianIcon} alt="" aria-hidden="true" className="h-full w-full rounded-full" />
                 </span>
               </button>
             )}
 
             <button
               type="button"
-              aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-label={isMenuOpen ? t('nav.closeMenu') : t('nav.openMenu')}
               aria-expanded={isMenuOpen}
               onClick={() => setIsMenuOpen((current) => !current)}
               className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-ink/5 text-brand-ink transition-colors duration-300 ease-premium hover:bg-brand-ink/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:h-9 sm:w-9 md:h-10 md:w-10"
@@ -132,7 +132,7 @@ function Navbar({ hideLanguageSwitch = false }) {
         {/* Backdrop */}
         <button
           type="button"
-          aria-label="Close navigation menu backdrop"
+          aria-label={t('nav.closeMenuBackdrop')}
           onClick={closeMenu}
           className={`fixed inset-0 z-40 bg-black/35 transition-opacity duration-300 ease-premium lg:hidden ${isMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
         />
@@ -170,7 +170,7 @@ function Navbar({ hideLanguageSwitch = false }) {
             </li>
           </ul>
 
-          <p className="mt-4 text-right text-sm text-brand-ink/40">hello@ankaljusic.com</p>
+          <p className="mt-4 text-right text-sm text-brand-ink/40">{t('nav.contactEmail')}</p>
         </div>
       </div>
 
@@ -178,7 +178,7 @@ function Navbar({ hideLanguageSwitch = false }) {
       {!hideLanguageSwitch ? (
         <button
           type="button"
-          aria-label={isEnglish ? 'Switch to Serbian' : 'Switch to English'}
+          aria-label={isEnglish ? t('nav.switchToSerbian') : t('nav.switchToEnglish')}
           aria-pressed={!isEnglish}
           onClick={toggle}
           className="absolute right-[59px] top-6 z-[60] hidden h-[32px] w-[72px] cursor-pointer items-center rounded-full bg-white/20 transition-colors duration-500 ease-premium hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent lg:inline-flex"
@@ -187,7 +187,7 @@ function Navbar({ hideLanguageSwitch = false }) {
             aria-hidden="true"
             className={`relative z-10 inline-flex h-[32px] w-[32px] items-center justify-center rounded-full transition-transform duration-500 ease-premium ${isEnglish ? 'translate-x-0 translate-y-0' : 'translate-x-10 translate-y-0'}`}
           >
-            <img src={isEnglish ? englishIcon : serbianIcon} alt={isEnglish ? 'English' : 'Serbian'} className="h-[32px] w-[32px]" />
+            <img src={isEnglish ? englishIcon : serbianIcon} alt="" aria-hidden="true" className="h-[32px] w-[32px]" />
           </span>
         </button>
       ) : null}

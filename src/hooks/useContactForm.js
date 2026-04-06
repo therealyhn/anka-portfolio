@@ -1,9 +1,28 @@
 import { useState } from 'react'
+import { useLang } from '../context/LangContext'
+import useTranslation from './useTranslation'
 
-export const INTEREST_OPTIONS = ['Branding', 'Web Design', 'Marketing Design', 'Presentations', 'Other']
-export const BUDGET_RANGES = ['Less than $500', '$500 - $1,500', '$1,500 - $2,500', 'More than $2,500']
+export const INTEREST_OPTIONS = ['branding', 'webDesign', 'marketingDesign', 'presentations', 'other']
+export const BUDGET_RANGES = ['lt500', 'r500_1500', 'r1500_2500', 'gt2500']
+
+const INTEREST_LABELS_EN = {
+  branding: 'Branding',
+  webDesign: 'Web Design',
+  marketingDesign: 'Marketing Design',
+  presentations: 'Presentations',
+  other: 'Other',
+}
+
+const BUDGET_LABELS_EN = {
+  lt500: 'Less than $500',
+  r500_1500: '$500 - $1,500',
+  r1500_2500: '$1,500 - $2,500',
+  gt2500: 'More than $2,500',
+}
 
 export function useContactForm() {
+  const { t } = useTranslation()
+  const { lang } = useLang()
   const [step, setStep] = useState(1)
   const [interests, setInterests] = useState([])
   const [hasBudget, setHasBudget] = useState(null) // null | true | false
@@ -16,9 +35,9 @@ export function useContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState(null)
 
-  const toggleInterest = (option) => {
+  const toggleInterest = (optionKey) => {
     setInterests((prev) =>
-      prev.includes(option) ? prev.filter((i) => i !== option) : [...prev, option]
+      prev.includes(optionKey) ? prev.filter((item) => item !== optionKey) : [...prev, optionKey]
     )
   }
 
@@ -43,32 +62,37 @@ export function useContactForm() {
 
   const handleSubmit = async () => {
     if (!isStep2Valid || isSubmitting) return
+
     setIsSubmitting(true)
     setSubmitError(null)
+
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: import.meta.env.VITE_WEB3FORMS_KEY,
-          subject: `New project inquiry from ${name}`,
+          subject: lang === 'sr' ? `Novi upit od ${name}` : `New project inquiry from ${name}`,
           from_name: name,
           email,
-          company: company || '—',
-          phone: phone || '—',
-          interests: interests.join(', '),
-          budget: hasBudget ? budgetRange : 'No budget in mind',
+          company: company || '-',
+          phone: phone || '-',
+          interests: interests.map((interest) => INTEREST_LABELS_EN[interest] || interest).join(', '),
+          budget: hasBudget
+            ? (BUDGET_LABELS_EN[budgetRange] || budgetRange)
+            : t('contact.budget.noMind'),
           project_details: projectDetails,
         }),
       })
+
       const data = await res.json()
       if (data.success) {
         setStep(3)
       } else {
-        setSubmitError('Something went wrong. Please try again.')
+        setSubmitError(t('contact.error.submit'))
       }
     } catch {
-      setSubmitError('Something went wrong. Please try again.')
+      setSubmitError(t('contact.error.submit'))
     } finally {
       setIsSubmitting(false)
     }

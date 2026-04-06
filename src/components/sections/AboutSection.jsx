@@ -23,7 +23,7 @@ function AboutSection() {
     experienceTitle: sr(data.experienceTitle, data.experienceTitle_sr),
     experienceText: sr(data.experienceText, data.experienceText_sr),
     locationTitle: sr(data.locationTitle, data.locationTitle_sr),
-    locationStatus: t('about.locationStatus'),
+    locationStatus: sr(data.locationStatus, data.locationStatus_sr || t('about.locationStatus')),
     yearsLabel: sr(data.yearsLabel, data.yearsLabel_sr),
     assetsLabel: sr(data.assetsLabel, data.assetsLabel_sr),
     testimonials: data.testimonials.map((item) => ({
@@ -42,7 +42,7 @@ function AboutSection() {
     <section
       id="about"
       className="rounded-frame bg-brand-paper px-4 py-10 sm:px-6 sm:py-12 md:px-8 md:py-14 lg:px-12 lg:py-16 xl:py-20 xl:px-12 2xl:pt-[84px] 2xl:pb-[102px]"
-      aria-label="About section"
+      aria-label={t('about.sectionAria')}
     >
       <div className="mx-auto max-w-[600px] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1200px] xl:max-w-[1440px] min-[1920px]:max-w-[1776px]">
         <AboutHeader data={resolvedData} />

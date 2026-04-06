@@ -44,14 +44,23 @@ function Project() {
     return <Navigate to="/" replace />
   }
 
-  const overview = sr(project.overview, project.overview_sr) || DEFAULT_OVERVIEW
-  const year = project.year || '2026'
-  const location = sr(project.location, project.location_sr) || 'Remote'
-  const duration = sr(project.duration, project.duration_sr) || '3 weeks'
-  const stack = project.stack || 'Figma'
-  const services = Array.isArray(project.services) && project.services.length > 0
-    ? project.services
-    : ['UI Design', 'Dashboard Design', 'Data Visualization']
+  const projectTitle = sr(project.title, project.title_sr) || project.title
+  const projectClient = sr(project.client, project.client_sr) || project.client
+  const overview = sr(project.overview, project.overview_sr) || t('project.fallback.overview') || DEFAULT_OVERVIEW
+  const year = project.year || t('project.fallback.year')
+  const location = sr(project.location, project.location_sr) || t('project.fallback.location')
+  const duration = sr(project.duration, project.duration_sr) || t('project.fallback.duration')
+  const stack = sr(project.stack, project.stack_sr) || t('project.fallback.stack')
+  const localizedServices = lang === 'sr' ? project.services_sr : project.services
+  const services = Array.isArray(localizedServices) && localizedServices.length > 0
+    ? localizedServices
+    : [
+        t('project.fallback.service.ui'),
+        t('project.fallback.service.dashboard'),
+        t('project.fallback.service.data'),
+      ]
+  const galleryAltLabel = lang === 'sr' ? 'prikaz' : 'screen'
+  const previewAltLabel = lang === 'sr' ? 'pregled' : 'preview'
 
   const galleryImages = Array.isArray(project.galleryImages) && project.galleryImages.length > 0
     ? project.galleryImages
@@ -64,10 +73,10 @@ function Project() {
           <Navbar hideLanguageSwitch />
 
           <div className="mt-20 sm:hidden">
-            <div className="project-title-marquee" aria-label={project.client}>
+            <div className="project-title-marquee" aria-label={projectClient}>
               <div className="project-title-track">
-                <span aria-hidden="true" className="whitespace-nowrap pr-16 font-display text-[80px] font-medium leading-[1.03] tracking-[-0.03em]">{project.client}</span>
-                <span aria-hidden="true" className="whitespace-nowrap pr-16 font-display text-[80px] font-medium leading-[1.03] tracking-[-0.03em]">{project.client}</span>
+                <span aria-hidden="true" className="whitespace-nowrap pr-16 font-display text-[80px] font-medium leading-[1.03] tracking-[-0.03em]">{projectClient}</span>
+                <span aria-hidden="true" className="whitespace-nowrap pr-16 font-display text-[80px] font-medium leading-[1.03] tracking-[-0.03em]">{projectClient}</span>
               </div>
             </div>
 
@@ -78,7 +87,7 @@ function Project() {
               </div>
               <div>
                 <p className="text-sm font-light leading-[1.22] text-brand-accent">{t('project.meta.client')}</p>
-                <p className="mt-1 text-base leading-[1.22]">{project.client}</p>
+                <p className="mt-1 text-base leading-[1.22]">{projectClient}</p>
               </div>
               <div>
                 <p className="text-sm font-light leading-[1.22] text-brand-accent">{t('project.meta.services')}</p>
@@ -110,7 +119,7 @@ function Project() {
                 <div key={`${project.slug}-gallery-mobile-${index}`} className="w-full shrink-0 bg-brand-charcoal">
                   <img
                     src={image}
-                    alt={`${project.title} screen ${index + 1}`}
+                    alt={`${projectTitle} ${galleryAltLabel} ${index + 1}`}
                     loading="lazy"
                     decoding="async"
                     className={`w-full h-auto block ${index === 0 ? 'rounded-b-[15px]' : 'rounded-[15px]'}`}
@@ -122,7 +131,7 @@ function Project() {
 
           <div className="mt-[64px] lg:mt-[96px] xl:mt-[96px] hidden sm:block pb-24 lg:ml-[32px] xl:ml-[64px] lg:mr-[16px] xl:mr-[-8px]">
             <h1 className="max-w-full font-display text-[80px] md:text-[120px] lg:text-[160px] xl:text-[160px] 2xl:text-[200px] font-medium leading-[1.16] tracking-[-0.04em] xl:tracking-[-16px]">
-              {project.client}
+              {projectClient}
             </h1>
 
             <div className="mt-12 lg:mt-[16px] xl:mt-[26px] flex flex-col lg:flex-row gap-12 lg:gap-[64px] xl:gap-[96px] items-start">
@@ -137,7 +146,7 @@ function Project() {
                 <div className="grid grid-cols-2 gap-x-6 gap-y-10 xl:gap-x-9 xl:gap-y-[87px]">
                   <div>
                     <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.client')}</p>
-                    <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.22] text-white break-words">{project.client}</p>
+                    <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.22] text-white break-words">{projectClient}</p>
                   </div>
                   <div>
                     <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.year')}</p>
@@ -174,7 +183,7 @@ function Project() {
                   <div key={`${project.slug}-gallery-desktop-${index}`} className="w-full shrink-0 bg-brand-charcoal">
                     <img
                       src={image}
-                      alt={`${project.title} screen ${index + 1}`}
+                      alt={`${projectTitle} ${galleryAltLabel} ${index + 1}`}
                       loading="lazy"
                       decoding="async"
                       className={`w-full h-auto block ${index === 0 ? 'rounded-b-[20px]' : 'rounded-[20px]'}`}
@@ -192,7 +201,12 @@ function Project() {
           <div className="lg:ml-[32px] xl:ml-[64px] max-w-[900px]">
             <h2 className="text-4xl sm:text-5xl font-medium tracking-tight">{t('project.meta.relatedProjects')}</h2>
             <div className="mt-8 grid grid-cols-2 gap-3 md:gap-6">
-              {relatedProjects.map((item) => (
+              {relatedProjects.map((item) => {
+                const itemTitle = sr(item.title, item.title_sr) || item.title
+                const itemClient = sr(item.client, item.client_sr) || item.client
+                const itemRole = sr(item.role, item.role_sr) || item.role
+
+                return (
                 <Link
                   key={item.id}
                   to={`/projects/${item.slug}`}
@@ -201,7 +215,7 @@ function Project() {
                   <div className="relative overflow-hidden rounded-[10px]">
                     <img
                       src={item.image}
-                      alt={`${item.title} preview`}
+                      alt={`${itemTitle} ${previewAltLabel}`}
                       loading="lazy"
                       decoding="async"
                       className="h-[160px] w-full object-cover transition-transform duration-500 ease-premium group-hover/project:scale-[1.03] sm:h-[300px]"
@@ -220,15 +234,16 @@ function Project() {
                       </span>
                     </div>
                     <p className="pointer-events-none absolute bottom-3 left-3 rounded-[3px] bg-white/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-white backdrop-blur-sm transition-opacity duration-300 ease-premium sm:opacity-0 sm:group-hover/project:opacity-100">
-                      {item.role}
+                      {itemRole}
                     </p>
                   </div>
                   <div className="mt-2 sm:mt-3">
-                    <p className="text-sm font-semibold text-white sm:text-xl">{item.title}</p>
-                    <p className="mt-0.5 text-xs font-medium text-white/50 sm:text-base">{item.client}</p>
+                    <p className="text-sm font-semibold text-white sm:text-xl">{itemTitle}</p>
+                    <p className="mt-0.5 text-xs font-medium text-white/50 sm:text-base">{itemClient}</p>
                   </div>
                 </Link>
-              ))}
+                )
+              })}
             </div>
 
             <Link

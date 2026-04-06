@@ -4,6 +4,7 @@ import heroBackground from '../assets/images/img/Background.png'
 import { useContactForm, INTEREST_OPTIONS, BUDGET_RANGES } from '../hooks/useContactForm'
 import useFooterContent from '../hooks/useFooterContent'
 import useTranslation from '../hooks/useTranslation'
+import { useLang } from '../context/LangContext'
 import linkedinIcon from '../assets/images/icons/Linekdin icon (footer).svg'
 import upworkIcon from '../assets/images/icons/Upwork icon (footer).svg'
 import fiverrIcon from '../assets/images/icons/Fiver icon (footer).svg'
@@ -46,6 +47,13 @@ function Stepper({ step }) {
 function Contact() {
   const { data: footerData } = useFooterContent()
   const { t } = useTranslation()
+  const { lang } = useLang()
+  const sr = (en, srVal) => (lang === 'sr' ? (srVal || en) : en)
+
+  const portfolioLabel =
+    sr(footerData?.portfolioLabel, footerData?.portfolioLabel_sr) || t('contact.footer.portfolio')
+  const privacyLabel =
+    sr(footerData?.privacyLabel, footerData?.privacyLabel_sr) || t('contact.footer.privacy')
 
   const {
     step,
@@ -119,7 +127,7 @@ function Contact() {
             <aside className="shrink-0 flex flex-col pt-1 lg:pt-0 mb-6 lg:mb-0">
               {/* Logo margin collapses on mobile to save vertical space */}
               <header className="mb-4 sm:mb-6 lg:mb-[100px] xl:mb-[120px]">
-                <Link to="/" aria-label="Back to home" className="inline-block transition-opacity hover:opacity-80">
+                <Link to="/" aria-label={t('nav.backToTop')} className="inline-block transition-opacity hover:opacity-80">
                   <img
                     src={logoWhiteText}
                     alt="Anka Design"
@@ -150,7 +158,7 @@ function Contact() {
                 </div>
                 <div>
                   <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide uppercase">{t('contact.info.location')}</p>
-                  <p className="text-sm xl:text-[15px] font-light text-white/80">Belgrade, Serbia</p>
+                  <p className="text-sm xl:text-[15px] font-light text-white/80">{t('contact.info.locationValue')}</p>
                 </div>
               </div>
             </aside>
@@ -187,7 +195,7 @@ function Contact() {
                           onClick={() => toggleInterest(option)}
                           className={`${BTN_BASE} px-3.5 py-2 sm:px-5 sm:py-2 lg:px-6 lg:py-2.5 ${interests.includes(option) ? BTN_ACTIVE : BTN_INACTIVE}`}
                         >
-                          {option}
+                          {t(`contact.interest.${option}`)}
                         </button>
                       ))}
                     </div>
@@ -224,7 +232,7 @@ function Contact() {
                             onClick={() => setBudgetRange(range)}
                             className={`${BTN_BASE} px-3.5 py-2 sm:px-5 sm:py-2 lg:px-6 lg:py-2.5 ${budgetRange === range ? BTN_ACTIVE : BTN_INACTIVE}`}
                           >
-                            {range}
+                            {t(`contact.budgetRange.${range}`)}
                           </button>
                         ))}
                       </div>
@@ -320,9 +328,9 @@ function Contact() {
               <div className="hidden lg:flex text-[12px] sm:text-[13px] font-medium text-[#8E8D8D] items-center gap-x-2 sm:gap-x-2.5 pb-1 sm:pb-2">
                 <span>&copy;Anka Ljusic, 2026</span>
                 <span className="text-[#525252]">|</span>
-                <span>{t('contact.footer.portfolio')}</span>
+                <span>{portfolioLabel}</span>
                 <Link to="/privacy" className="text-[#525252] hover:text-white transition-colors duration-300 ml-1">
-                  {t('contact.footer.privacy')}
+                  {privacyLabel}
                 </Link>
               </div>
 
@@ -367,10 +375,10 @@ function Contact() {
                 to="/privacy"
                 className="text-[11px] text-[#525252] hover:text-white transition-colors duration-300"
               >
-                {t('contact.footer.privacy')}
+                {privacyLabel}
               </Link>
               <p className="text-[11px] font-medium text-[#8E8D8D]">
-                &copy;Anka Ljusic, 2026 &nbsp;|&nbsp; {t('contact.footer.portfolio')}
+                &copy;Anka Ljusic, 2026 &nbsp;|&nbsp; {portfolioLabel}
               </p>
               <div className="flex items-center gap-3 mt-0.5">
                 {footerData.socials.map((social) => {

@@ -12,6 +12,12 @@ export const project = defineType({
       validation: (Rule) => Rule.required().min(2).max(80),
     }),
     defineField({
+      name: 'title_sr',
+      title: 'Title (Srpski)',
+      type: 'string',
+      validation: (Rule) => Rule.max(80),
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -28,10 +34,22 @@ export const project = defineType({
       validation: (Rule) => Rule.required().min(2).max(80),
     }),
     defineField({
+      name: 'client_sr',
+      title: 'Client (Srpski)',
+      type: 'string',
+      validation: (Rule) => Rule.max(80),
+    }),
+    defineField({
       name: 'role',
       title: 'Role',
       type: 'string',
       initialValue: 'UI Design',
+      validation: (Rule) => Rule.max(60),
+    }),
+    defineField({
+      name: 'role_sr',
+      title: 'Role (Srpski)',
+      type: 'string',
       validation: (Rule) => Rule.max(60),
     }),
     defineField({
@@ -100,8 +118,20 @@ export const project = defineType({
       validation: (Rule) => Rule.max(120),
     }),
     defineField({
+      name: 'stack_sr',
+      title: 'Stack / Tools (Srpski)',
+      type: 'string',
+      validation: (Rule) => Rule.max(120),
+    }),
+    defineField({
       name: 'services',
       title: 'Services',
+      type: 'array',
+      of: [{type: 'string'}],
+    }),
+    defineField({
+      name: 'services_sr',
+      title: 'Services (Srpski)',
       type: 'array',
       of: [{type: 'string'}],
     }),

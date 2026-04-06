@@ -26,6 +26,7 @@ const SERVICES_QUERY = `
       "description": coalesce(description, details, copy),
       "description_sr": coalesce(description_sr, null),
       "tags": array::compact(coalesce(tags, keywords, [])),
+      "tags_sr": array::compact(coalesce(tags_sr, [])),
       "previewProjectSlug": coalesce(
         previewProject->slug.current,
         previewProject->slug
@@ -57,6 +58,7 @@ const DEFAULT_SERVICES_CONTENT = {
       description:
         'Creating cohesive visual identities, from logos to colors and graphics, that feel intentional, polished, and just... right.',
       tags: ['Logo Design', 'Brand Identity', 'Visual Identity', 'Graphic Design'],
+      tags_sr: null,
       previewImage: projectPlaceholder,
     },
     {
@@ -66,6 +68,7 @@ const DEFAULT_SERVICES_CONTENT = {
       description:
         'Designing interfaces and product flows that reduce friction, support business goals, and make complex actions feel simple.',
       tags: ['UX Design', 'UI Systems', 'Landing Pages', 'Product Flows'],
+      tags_sr: null,
       previewImage: projectPlaceholder,
     },
     {
@@ -75,6 +78,7 @@ const DEFAULT_SERVICES_CONTENT = {
       description:
         'Building campaign-ready assets across channels, keeping messaging consistent while adapting visuals for each platform.',
       tags: ['Campaign Assets', 'Social Creatives', 'Ad Visuals', 'Email Banners'],
+      tags_sr: null,
       previewImage: projectPlaceholder,
     },
     {
@@ -84,6 +88,7 @@ const DEFAULT_SERVICES_CONTENT = {
       description:
         'Structuring and designing decks that communicate clearly, hold attention, and help teams present ideas with confidence.',
       tags: ['Pitch Decks', 'Sales Decks', 'Case Studies', 'Narrative Design'],
+      tags_sr: null,
       previewImage: projectPlaceholder,
     },
   ],
@@ -128,6 +133,7 @@ function normalizeItem(rawItem, fallbackItem) {
     description: rawItem?.description || fallback.description || '',
     description_sr: rawItem?.description_sr || null,
     tags: normalizeTags(rawItem?.tags, fallback.tags || []),
+    tags_sr: normalizeTags(rawItem?.tags_sr, fallback.tags_sr || []),
     previewProjectSlug: rawItem?.previewProjectSlug || '',
     previewImage: rawItem?.previewImage || fallback.previewImage || projectPlaceholder,
   }

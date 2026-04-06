@@ -1,9 +1,18 @@
 import { Link } from 'react-router-dom'
 import CircleArrowButton from '../ui/CircleArrowButton'
+import { useLang } from '../../context/LangContext'
 import navArrow from '../../assets/images/arrows/Nav bar.svg'
 import navArrowHover from '../../assets/images/arrows/Nav bar HOVER.svg'
 
 function ProjectCard({ project }) {
+  const { lang } = useLang()
+  const sr = (en, srVal) => lang === 'sr' ? (srVal || en) : en
+
+  const title = sr(project.title, project.title_sr) || project.title
+  const client = sr(project.client, project.client_sr) || project.client
+  const role = sr(project.role, project.role_sr) || project.role
+  const previewAltLabel = lang === 'sr' ? 'pregled projekta' : 'project preview'
+
   return (
     <Link
       to={`/projects/${project.slug}`}
@@ -13,7 +22,7 @@ function ProjectCard({ project }) {
         <div className="relative overflow-hidden rounded-[8px] sm:rounded-[10px]">
           <img
             src={project.image}
-            alt={`${project.title} project preview`}
+            alt={`${title} ${previewAltLabel}`}
             loading="lazy"
             decoding="async"
             className="h-[200px] w-full object-cover transition-transform duration-500 ease-premium group-hover/project:scale-[1.03] sm:h-[220px] md:h-[250px] lg:h-[240px] xl:h-[285px] 2xl:h-[306px] min-[1920px]:h-[364px]"
@@ -32,12 +41,12 @@ function ProjectCard({ project }) {
             </span>
           </div>
           <p className="pointer-events-none absolute bottom-2 left-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-white opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100 sm:bottom-3 sm:left-3 sm:px-2.5 sm:py-1 sm:text-xs">
-            {project.role}
+            {role}
           </p>
         </div>
 
         <h3 className="mt-2 text-sm font-semibold text-brand-ink sm:mt-3 sm:text-base md:text-lg xl:text-xl 2xl:mt-[8px] 2xl:text-[21px] 2xl:leading-[1.26]">
-          {project.title} <span className="font-medium text-brand-muted">| {project.client}</span>
+          {title} <span className="font-medium text-brand-muted">| {client}</span>
         </h3>
       </article>
     </Link>

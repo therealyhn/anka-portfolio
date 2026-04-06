@@ -6,6 +6,7 @@ import footerBackground from '../../assets/images/img/Background.png'
 import AccentDot from '../ui/AccentDot'
 import useFooterContent from '../../hooks/useFooterContent'
 import { useLang } from '../../context/LangContext'
+import useTranslation from '../../hooks/useTranslation'
 import linkedinIcon from '../../assets/images/icons/Linekdin icon (footer).svg'
 import upworkIcon from '../../assets/images/icons/Upwork icon (footer).svg'
 import fiverrIcon from '../../assets/images/icons/Fiver icon (footer).svg'
@@ -48,6 +49,17 @@ function FooterLink({ href, className, children }) {
 
 function Footer() {
   const { data } = useFooterContent()
+  const { lang } = useLang()
+  const { t } = useTranslation()
+  const sr = (en, srVal) => (lang === 'sr' ? (srVal || en) : en)
+
+  const availabilityLabel = sr(data.availabilityLabel, data.availabilityLabel_sr)
+  const titleLineOne = sr(data.titleLineOne, data.titleLineOne_sr)
+  const titleAccent = sr(data.titleAccent, data.titleAccent_sr)
+  const description = sr(data.description, data.description_sr)
+  const ctaLabel = sr(data.ctaLabel, data.ctaLabel_sr)
+  const portfolioLabel = sr(data.portfolioLabel, data.portfolioLabel_sr)
+  const privacyLabel = sr(data.privacyLabel, data.privacyLabel_sr)
 
   return (
     <section id="contact" className="px-3 pb-3 sm:px-4 sm:pb-4 md:px-6 md:pb-5 lg:px-8 min-[1920px]:px-3 min-[1920px]:pb-6">
@@ -63,19 +75,19 @@ function Footer() {
           <div className="flex flex-1 flex-col items-center justify-center py-12 sm:py-16">
             <p className="inline-flex items-center gap-2 font-medium text-white/90 xl:gap-[10px]">
               <AccentDot />
-              <span className="text-xs font-thin tracking-wide sm:text-sm xl:text-[16px]">{data.availabilityLabel}</span>
+              <span className="text-xs font-thin tracking-wide sm:text-sm xl:text-[16px]">{availabilityLabel}</span>
             </p>
             <h2 className="mt-2 text-4xl font-semibold sm:mt-3 sm:text-5xl md:text-6xl lg:text-7xl min-[1920px]:mt-4 min-[1920px]:text-[105px] min-[1920px]:leading-[1.03]">
-              {data.titleLineOne} <em className="font-serif text-[1.08em] font-normal italic">{data.titleAccent}</em>
+              {titleLineOne} <em className="font-serif text-[1.08em] font-normal italic">{titleAccent}</em>
             </h2>
             <p className="mx-auto mt-3 max-w-[250px] text-sm leading-relaxed text-white/80 sm:mt-4 sm:max-w-[300px] sm:text-sm md:text-sm lg:text-sm min-[1920px]:mt-[30px] min-[1920px]:max-w-[300px] min-[1920px]:text-[18px] min-[1920px]:leading-[1.36]">
-              {data.description}
+              {description}
             </p>
             <FooterLink
               href={data.ctaHref}
               className="group mt-6 inline-flex items-center gap-2 text-lg font-thin text-white transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:mt-8 sm:gap-3 sm:text-xl md:text-2xl min-[1920px]:mt-[44px] min-[1920px]:text-[28px]"
             >
-              <span>{data.ctaLabel}</span>
+              <span>{ctaLabel}</span>
               <CircleArrowButton
                 iconSrc={navArrow}
                 iconHoverSrc={navArrowHover}
@@ -90,7 +102,7 @@ function Footer() {
             href={data.privacyHref}
             className="mb-4 block text-center text-xs text-white/35 transition-colors duration-300 ease-premium hover:text-brand-paper sm:hidden"
           >
-            {data.privacyLabel}
+            {privacyLabel}
           </FooterLink>
 
           <div className="flex flex-col gap-4 border-t border-white/15 py-6 sm:py-8">
@@ -99,16 +111,16 @@ function Footer() {
                 <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:justify-start">
                   <span>&copy;{data.copyrightText}</span>
                   <span className="text-white/45">|</span>
-                  <span>{data.portfolioLabel}</span>
+                  <span>{portfolioLabel}</span>
                   <FooterLink
                     href={data.privacyHref}
                     className="hidden text-white/35 transition-colors duration-300 ease-premium hover:text-brand-paper sm:inline"
                   >
-                    {data.privacyLabel}
+                    {privacyLabel}
                   </FooterLink>
                 </div>
                 <p className="text-xs text-white/55 sm:text-sm">
-                  Developed by{' '}
+                  {t('footer.developedBy')}{' '}
                   <a
                     href="https://jovanljusic.com"
                     target="_blank"

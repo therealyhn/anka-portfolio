@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import AccentDot from '../ui/AccentDot'
 import useServicesContent from '../../hooks/useServicesContent'
 import useProjectsContent from '../../hooks/useProjectsContent'
+import useTranslation from '../../hooks/useTranslation'
 import { useLang } from '../../context/LangContext'
 
 const SERVICE_PREVIEW_SLUGS = {
@@ -14,6 +15,7 @@ const SERVICE_PREVIEW_SLUGS = {
 function ServicesSection() {
   const { data: servicesContent } = useServicesContent()
   const { data: projects } = useProjectsContent()
+  const { t } = useTranslation()
   const { lang } = useLang()
   const [openServiceId, setOpenServiceId] = useState(null)
 
@@ -52,18 +54,18 @@ function ServicesSection() {
   }
 
   return (
-    <section id="services" className="rounded-frame bg-brand-paper px-4 py-10 sm:px-6 sm:py-12 md:px-8 md:py-14 lg:px-12 lg:py-16 xl:px-[48px] xl:py-[80px] 2xl:px-[60px] 2xl:py-[100px] min-[1920px]:px-[72px] min-[1920px]:pt-[86px] min-[1920px]:pb-[118px]" aria-label="Services section">
+    <section id="services" className="rounded-frame bg-brand-paper px-4 py-10 sm:px-6 sm:py-12 md:px-8 md:py-14 lg:px-12 lg:py-16 xl:px-[48px] xl:py-[80px] 2xl:px-[60px] 2xl:py-[100px] min-[1920px]:px-[72px] min-[1920px]:pt-[86px] min-[1920px]:pb-[118px]" aria-label={t('services.sectionAria')}>
       <div className="mx-auto max-w-[600px] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1100px] xl:max-w-[1300px] 2xl:max-w-[1500px] min-[1920px]:max-w-[1776px]">
         <div className="flex flex-col gap-5 sm:gap-6 md:gap-8 min-[1200px]:flex-row min-[1200px]:items-start min-[1200px]:justify-between">
           <div className="min-[1200px]:w-[55%] xl:w-[50%] 2xl:w-[55%] min-[1920px]:w-[1040px]">
             <p className="inline-flex items-center gap-2 text-[13px] font-normal uppercase tracking-[0.01em] text-brand-accent sm:gap-3 sm:text-[15px] xl:text-[20px] 2xl:text-[22px] min-[1920px]:text-[22px]">
               <AccentDot className="h-4 w-4 xl:h-2 xl:w-2 min-[1920px]:h-2.5 min-[1920px]:w-2.5" />
-              {sr(servicesContent?.eyebrowLabel, servicesContent?.eyebrowLabel_sr) || 'Services'}
+              {sr(servicesContent?.eyebrowLabel, servicesContent?.eyebrowLabel_sr) || t('services.fallback.eyebrow')}
             </p>
             <h2 className="mt-3 max-w-[250px] text-[28px] leading-tight text-brand-ink sm:mt-4 sm:text-4xl md:text-5xl lg:text-6xl xl:mt-[12px] xl:max-w-[700px] xl:text-[56px] 2xl:mt-[16px] 2xl:text-[60px] min-[1920px]:mt-[18px] min-[1920px]:max-w-[600px] min-[1920px]:text-[56px] min-[1920px]:leading-[1.1] min-[1920px]:tracking-[-0.04em]">
-              {sr(servicesContent?.titleLineOne, servicesContent?.titleLineOne_sr) || 'What I can'}{' '}
-              <em className="font-serif text-[1.3em] font-normal italic">{sr(servicesContent?.titleAccent, servicesContent?.titleAccent_sr) || 'design'}</em>{' '}
-              {sr(servicesContent?.titleLineTwo, servicesContent?.titleLineTwo_sr) || 'for your team'}
+              {sr(servicesContent?.titleLineOne, servicesContent?.titleLineOne_sr) || t('services.fallback.titleLineOne')}{' '}
+              <em className="font-serif text-[1.3em] font-normal italic">{sr(servicesContent?.titleAccent, servicesContent?.titleAccent_sr) || t('services.fallback.titleAccent')}</em>{' '}
+              {sr(servicesContent?.titleLineTwo, servicesContent?.titleLineTwo_sr) || t('services.fallback.titleLineTwo')}
             </h2>
           </div>
 
@@ -75,6 +77,9 @@ function ServicesSection() {
         <ul className="mt-8 border-t border-black/35 sm:mt-10 xl:mt-[48px] 2xl:mt-[56px] min-[1920px]:mt-[62px]">
           {serviceItems.map((item) => {
             const isOpen = openServiceId === item.id
+            const tags = lang === 'sr' && Array.isArray(item.tags_sr) && item.tags_sr.length > 0
+              ? item.tags_sr
+              : item.tags
 
             return (
               <li key={item.id} className="border-b border-black/35">
@@ -123,7 +128,7 @@ function ServicesSection() {
                         </p>
 
                         <div className="mt-3 flex flex-wrap gap-2 sm:mt-4 sm:gap-2.5 xl:mt-[18px] xl:gap-[12px] min-[1920px]:mt-[24px] min-[1920px]:gap-[14px]">
-                          {item.tags.map((tag) => (
+                          {tags.map((tag) => (
                             <span
                               key={`${item.id}-${tag}`}
                               className="inline-flex items-center justify-center rounded-full border border-black px-3 py-1 text-xs leading-[1.05] text-brand-ink sm:px-3.5 sm:py-1.5 sm:text-sm md:text-base xl:px-[16px] xl:py-[8px] xl:text-[16px] 2xl:px-[18px] 2xl:py-[10px] 2xl:text-[20px] min-[1920px]:rounded-[999px] min-[1920px]:px-[18px] min-[1920px]:py-[9px] min-[1920px]:text-[18px]"

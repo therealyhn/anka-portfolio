@@ -1,8 +1,10 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Navigation } from 'swiper/modules'
 import 'swiper/css'
+import useTranslation from '../../../hooks/useTranslation'
 
 function AboutTestimonialsSlider({ testimonials }) {
+  const { t } = useTranslation()
   const safeTestimonials = Array.isArray(testimonials) ? testimonials : []
   const isTestimonialLoopEnabled = safeTestimonials.length > 1
 
@@ -27,7 +29,7 @@ function AboutTestimonialsSlider({ testimonials }) {
           <div className="pointer-events-none absolute inset-x-0 top-1/2 z-20 flex -translate-y-1/2 items-center justify-between px-0 sm:px-2 xl:px-3">
             <button
               type="button"
-              aria-label="Previous testimonial"
+              aria-label={t('about.testimonials.previous')}
               className="about-testimonial-prev pointer-events-auto inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent text-black/45 transition-colors duration-300 ease-premium hover:text-black/70 xl:h-9 xl:w-9"
             >
               <svg className="h-5 w-5" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -36,7 +38,7 @@ function AboutTestimonialsSlider({ testimonials }) {
             </button>
             <button
               type="button"
-              aria-label="Next testimonial"
+              aria-label={t('about.testimonials.next')}
               className="about-testimonial-next pointer-events-auto inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent text-black/45 transition-colors duration-300 ease-premium hover:text-black/70 xl:h-9 xl:w-9"
             >
               <svg className="h-5 w-5" viewBox="0 0 16 16" fill="none" aria-hidden="true">
