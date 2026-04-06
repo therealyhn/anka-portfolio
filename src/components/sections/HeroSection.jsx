@@ -6,10 +6,16 @@ import discoverArrow from '../../assets/images/arrows/Discover more (hero sectio
 import heroBackground from '../../assets/images/img/Background.png'
 import ankaPortrait from '../../assets/images/img/anka_4x.png'
 import useHeroContent from '../../hooks/useHeroContent'
+import useTranslation from '../../hooks/useTranslation'
+import { useLang } from '../../context/LangContext'
 
 function HeroSection() {
   const [belgradeTime, setBelgradeTime] = useState('')
   const { data: heroContent } = useHeroContent()
+  const { t } = useTranslation()
+  const { lang } = useLang()
+
+  const sr = (en, srVal) => lang === 'sr' ? (srVal || en) : en
 
   useEffect(() => {
     const formatter = new Intl.DateTimeFormat('en-US', {
@@ -66,26 +72,26 @@ function HeroSection() {
         <div className="pt-32 text-center xl:absolute xl:left-1/2 xl:top-[116px] xl:mt-0 xl:w-[1100px] xl:-translate-x-1/2 xl:pt-0 2xl:w-[1228px]">
           <p className="inline-flex items-center gap-2 font-thin text-white/90 xl:gap-[10px]">
             <AccentDot className="animate-pulse" />
-            <span className="text-[14px] font-thin tracking-wide xl:text-[16px]">Available for work</span>
+            <span className="text-[14px] font-thin tracking-wide xl:text-[16px]">{t('hero.available')}</span>
           </p>
 
           <h1 className="mt-2 font-display text-[44px] font-thin leading-[1.05] tracking-tight sm:mt-8 sm:text-[56px] md:text-[72px] lg:text-[88px] xl:mt-[18px] xl:text-[100px] xl:leading-[0.95] xl:tracking-[-0.032em] 2xl:text-[120px]">
-            <span className="block mb-1">{heroContent.titleLineOne}</span>
+            <span className="block mb-1">{sr(heroContent.titleLineOne, heroContent.titleLineOne_sr)}</span>
             <span className="block">
-              <em className="font-serif italic text-[1.1em] mr-2">{heroContent.titleAccent}</em>
-              <span>{heroContent.titleLineTwo}</span>
+              <em className="font-serif italic text-[1.1em] mr-2">{sr(heroContent.titleAccent, heroContent.titleAccent_sr)}</em>
+              <span>{sr(heroContent.titleLineTwo, heroContent.titleLineTwo_sr)}</span>
             </span>
           </h1>
         </div>
 
         {/* Mobile/tablet: description + CTA directly below heading */}
         <div className="mt-2 flex flex-col items-center text-center lg:hidden">
-          <p className="max-w-[420px] text-[18px] leading-[1.5] text-white/80">{heroContent.description}</p>
+          <p className="max-w-[420px] text-[18px] leading-[1.5] text-white/80">{sr(heroContent.description, heroContent.description_sr)}</p>
           <a
             href="#projects"
             className="group mt-10 inline-flex items-center gap-4 text-sm font-normal text-white transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
           >
-            <span className="text-[17px] tracking-tight">Discover more</span>
+            <span className="text-[17px] tracking-tight">{t('hero.discoverMore')}</span>
             <CircleArrowButton
               iconSrc={discoverArrow}
               iconHoverSrc={discoverArrow}
@@ -104,12 +110,12 @@ function HeroSection() {
 
             {/* Desktop description + CTA — lg+ only */}
             <div className="hidden max-w-[260px] lg:block">
-              <p className="text-sm leading-relaxed text-white/90 xl:text-[16px] xl:leading-[1.42]">{heroContent.description}</p>
+              <p className="text-sm leading-relaxed text-white/90 xl:text-[16px] xl:leading-[1.42]">{sr(heroContent.description, heroContent.description_sr)}</p>
               <a
                 href="#projects"
                 className="group mt-4 inline-flex items-center gap-2 text-sm font-thin text-white transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent xl:mt-8 xl:gap-2"
               >
-                <span className="text-[14px] tracking-wide xl:tracking-normal">Discover more</span>
+                <span className="text-[14px] tracking-wide xl:tracking-normal">{t('hero.discoverMore')}</span>
                 <CircleArrowButton
                   iconSrc={discoverArrow}
                   iconHoverSrc={discoverArrow}
@@ -123,7 +129,7 @@ function HeroSection() {
 
             {/* Based in Serbia */}
             <p className="ml-auto text-right text-[14px] font-normal tracking-normal text-white/90 sm:text-[14px] lg:ml-0 xl:text-[12px] xl:leading-[1.22]">
-              Based in Serbia <span className="text-brand-success ml-1">{belgradeTime}</span>
+              {t('hero.basedIn')} <span className="text-brand-success ml-1">{belgradeTime}</span>
             </p>
           </div>
         </div>

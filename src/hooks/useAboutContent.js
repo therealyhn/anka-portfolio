@@ -14,18 +14,28 @@ const ABOUT_QUERY = `
     *[_type == "aboutSection"] | order(_updatedAt desc)[0]
   ){
     "eyebrowLabel": coalesce(eyebrowLabel, sectionLabel),
+    "eyebrowLabel_sr": coalesce(eyebrowLabel_sr, null),
     "titleLineOne": coalesce(titleLineOne, headingLineOne),
+    "titleLineOne_sr": coalesce(titleLineOne_sr, null),
     "titleAccent": coalesce(titleAccent, headingAccent),
+    "titleAccent_sr": coalesce(titleAccent_sr, null),
     "titleLineTwo": coalesce(titleLineTwo, headingLineTwo),
+    "titleLineTwo_sr": coalesce(titleLineTwo_sr, null),
     "description": coalesce(description, introText),
+    "description_sr": coalesce(description_sr, null),
     "experienceTitle": coalesce(experienceTitle, experienceHeading),
+    "experienceTitle_sr": coalesce(experienceTitle_sr, null),
     "experienceText": coalesce(experienceText, experienceDescription),
+    "experienceText_sr": coalesce(experienceText_sr, null),
     "locationTitle": coalesce(locationTitle, locationHeading, basedIn),
+    "locationTitle_sr": coalesce(locationTitle_sr, null),
     "locationStatus": coalesce(locationStatus, locationSubtitle, workingStatus),
     "yearsValue": coalesce(yearsValue, statYearsValue),
     "yearsLabel": coalesce(yearsLabel, statYearsLabel),
+    "yearsLabel_sr": coalesce(yearsLabel_sr, null),
     "assetsValue": coalesce(assetsValue, statAssetsValue),
     "assetsLabel": coalesce(assetsLabel, statAssetsLabel),
+    "assetsLabel_sr": coalesce(assetsLabel_sr, null),
     "quoteLineOne": coalesce(quoteLineOne, testimonialLineOne),
     "quoteLineTwo": coalesce(quoteLineTwo, testimonialLineTwo),
     "testimonialName": coalesce(testimonialName, authorName),
@@ -40,15 +50,19 @@ const ABOUT_QUERY = `
     "testimonials": coalesce(testimonials, [])[]{
       _key,
       "quoteLineOne": coalesce(quoteLineOne, quote, lineOne, testimonialLineOne),
+      "quoteLineOne_sr": coalesce(quoteLineOne_sr, null),
       "quoteLineTwo": coalesce(quoteLineTwo, lineTwo, testimonialLineTwo),
+      "quoteLineTwo_sr": coalesce(quoteLineTwo_sr, null),
       "name": coalesce(name, testimonialName, authorName),
       "role": coalesce(role, testimonialRole, authorRole),
+      "role_sr": coalesce(role_sr, null),
       "avatar": coalesce(avatar.asset->url, image.asset->url, testimonialAvatar.asset->url)
     },
     "tools": coalesce(tools, toolItems, [])[]{
       _key,
       "title": coalesce(title, label, name),
       "description": coalesce(description, copy, subtitle),
+      "description_sr": coalesce(description_sr, null),
       "icon": coalesce(icon.asset->url, image.asset->url)
     }
   }
@@ -136,6 +150,7 @@ function normalizeTools(rawTools, fallbackTools) {
         id: item?._key || fallback?.id || `${title.toLowerCase().replace(/\s+/g, '-')}-${index}`,
         title,
         description: item?.description || fallback?.description || '',
+        description_sr: item?.description_sr || null,
         icon: item?.icon || fallback?.icon || '',
       }
     })
@@ -165,9 +180,12 @@ function normalizeTestimonials(rawTestimonials, rawContent, fallbackTestimonials
         return {
           id: item?._key || `testimonial-${index + 1}`,
           quoteLineOne,
+          quoteLineOne_sr: item?.quoteLineOne_sr || null,
           quoteLineTwo,
+          quoteLineTwo_sr: item?.quoteLineTwo_sr || null,
           name: item?.name || fallback?.name || 'Anonymous',
           role: item?.role || fallback?.role || '',
+          role_sr: item?.role_sr || null,
           avatar: item?.avatar || fallback?.avatar || ankaImageFallback,
         }
       })
@@ -199,18 +217,28 @@ function normalizeAboutContent(rawContent) {
 
   return {
     eyebrowLabel: rawContent?.eyebrowLabel || fallback.eyebrowLabel,
+    eyebrowLabel_sr: rawContent?.eyebrowLabel_sr || null,
     titleLineOne: rawContent?.titleLineOne || fallback.titleLineOne,
+    titleLineOne_sr: rawContent?.titleLineOne_sr || null,
     titleAccent: rawContent?.titleAccent || fallback.titleAccent,
+    titleAccent_sr: rawContent?.titleAccent_sr || null,
     titleLineTwo: rawContent?.titleLineTwo || fallback.titleLineTwo,
+    titleLineTwo_sr: rawContent?.titleLineTwo_sr || null,
     description: rawContent?.description || fallback.description,
+    description_sr: rawContent?.description_sr || null,
     experienceTitle: rawContent?.experienceTitle || fallback.experienceTitle,
+    experienceTitle_sr: rawContent?.experienceTitle_sr || null,
     experienceText: rawContent?.experienceText || fallback.experienceText,
+    experienceText_sr: rawContent?.experienceText_sr || null,
     locationTitle: rawContent?.locationTitle || fallback.locationTitle,
+    locationTitle_sr: rawContent?.locationTitle_sr || null,
     locationStatus: rawContent?.locationStatus || fallback.locationStatus,
     yearsValue: rawContent?.yearsValue || fallback.yearsValue,
     yearsLabel: rawContent?.yearsLabel || fallback.yearsLabel,
+    yearsLabel_sr: rawContent?.yearsLabel_sr || null,
     assetsValue: rawContent?.assetsValue || fallback.assetsValue,
     assetsLabel: rawContent?.assetsLabel || fallback.assetsLabel,
+    assetsLabel_sr: rawContent?.assetsLabel_sr || null,
     quoteLineOne: rawContent?.quoteLineOne || fallback.quoteLineOne,
     quoteLineTwo: rawContent?.quoteLineTwo || fallback.quoteLineTwo,
     testimonialName: rawContent?.testimonialName || fallback.testimonialName,

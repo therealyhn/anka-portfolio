@@ -120,7 +120,7 @@ function Project() {
             </h1>
 
             <div className="mt-12 lg:mt-[16px] xl:mt-[26px] flex flex-col lg:flex-row gap-12 lg:gap-[64px] xl:gap-[96px] items-start">
-              <div className="w-full lg:w-[360px] xl:w-[441px] shrink-0 lg:sticky lg:top-[120px] pt-0 lg:pt-[67px]">
+              <div className="w-full lg:w-[360px] xl:w-[441px] shrink-0 lg:sticky lg:top-[120px] xl:top-[160px] 2xl:top-[200px] pt-0 lg:pt-[67px]">
                 <div className="mb-12 xl:mb-[87px]">
                   <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">overview</p>
                   <p className="mt-4 xl:mt-[19px] text-lg xl:text-[21px] leading-[1.4] text-white lg:pr-0">

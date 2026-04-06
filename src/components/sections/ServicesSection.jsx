@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import AccentDot from '../ui/AccentDot'
 import useServicesContent from '../../hooks/useServicesContent'
 import useProjectsContent from '../../hooks/useProjectsContent'
+import { useLang } from '../../context/LangContext'
 
 const SERVICE_PREVIEW_SLUGS = {
   'brand-visual': 'logo-design',
@@ -13,8 +14,17 @@ const SERVICE_PREVIEW_SLUGS = {
 function ServicesSection() {
   const { data: servicesContent } = useServicesContent()
   const { data: projects } = useProjectsContent()
+  const { lang } = useLang()
   const [openServiceId, setOpenServiceId] = useState(null)
-  const serviceItems = servicesContent?.items || []
+
+  const sr = (en, srVal) => lang === 'sr' ? (srVal || en) : en
+
+  const serviceItems = (servicesContent?.items || []).map((item) => ({
+    ...item,
+    label: sr(item.label, item.label_sr),
+    hoverLabel: sr(item.hoverLabel, item.hoverLabel_sr),
+    description: sr(item.description, item.description_sr),
+  }))
 
   const projectImageBySlug = useMemo(() => (
     projects.reduce((acc, project) => {
@@ -48,17 +58,17 @@ function ServicesSection() {
           <div className="min-[1200px]:w-[55%] xl:w-[50%] 2xl:w-[55%] min-[1920px]:w-[1040px]">
             <p className="inline-flex items-center gap-2 text-[13px] font-normal uppercase tracking-[0.01em] text-brand-accent sm:gap-3 sm:text-[15px] xl:text-[20px] 2xl:text-[22px] min-[1920px]:text-[22px]">
               <AccentDot className="h-4 w-4 xl:h-2 xl:w-2 min-[1920px]:h-2.5 min-[1920px]:w-2.5" />
-              {servicesContent?.eyebrowLabel || 'Services'}
+              {sr(servicesContent?.eyebrowLabel, servicesContent?.eyebrowLabel_sr) || 'Services'}
             </p>
             <h2 className="mt-3 max-w-[250px] text-[28px] leading-tight text-brand-ink sm:mt-4 sm:text-4xl md:text-5xl lg:text-6xl xl:mt-[12px] xl:max-w-[700px] xl:text-[56px] 2xl:mt-[16px] 2xl:text-[60px] min-[1920px]:mt-[18px] min-[1920px]:max-w-[600px] min-[1920px]:text-[56px] min-[1920px]:leading-[1.1] min-[1920px]:tracking-[-0.04em]">
-              {servicesContent?.titleLineOne || 'What I can'}{' '}
-              <em className="font-serif text-[1.3em] font-normal italic">{servicesContent?.titleAccent || 'design'}</em>{' '}
-              {servicesContent?.titleLineTwo || 'for your team'}
+              {sr(servicesContent?.titleLineOne, servicesContent?.titleLineOne_sr) || 'What I can'}{' '}
+              <em className="font-serif text-[1.3em] font-normal italic">{sr(servicesContent?.titleAccent, servicesContent?.titleAccent_sr) || 'design'}</em>{' '}
+              {sr(servicesContent?.titleLineTwo, servicesContent?.titleLineTwo_sr) || 'for your team'}
             </h2>
           </div>
 
           <p className="max-w-[1000px] text-md leading-relaxed font-thin text-black/70 sm:text-base min-[1200px]:w-[42%] min-[1200px]:self-end xl:w-[45%] xl:text-[18px] 2xl:w-[42%] 2xl:text-[20px] min-[1920px]:w-[640px] min-[1920px]:text-[20px] min-[1920px]:leading-[1.6] pb-2">
-            {servicesContent?.description}
+            {sr(servicesContent?.description, servicesContent?.description_sr)}
           </p>
         </div>
 

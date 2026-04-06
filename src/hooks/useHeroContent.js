@@ -7,17 +7,25 @@ const HERO_QUERY = `
     *[_type == "heroSection"] | order(_updatedAt desc)[0]
   ){
     "titleLineOne": coalesce(titleLineOne, headingLineOne, heroTitleLineOne),
+    "titleLineOne_sr": coalesce(titleLineOne_sr, null),
     "titleAccent": coalesce(titleAccent, headingAccent, heroTitleAccent),
+    "titleAccent_sr": coalesce(titleAccent_sr, null),
     "titleLineTwo": coalesce(titleLineTwo, headingLineTwo, heroTitleLineTwo),
-    "description": coalesce(description, introText, designProductsText, heroDescription)
+    "titleLineTwo_sr": coalesce(titleLineTwo_sr, null),
+    "description": coalesce(description, introText, designProductsText, heroDescription),
+    "description_sr": coalesce(description_sr, null)
   }
 `
 
 const DEFAULT_HERO_CONTENT = {
   titleLineOne: "Hello I'm Anka",
+  titleLineOne_sr: null,
   titleAccent: 'Digital',
+  titleAccent_sr: null,
   titleLineTwo: 'Designer',
+  titleLineTwo_sr: null,
   description: 'I design products, platforms, and everything in between, made to make sense the first time you use them.',
+  description_sr: null,
 }
 
 function useHeroContent() {
@@ -36,9 +44,13 @@ function useHeroContent() {
 
         setData({
           titleLineOne: heroData?.titleLineOne || DEFAULT_HERO_CONTENT.titleLineOne,
+          titleLineOne_sr: heroData?.titleLineOne_sr || null,
           titleAccent: heroData?.titleAccent || DEFAULT_HERO_CONTENT.titleAccent,
+          titleAccent_sr: heroData?.titleAccent_sr || null,
           titleLineTwo: heroData?.titleLineTwo || DEFAULT_HERO_CONTENT.titleLineTwo,
+          titleLineTwo_sr: heroData?.titleLineTwo_sr || null,
           description: heroData?.description || DEFAULT_HERO_CONTENT.description,
+          description_sr: heroData?.description_sr || null,
         })
         setError(null)
       } catch (fetchError) {

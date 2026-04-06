@@ -6,23 +6,22 @@ import englishIcon from '../../assets/images/icons/english icon.svg'
 import serbianIcon from '../../assets/images/icons/serbian icon.svg'
 import navArrow from '../../assets/images/arrows/Nav bar.svg'
 import navArrowHover from '../../assets/images/arrows/Nav bar HOVER.svg'
-
-const NAV_ITEMS = [
-  { label: 'Projects', sectionId: 'projects' },
-  { label: 'Services', sectionId: 'services' },
-  { label: 'About me', sectionId: 'about' },
-]
+import { useLang } from '../../context/LangContext'
+import useTranslation from '../../hooks/useTranslation'
 
 function Navbar({ hideLanguageSwitch = false }) {
   const { pathname } = useLocation()
-  const [language, setLanguage] = useState('en')
+  const { lang, toggle } = useLang()
+  const { t } = useTranslation()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const isEnglish = language === 'en'
+  const isEnglish = lang === 'en'
   const isHomePage = pathname === '/'
 
-  const toggleLanguage = () => {
-    setLanguage((current) => (current === 'en' ? 'sr' : 'en'))
-  }
+  const NAV_ITEMS = [
+    { label: t('nav.projects'), sectionId: 'projects' },
+    { label: t('nav.services'), sectionId: 'services' },
+    { label: t('nav.about'), sectionId: 'about' },
+  ]
 
   const closeMenu = () => {
     setIsMenuOpen(false)
@@ -86,7 +85,7 @@ function Navbar({ hideLanguageSwitch = false }) {
             to="/contact"
             className="group hidden items-center gap-[5px] font-sans text-[14px] font-medium leading-[1.26] text-brand-ink transition-colors duration-500 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface lg:inline-flex"
           >
-            <span className="hidden sm:inline">Let&apos;s talk</span>
+            <span className="hidden sm:inline">{t('nav.letsTalk')}</span>
             <CircleArrowButton
               iconSrc={navArrow}
               iconHoverSrc={navArrowHover}
@@ -102,7 +101,7 @@ function Navbar({ hideLanguageSwitch = false }) {
                 type="button"
                 aria-label={isEnglish ? 'Switch to Serbian' : 'Switch to English'}
                 aria-pressed={!isEnglish}
-                onClick={toggleLanguage}
+                onClick={toggle}
                 className="relative inline-flex h-8 w-[56px] items-center rounded-full bg-brand-ink/10 px-1 transition-colors duration-300 ease-premium hover:bg-brand-ink/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:h-9 sm:w-[62px] md:h-10 md:w-[66px]"
               >
                 <span
@@ -163,7 +162,7 @@ function Navbar({ hideLanguageSwitch = false }) {
                 onClick={closeMenu}
                 className="group flex items-center justify-end gap-2.5 py-2.5 text-[22px] font-medium text-brand-ink transition-colors duration-300 ease-premium hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:py-3 sm:text-[26px]"
               >
-                <span>Contact</span>
+                <span>{t('nav.contact')}</span>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="shrink-0 sm:h-[18px] sm:w-[18px]">
                   <path d="M2.5 13.5L13.5 2.5M13.5 2.5H5.5M13.5 2.5V10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -181,7 +180,7 @@ function Navbar({ hideLanguageSwitch = false }) {
           type="button"
           aria-label={isEnglish ? 'Switch to Serbian' : 'Switch to English'}
           aria-pressed={!isEnglish}
-          onClick={toggleLanguage}
+          onClick={toggle}
           className="absolute right-[59px] top-6 z-[60] hidden h-[32px] w-[72px] cursor-pointer items-center rounded-full bg-white/20 transition-colors duration-500 ease-premium hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent lg:inline-flex"
         >
           <span

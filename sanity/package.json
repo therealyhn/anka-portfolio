@@ -14,11 +14,15 @@
   "keywords": [
     "sanity"
   ],
+  "overrides": {
+    "@asamuzakjp/css-color": "4.0.5",
+    "@asamuzakjp/dom-selector": "6.7.4"
+  },
   "dependencies": {
-    "@sanity/vision": "^5.17.1",
+    "@sanity/vision": "^5.19.0",
     "react": "^19.1",
     "react-dom": "^19.1",
-    "sanity": "^5.17.1",
+    "sanity": "^5.19.0",
     "styled-components": "^6.1.18"
   },
   "devDependencies": {

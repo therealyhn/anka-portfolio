@@ -8,15 +8,23 @@ const SERVICES_QUERY = `
     *[_type == "servicesSection"] | order(_updatedAt desc)[0]
   ){
     "eyebrowLabel": coalesce(eyebrowLabel, sectionLabel),
+    "eyebrowLabel_sr": coalesce(eyebrowLabel_sr, null),
     "titleLineOne": coalesce(titleLineOne, headingLineOne),
+    "titleLineOne_sr": coalesce(titleLineOne_sr, null),
     "titleAccent": coalesce(titleAccent, headingAccent),
+    "titleAccent_sr": coalesce(titleAccent_sr, null),
     "titleLineTwo": coalesce(titleLineTwo, headingLineTwo),
+    "titleLineTwo_sr": coalesce(titleLineTwo_sr, null),
     "description": coalesce(description, introText),
+    "description_sr": coalesce(description_sr, null),
     "items": coalesce(items, serviceItems, [])[]{
       _key,
       "label": coalesce(label, title, name),
+      "label_sr": coalesce(label_sr, null),
       "hoverLabel": coalesce(hoverLabel, teaser, subtitle),
+      "hoverLabel_sr": coalesce(hoverLabel_sr, null),
       "description": coalesce(description, details, copy),
+      "description_sr": coalesce(description_sr, null),
       "tags": array::compact(coalesce(tags, keywords, [])),
       "previewProjectSlug": coalesce(
         previewProject->slug.current,
@@ -114,8 +122,11 @@ function normalizeItem(rawItem, fallbackItem) {
   return {
     id: rawItem?._key || fallback.id || slugify(label) || 'service-item',
     label,
+    label_sr: rawItem?.label_sr || null,
     hoverLabel,
+    hoverLabel_sr: rawItem?.hoverLabel_sr || null,
     description: rawItem?.description || fallback.description || '',
+    description_sr: rawItem?.description_sr || null,
     tags: normalizeTags(rawItem?.tags, fallback.tags || []),
     previewProjectSlug: rawItem?.previewProjectSlug || '',
     previewImage: rawItem?.previewImage || fallback.previewImage || projectPlaceholder,
@@ -132,10 +143,15 @@ function normalizeServicesContent(rawContent) {
 
   return {
     eyebrowLabel: rawContent?.eyebrowLabel || fallback.eyebrowLabel,
+    eyebrowLabel_sr: rawContent?.eyebrowLabel_sr || null,
     titleLineOne: rawContent?.titleLineOne || fallback.titleLineOne,
+    titleLineOne_sr: rawContent?.titleLineOne_sr || null,
     titleAccent: rawContent?.titleAccent || fallback.titleAccent,
+    titleAccent_sr: rawContent?.titleAccent_sr || null,
     titleLineTwo: rawContent?.titleLineTwo || fallback.titleLineTwo,
+    titleLineTwo_sr: rawContent?.titleLineTwo_sr || null,
     description: rawContent?.description || fallback.description,
+    description_sr: rawContent?.description_sr || null,
     items: normalizedItems,
   }
 }
