@@ -17,35 +17,18 @@ function Project() {
   const project = projects.find((item) => item.slug === slug)
   const relatedProjects = projects.filter((item) => item.slug !== slug).slice(0, 2)
 
-  const galleryRef = useRef(null)
+  const mobileGalleryRef = useRef(null)
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+
+    requestAnimationFrame(() => {
+      if (mobileGalleryRef.current) {
+        mobileGalleryRef.current.scrollTop = 0
+      }
+    })
   }, [slug])
 
-  useEffect(() => {
-    const handleWheel = (e) => {
-      if (window.innerWidth < 1024) return
-
-      const gallery = galleryRef.current
-      if (!gallery) return
-
-      const rect = gallery.getBoundingClientRect()
-      if (rect.top >= window.innerHeight || rect.bottom <= 0) return
-
-      const { scrollTop, scrollHeight, clientHeight } = gallery
-      const atBottom = scrollTop + clientHeight >= scrollHeight - 2
-      const atTop = scrollTop <= 0
-
-      if ((e.deltaY > 0 && !atBottom) || (e.deltaY < 0 && !atTop)) {
-        e.preventDefault()
-        gallery.scrollBy({ top: e.deltaY })
-      }
-    }
-
-    window.addEventListener('wheel', handleWheel, { passive: false })
-    return () => window.removeEventListener('wheel', handleWheel)
-  }, [])
 
   if (!project && loading) {
     return <main className="min-h-screen bg-brand-charcoal" />
@@ -70,11 +53,11 @@ function Project() {
 
   return (
     <main className="min-h-screen overflow-x-clip bg-brand-charcoal text-white">
-      <section className="w-full overflow-x-clip px-4 pt-6 sm:px-8">
+      <section className="w-full overflow-x-clip px-4 sm:px-8">
         <div className="mx-auto w-full max-w-[1920px]">
           <Navbar hideLanguageSwitch />
 
-          <div className="mt-28 sm:hidden">
+          <div className="mt-20 sm:hidden">
             <div className="project-title-marquee" aria-label={project.client}>
               <div className="project-title-track">
                 <span aria-hidden="true" className="whitespace-nowrap pr-16 font-display text-[80px] font-medium leading-[1.03] tracking-[-0.03em]">{project.client}</span>
@@ -113,9 +96,12 @@ function Project() {
               </div>
             </div>
 
-            <div className="mt-8 space-y-[13px]">
+            <div
+              ref={mobileGalleryRef}
+              className="mt-8 h-[calc(100vh-140px)] overflow-y-auto no-scrollbar space-y-[13px]"
+            >
               {galleryImages.map((image, index) => (
-                <div key={`${project.slug}-gallery-mobile-${index}`}>
+                <div key={`${project.slug}-gallery-mobile-${index}`} className="w-full shrink-0 bg-brand-charcoal">
                   <img
                     src={image}
                     alt={`${project.title} screen ${index + 1}`}
@@ -128,8 +114,8 @@ function Project() {
             </div>
           </div>
 
-          <div className="mt-[100px] lg:mt-[150px] xl:mt-[168px] hidden sm:block pb-24 lg:ml-[32px] xl:ml-[64px] lg:mr-[16px] xl:mr-[-8px]">
-            <h1 className="max-w-full font-display text-[80px] md:text-[120px] lg:text-[160px] xl:text-[200px] font-medium leading-[1.16] tracking-[-0.04em] xl:tracking-[-16px]">
+          <div className="mt-[64px] lg:mt-[96px] xl:mt-[96px] hidden sm:block pb-24 lg:ml-[32px] xl:ml-[64px] lg:mr-[16px] xl:mr-[-8px]">
+            <h1 className="max-w-full font-display text-[80px] md:text-[120px] lg:text-[160px] xl:text-[160px] 2xl:text-[200px] font-medium leading-[1.16] tracking-[-0.04em] xl:tracking-[-16px]">
               {project.client}
             </h1>
 
@@ -177,7 +163,7 @@ function Project() {
                 </div>
               </div>
 
-              <div ref={galleryRef} className="flex-1 w-full min-w-0 flex flex-col gap-[13px] lg:h-[calc(100vh-140px)] overflow-y-auto no-scrollbar lg:sticky lg:top-[120px]">
+              <div className="flex-1 w-full min-w-0 flex flex-col gap-[13px]">
                 {galleryImages.map((image, index) => (
                   <div key={`${project.slug}-gallery-desktop-${index}`} className="w-full shrink-0 bg-brand-charcoal">
                     <img
@@ -262,3 +248,5 @@ function Project() {
 }
 
 export default Project
+
+
