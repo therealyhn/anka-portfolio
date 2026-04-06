@@ -3,6 +3,7 @@ import logoWhiteText from '../assets/images/logo/SVG white text.svg'
 import heroBackground from '../assets/images/img/Background.png'
 import { useContactForm, INTEREST_OPTIONS, BUDGET_RANGES } from '../hooks/useContactForm'
 import useFooterContent from '../hooks/useFooterContent'
+import useTranslation from '../hooks/useTranslation'
 import linkedinIcon from '../assets/images/icons/Linekdin icon (footer).svg'
 import upworkIcon from '../assets/images/icons/Upwork icon (footer).svg'
 import fiverrIcon from '../assets/images/icons/Fiver icon (footer).svg'
@@ -19,13 +20,6 @@ const SOCIAL_ICON_MAP = {
 
 function normalizePlatform(platform) {
   return String(platform || '').toLowerCase().trim()
-}
-
-const STEP_SUBTITLES = {
-  '1_initial': "Fill out the form and I'll get back to you as soon as possible.",
-  '1_progress': "You're almost done. Hint — contact info is next.",
-  2: 'Final details so I can get back to you.',
-  3: "All set. I'll review your message and get back to you shortly.",
 }
 
 const BTN_BASE = 'transition-all duration-300 rounded-[2px] text-[13px] sm:text-[14px] leading-none border'
@@ -51,6 +45,7 @@ function Stepper({ step }) {
 
 function Contact() {
   const { data: footerData } = useFooterContent()
+  const { t } = useTranslation()
 
   const {
     step,
@@ -82,18 +77,18 @@ function Contact() {
 
   const subtitle =
     step === 3
-      ? STEP_SUBTITLES[3]
+      ? t('contact.step3')
       : step === 2
-        ? STEP_SUBTITLES[2]
+        ? t('contact.step2')
         : hasBudget !== null
-          ? STEP_SUBTITLES['1_progress']
-          : STEP_SUBTITLES['1_initial']
+          ? t('contact.step1.progress')
+          : t('contact.step1.initial')
 
   const contactFields = [
-    { id: 'name', label: 'What is your name?', required: true, type: 'text', value: name, onChange: setName, placeholder: 'John Doe' },
-    { id: 'email', label: 'What is your email?', required: true, type: 'email', value: email, onChange: setEmail, placeholder: 'johhn@doecompany.com' },
-    { id: 'company', label: 'Where do you work?', required: false, type: 'text', value: company, onChange: setCompany, placeholder: 'Doecompany' },
-    { id: 'phone', label: 'What is your phone number?', required: false, type: 'tel', value: phone, onChange: setPhone, placeholder: '+38169...' },
+    { id: 'name', label: t('contact.name.label'), required: true, type: 'text', value: name, onChange: setName, placeholder: t('contact.name.placeholder') },
+    { id: 'email', label: t('contact.email.label'), required: true, type: 'email', value: email, onChange: setEmail, placeholder: t('contact.email.placeholder') },
+    { id: 'company', label: t('contact.company.label'), required: false, type: 'text', value: company, onChange: setCompany, placeholder: t('contact.company.placeholder') },
+    { id: 'phone', label: t('contact.phone.label'), required: false, type: 'tel', value: phone, onChange: setPhone, placeholder: t('contact.phone.placeholder') },
   ]
 
   return (
@@ -136,7 +131,7 @@ function Contact() {
               {/* Contact info: hidden below lg — no vertical space wasted on mobile */}
               <div className="flex flex-col gap-y-4 mt-2 lg:gap-y-8 xl:gap-y-[32px]">
                 <div>
-                  <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide uppercase">email</p>
+                  <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide uppercase">{t('contact.info.email')}</p>
                   <a
                     href="mailto:hello@ankaljusic.com"
                     className="block text-sm xl:text-[15px] font-light text-white/80 transition-colors duration-300 hover:text-white"
@@ -145,7 +140,7 @@ function Contact() {
                   </a>
                 </div>
                 <div>
-                  <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide uppercase">phone</p>
+                  <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide uppercase">{t('contact.info.phone')}</p>
                   <a
                     href="tel:+381691411117"
                     className="block text-sm xl:text-[15px] font-light text-white/80 transition-colors duration-300 hover:text-white"
@@ -154,7 +149,7 @@ function Contact() {
                   </a>
                 </div>
                 <div>
-                  <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide uppercase">location</p>
+                  <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide uppercase">{t('contact.info.location')}</p>
                   <p className="text-sm xl:text-[15px] font-light text-white/80">Belgrade, Serbia</p>
                 </div>
               </div>
@@ -165,9 +160,9 @@ function Contact() {
 
               {/* Title — font scales across all breakpoints */}
               <h1 className="font-display text-[38px] font-thin leading-[0.95] tracking-tight sm:text-[52px] md:text-[66px] lg:text-[72px] xl:text-[86px] xl:tracking-[-0.032em] text-white mb-4 sm:mb-5 lg:mb-6 xl:mb-10 shrink-0">
-                Got a <em className="hero-accent-word inline-block text-[1em] xl:text-[1.12em]">vision?</em>
+                {t('contact.title1')} <em className="hero-accent-word inline-block text-[1em] xl:text-[1.12em]">{t('contact.titleAccent1')}</em>
                 <br />
-                Let&apos;s <em className="hero-accent-word inline-block text-[1em] xl:text-[1.12em]">design</em> it
+                {t('contact.title2')} <em className="hero-accent-word inline-block text-[1em] xl:text-[1.12em]">{t('contact.titleAccent2')}</em>{t('contact.title3') ? ` ${t('contact.title3')}` : ''}
               </h1>
 
               <p className="text-sm sm:text-[15px] font-light leading-[1.42] text-[#8E8D8D] mb-6 sm:mb-8 lg:mb-10 max-w-[420px] shrink-0">
@@ -182,7 +177,7 @@ function Contact() {
 
                   <div>
                     <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-4 sm:mb-5">
-                      I&apos;m interested in
+                      {t('contact.interested')}
                     </p>
                     <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-3">
                       {INTEREST_OPTIONS.map((option) => (
@@ -200,17 +195,17 @@ function Contact() {
 
                   <div>
                     <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-4 sm:mb-5">
-                      Do you have a budget in mind?
+                      {t('contact.budget.question')}
                     </p>
                     <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-3">
-                      {([['Yes', true], ['No', false]]).map(([label, value]) => (
+                      {([['yes', true], ['no', false]]).map(([key, value]) => (
                         <button
-                          key={label}
+                          key={key}
                           type="button"
                           onClick={() => selectBudget(value)}
                           className={`${BTN_BASE} px-5 py-2 sm:px-6 sm:py-2 lg:px-[24px] lg:py-2.5 ${hasBudget === value ? BTN_ACTIVE : BTN_INACTIVE}`}
                         >
-                          {label}
+                          {t(`contact.budget.${key}`)}
                         </button>
                       ))}
                     </div>
@@ -219,7 +214,7 @@ function Contact() {
                   {hasBudget === true && (
                     <div>
                       <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-4 sm:mb-5">
-                        What is the dedicated budget for the project?
+                        {t('contact.budget.range')}
                       </p>
                       <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-3">
                         {BUDGET_RANGES.map((range) => (
@@ -241,10 +236,10 @@ function Contact() {
                       htmlFor="projectDetails"
                       className="block text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-1.5"
                     >
-                      Tell me something about your project
+                      {t('contact.project.label')}
                     </label>
                     <p className="text-xs sm:text-sm font-light leading-relaxed text-[#525252] mb-8 sm:mb-10 lg:mb-12">
-                      Write a few lines about your project; tell me what you&apos;re looking to design.
+                      {t('contact.project.hint')}
                     </p>
                     <input
                       id="projectDetails"
@@ -252,7 +247,7 @@ function Contact() {
                       value={projectDetails}
                       onChange={(e) => setProjectDetails(e.target.value)}
                       className="w-full border-b border-[#525252] bg-transparent pb-3 text-[14px] sm:text-[15px] lg:text-[16px] text-white outline-none placeholder:text-white/20 focus:border-white transition-colors duration-300"
-                      placeholder="Describe your project..."
+                      placeholder={t('contact.project.placeholder')}
                     />
                   </div>
 
@@ -299,17 +294,17 @@ function Contact() {
               {step === 3 && (
                 <div className="flex-1">
                   <h2 className="font-display text-[42px] sm:text-[56px] lg:text-[64px] xl:text-[72px] font-thin leading-[0.95] tracking-tight text-white mb-5 lg:mb-6">
-                    Message <em className="hero-accent-word">sent</em>!
+                    {t('contact.success.title1')} <em className="hero-accent-word">{t('contact.success.titleAccent')}</em>!
                   </h2>
                   <p className="text-sm sm:text-[15px] font-light text-[#8E8D8D] mb-8 max-w-[380px] leading-relaxed">
-                    You can expect a reply within 1–2 business days.
+                    {t('contact.success.text')}
                   </p>
                   <button
                     type="button"
                     onClick={reset}
                     className="text-[14px] font-light text-[#8E8D8D] hover:text-white transition-colors duration-300"
                   >
-                    + Make new request.
+                    {t('contact.success.newRequest')}
                   </button>
                 </div>
               )}
@@ -325,9 +320,9 @@ function Contact() {
               <div className="hidden lg:flex text-[12px] sm:text-[13px] font-medium text-[#8E8D8D] items-center gap-x-2 sm:gap-x-2.5 pb-1 sm:pb-2">
                 <span>&copy;Anka Ljusic, 2026</span>
                 <span className="text-[#525252]">|</span>
-                <span>Personal Portfolio</span>
+                <span>{t('contact.footer.portfolio')}</span>
                 <Link to="/privacy" className="text-[#525252] hover:text-white transition-colors duration-300 ml-1">
-                  Privacy Policy
+                  {t('contact.footer.privacy')}
                 </Link>
               </div>
 
@@ -339,7 +334,7 @@ function Contact() {
                     disabled={!isStep1Valid}
                     className="inline-flex items-center gap-1.5 rounded-[4px] bg-white pl-5 pr-4 py-2.5 sm:pl-6 sm:pr-5 xl:py-3.5 text-[13px] sm:text-[14px] font-medium leading-none text-brand-ink shadow-sm transition-all duration-300 hover:bg-white/90 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white"
                   >
-                    <span>Next</span>
+                    <span>{t('contact.next')}</span>
                     <span aria-hidden="true" className="text-[16px] font-light leading-none -mt-0.5">&rsaquo;</span>
                   </button>
                 )}
@@ -351,7 +346,7 @@ function Contact() {
                       onClick={handlePrev}
                       className="text-[13px] sm:text-[14px] font-medium text-[#8E8D8D] hover:text-white transition-colors duration-300"
                     >
-                      Previous
+                      {t('contact.previous')}
                     </button>
                     <button
                       type="button"
@@ -359,7 +354,7 @@ function Contact() {
                       disabled={!isStep2Valid || isSubmitting}
                       className="inline-flex items-center gap-1.5 rounded-[4px] bg-white pl-5 pr-4 py-2.5 sm:pl-6 sm:pr-5 xl:py-3.5 text-[13px] sm:text-[14px] font-medium leading-none text-brand-ink shadow-sm transition-all duration-300 hover:bg-white/90 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white"
                     >
-                      {isSubmitting ? 'Sending...' : 'Send'}
+                      {isSubmitting ? t('contact.sending') : t('contact.send')}
                     </button>
                   </div>
                 )}
@@ -372,10 +367,10 @@ function Contact() {
                 to="/privacy"
                 className="text-[11px] text-[#525252] hover:text-white transition-colors duration-300"
               >
-                Privacy Policy
+                {t('contact.footer.privacy')}
               </Link>
               <p className="text-[11px] font-medium text-[#8E8D8D]">
-                &copy;Anka Ljusic, 2026 &nbsp;|&nbsp; Personal Portfolio
+                &copy;Anka Ljusic, 2026 &nbsp;|&nbsp; {t('contact.footer.portfolio')}
               </p>
               <div className="flex items-center gap-3 mt-0.5">
                 {footerData.socials.map((social) => {

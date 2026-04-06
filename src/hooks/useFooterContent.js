@@ -7,14 +7,21 @@ const FOOTER_QUERY = `
     *[_type == "footerSection"] | order(_updatedAt desc)[0]
   ){
     "availabilityLabel": coalesce(availabilityLabel, badgeLabel),
+    "availabilityLabel_sr": coalesce(availabilityLabel_sr, null),
     "titleLineOne": coalesce(titleLineOne, headingLineOne),
+    "titleLineOne_sr": coalesce(titleLineOne_sr, null),
     "titleAccent": coalesce(titleAccent, headingAccent),
+    "titleAccent_sr": coalesce(titleAccent_sr, null),
     "description": coalesce(description, subtitle),
+    "description_sr": coalesce(description_sr, null),
     "ctaLabel": coalesce(ctaLabel, buttonLabel),
+    "ctaLabel_sr": coalesce(ctaLabel_sr, null),
     "ctaHref": coalesce(ctaHref, buttonHref),
     "copyrightText": coalesce(copyrightText, legalText),
     "portfolioLabel": coalesce(portfolioLabel, portfolioText),
+    "portfolioLabel_sr": coalesce(portfolioLabel_sr, null),
     "privacyLabel": coalesce(privacyLabel, privacyText),
+    "privacyLabel_sr": coalesce(privacyLabel_sr, null),
     "privacyHref": coalesce(privacyHref, privacyUrl),
     "socials": coalesce(socials, [])[]{
       _key,
@@ -77,14 +84,21 @@ function normalizeFooterContent(rawContent) {
 
   return {
     availabilityLabel: rawContent?.availabilityLabel || fallback.availabilityLabel,
+    availabilityLabel_sr: rawContent?.availabilityLabel_sr || null,
     titleLineOne: rawContent?.titleLineOne || fallback.titleLineOne,
+    titleLineOne_sr: rawContent?.titleLineOne_sr || null,
     titleAccent: rawContent?.titleAccent || fallback.titleAccent,
+    titleAccent_sr: rawContent?.titleAccent_sr || null,
     description: rawContent?.description || fallback.description,
+    description_sr: rawContent?.description_sr || null,
     ctaLabel: rawContent?.ctaLabel || fallback.ctaLabel,
+    ctaLabel_sr: rawContent?.ctaLabel_sr || null,
     ctaHref: rawContent?.ctaHref || fallback.ctaHref,
     copyrightText: normalizeCopyrightText(rawContent?.copyrightText, fallback.copyrightText),
     portfolioLabel: rawContent?.portfolioLabel || fallback.portfolioLabel,
+    portfolioLabel_sr: rawContent?.portfolioLabel_sr || null,
     privacyLabel: rawContent?.privacyLabel || fallback.privacyLabel,
+    privacyLabel_sr: rawContent?.privacyLabel_sr || null,
     privacyHref: rawContent?.privacyHref || fallback.privacyHref,
     socials: normalizeSocials(rawContent?.socials, fallback.socials),
   }

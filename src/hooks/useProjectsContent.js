@@ -11,9 +11,12 @@ const PROJECTS_QUERY = `
     "role": coalesce(role, projectRole, category),
     "image": coalesce(thumbnail.asset->url, image.asset->url, coverImage.asset->url),
     "overview": coalesce(overview, description, summary),
+    "overview_sr": coalesce(overview_sr, null),
     "year": coalesce(year, projectYear),
     "location": coalesce(location, projectLocation),
+    "location_sr": coalesce(location_sr, null),
     "duration": coalesce(duration, projectDuration),
+    "duration_sr": coalesce(duration_sr, null),
     "stack": coalesce(stack, tool, tools),
     "services": array::compact(
       coalesce(services[]->title, []) +
@@ -62,9 +65,12 @@ function normalizeProject(rawProject, fallbackProject) {
     role: rawProject?.role || fallback.role || 'Design',
     image: rawProject?.image || fallback.image || projectsData[0]?.image,
     overview: rawProject?.overview || fallback.overview,
+    overview_sr: rawProject?.overview_sr || null,
     year: rawProject?.year || fallback.year,
     location: rawProject?.location || fallback.location,
+    location_sr: rawProject?.location_sr || null,
     duration: rawProject?.duration || fallback.duration,
+    duration_sr: rawProject?.duration_sr || null,
     stack: rawProject?.stack || fallback.stack,
     services: normalizeServices(rawProject?.services) || fallback.services,
     galleryImages: Array.isArray(rawProject?.galleryImages) && rawProject.galleryImages.length > 0

@@ -4,6 +4,8 @@ import CircleArrowButton from '../components/ui/CircleArrowButton'
 import Footer from '../components/layout/Footer'
 import Navbar from '../components/layout/Navbar'
 import useProjectsContent from '../hooks/useProjectsContent'
+import useTranslation from '../hooks/useTranslation'
+import { useLang } from '../context/LangContext'
 import navArrow from '../assets/images/arrows/Nav bar.svg'
 import navArrowHover from '../assets/images/arrows/Nav bar HOVER.svg'
 
@@ -13,6 +15,10 @@ const DEFAULT_OVERVIEW =
 function Project() {
   const { slug } = useParams()
   const { loading, data: projects } = useProjectsContent()
+  const { t } = useTranslation()
+  const { lang } = useLang()
+
+  const sr = (en, srVal) => lang === 'sr' ? (srVal || en) : en
 
   const project = projects.find((item) => item.slug === slug)
   const relatedProjects = projects.filter((item) => item.slug !== slug).slice(0, 2)
@@ -38,10 +44,10 @@ function Project() {
     return <Navigate to="/" replace />
   }
 
-  const overview = project.overview || DEFAULT_OVERVIEW
+  const overview = sr(project.overview, project.overview_sr) || DEFAULT_OVERVIEW
   const year = project.year || '2026'
-  const location = project.location || 'Remote'
-  const duration = project.duration || '3 weeks'
+  const location = sr(project.location, project.location_sr) || 'Remote'
+  const duration = sr(project.duration, project.duration_sr) || '3 weeks'
   const stack = project.stack || 'Figma'
   const services = Array.isArray(project.services) && project.services.length > 0
     ? project.services
@@ -67,31 +73,31 @@ function Project() {
 
             <div className="mt-8 space-y-6">
               <div>
-                <p className="text-sm font-light leading-[1.22] text-brand-accent">overview</p>
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">{t('project.meta.overview')}</p>
                 <p className="mt-2 text-base leading-[1.4]">{overview}</p>
               </div>
               <div>
-                <p className="text-sm font-light leading-[1.22] text-brand-accent">client</p>
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">{t('project.meta.client')}</p>
                 <p className="mt-1 text-base leading-[1.22]">{project.client}</p>
               </div>
               <div>
-                <p className="text-sm font-light leading-[1.22] text-brand-accent">services</p>
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">{t('project.meta.services')}</p>
                 <p className="mt-1 text-base leading-[1.25]">{services.join(', ')}</p>
               </div>
               <div>
-                <p className="text-sm font-light leading-[1.22] text-brand-accent">stack</p>
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">{t('project.meta.stack')}</p>
                 <p className="mt-1 text-base leading-[1.25]">{stack}</p>
               </div>
               <div>
-                <p className="text-sm font-light leading-[1.22] text-brand-accent">duration</p>
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">{t('project.meta.duration')}</p>
                 <p className="mt-1 text-base leading-[1.22]">{duration}</p>
               </div>
               <div>
-                <p className="text-sm font-light leading-[1.22] text-brand-accent">location</p>
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">{t('project.meta.location')}</p>
                 <p className="mt-1 text-base leading-[1.22]">{location}</p>
               </div>
               <div>
-                <p className="text-sm font-light leading-[1.22] text-brand-accent">year</p>
+                <p className="text-sm font-light leading-[1.22] text-brand-accent">{t('project.meta.year')}</p>
                 <p className="mt-1 text-base leading-[1.22]">{year}</p>
               </div>
             </div>
@@ -120,9 +126,9 @@ function Project() {
             </h1>
 
             <div className="mt-12 lg:mt-[16px] xl:mt-[26px] flex flex-col lg:flex-row gap-12 lg:gap-[64px] xl:gap-[96px] items-start">
-              <div className="w-full lg:w-[360px] xl:w-[441px] shrink-0 lg:sticky lg:top-[120px] xl:top-[160px] 2xl:top-[200px] pt-0 lg:pt-[67px]">
+              <div className="w-full lg:w-[360px] xl:w-[441px] shrink-0 lg:sticky lg:top-[120px] xl:top-[96px] 2xl:top-[80px] pt-0 lg:pt-[24px]">
                 <div className="mb-12 xl:mb-[87px]">
-                  <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">overview</p>
+                  <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.overview')}</p>
                   <p className="mt-4 xl:mt-[19px] text-lg xl:text-[21px] leading-[1.4] text-white lg:pr-0">
                     {overview}
                   </p>
@@ -130,27 +136,27 @@ function Project() {
 
                 <div className="grid grid-cols-2 gap-x-6 gap-y-10 xl:gap-x-9 xl:gap-y-[87px]">
                   <div>
-                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">client</p>
+                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.client')}</p>
                     <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.22] text-white break-words">{project.client}</p>
                   </div>
                   <div>
-                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">year</p>
+                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.year')}</p>
                     <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.22] text-white">{year}</p>
                   </div>
                   <div>
-                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">location</p>
+                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.location')}</p>
                     <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.22] text-white">{location}</p>
                   </div>
                   <div>
-                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">duration</p>
+                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.duration')}</p>
                     <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.22] text-white">{duration}</p>
                   </div>
                   <div>
-                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">stack</p>
+                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.stack')}</p>
                     <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.25] text-white break-words">{stack}</p>
                   </div>
                   <div>
-                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">services</p>
+                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.services')}</p>
                     <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.25] text-white break-words">
                       {services.map((service, index) => (
                         <span key={`${project.slug}-service-desktop-${index}`}>
@@ -184,7 +190,7 @@ function Project() {
       <section className="w-full overflow-x-clip px-4 pb-14 pt-16 sm:px-8">
         <div className="mx-auto w-full max-w-[1920px]">
           <div className="lg:ml-[32px] xl:ml-[64px] max-w-[900px]">
-            <h2 className="text-4xl sm:text-5xl font-medium tracking-tight">More projects like this</h2>
+            <h2 className="text-4xl sm:text-5xl font-medium tracking-tight">{t('project.meta.relatedProjects')}</h2>
             <div className="mt-8 grid grid-cols-2 gap-3 md:gap-6">
               {relatedProjects.map((item) => (
                 <Link
@@ -229,7 +235,7 @@ function Project() {
               to="/projects"
               className="group mt-8 inline-flex items-center gap-2.5 sm:hidden"
             >
-              <span className="text-base font-medium">See all projects</span>
+              <span className="text-base font-medium">{t('project.meta.seeAll')}</span>
               <CircleArrowButton
                 iconSrc={navArrow}
                 iconHoverSrc={navArrowHover}
@@ -248,5 +254,3 @@ function Project() {
 }
 
 export default Project
-
-
