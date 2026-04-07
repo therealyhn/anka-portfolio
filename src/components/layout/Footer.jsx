@@ -58,8 +58,12 @@ function Footer() {
   const titleAccent = sr(data.titleAccent, data.titleAccent_sr)
   const description = sr(data.description, data.description_sr)
   const ctaLabel = sr(data.ctaLabel, data.ctaLabel_sr)
-  const portfolioLabel = sr(data.portfolioLabel, data.portfolioLabel_sr)
-  const privacyLabel = sr(data.privacyLabel, data.privacyLabel_sr)
+  const portfolioLabel = lang === 'sr'
+    ? (data.portfolioLabel_sr || t('footer.portfolio'))
+    : data.portfolioLabel
+  const privacyLabel = lang === 'sr'
+    ? (data.privacyLabel_sr || t('footer.privacy'))
+    : data.privacyLabel
 
   return (
     <section id="contact" className="px-3 pb-3 sm:px-4 sm:pb-4 md:px-6 md:pb-5 lg:px-8 min-[1920px]:px-3 min-[1920px]:pb-6">

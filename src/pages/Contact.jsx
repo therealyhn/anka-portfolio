@@ -34,7 +34,7 @@ function Stepper({ step }) {
     `h-[1px] transition-colors duration-300 ${afterStep < step ? 'bg-white/60' : 'bg-white/20'}`
 
   return (
-    <div className="flex items-center w-full mb-8 sm:mb-10 lg:mb-14 xl:mb-16 shrink-0">
+    <div className="flex items-center w-full mb-5 sm:mb-6 lg:mb-8 xl:mb-10 shrink-0">
       <span className={dotCls(1)} />
       <span className={`${lineCls(1)} w-[35%]`} />
       <span className={dotCls(2)} />
@@ -50,10 +50,12 @@ function Contact() {
   const { lang } = useLang()
   const sr = (en, srVal) => (lang === 'sr' ? (srVal || en) : en)
 
-  const portfolioLabel =
-    sr(footerData?.portfolioLabel, footerData?.portfolioLabel_sr) || t('contact.footer.portfolio')
-  const privacyLabel =
-    sr(footerData?.privacyLabel, footerData?.privacyLabel_sr) || t('contact.footer.privacy')
+  const portfolioLabel = lang === 'sr'
+    ? (footerData?.portfolioLabel_sr || t('contact.footer.portfolio'))
+    : footerData?.portfolioLabel
+  const privacyLabel = lang === 'sr'
+    ? (footerData?.privacyLabel_sr || t('contact.footer.privacy'))
+    : footerData?.privacyLabel
 
   const {
     step,
@@ -164,16 +166,16 @@ function Contact() {
             </aside>
 
             {/* Right column: Title + Stepper + Form content */}
-            <section className="lg:flex-1 lg:min-h-0 w-full max-w-[720px] lg:pt-[10px] flex flex-col">
+            <section className="lg:flex-1 lg:min-h-0 w-full max-w-[800px] lg:pt-[10px] flex flex-col">
 
               {/* Title — font scales across all breakpoints */}
-              <h1 className="font-display text-[38px] font-thin leading-[0.95] tracking-tight sm:text-[52px] md:text-[66px] lg:text-[72px] xl:text-[86px] xl:tracking-[-0.032em] text-white mb-4 sm:mb-5 lg:mb-6 xl:mb-10 shrink-0">
+              <h1 className="font-display text-[38px] font-thin leading-[0.95] tracking-tight sm:text-[52px] md:text-[66px] lg:text-[72px] xl:text-[86px] xl:tracking-[-0.032em] text-white mb-3 sm:mb-4 lg:mb-5 xl:mb-6 shrink-0">
                 {t('contact.title1')} <em className="hero-accent-word inline-block text-[1em] xl:text-[1.12em]">{t('contact.titleAccent1')}</em>
                 <br />
                 {t('contact.title2')} <em className="hero-accent-word inline-block text-[1em] xl:text-[1.12em]">{t('contact.titleAccent2')}</em>{t('contact.title3') ? ` ${t('contact.title3')}` : ''}
               </h1>
 
-              <p className="text-sm sm:text-[15px] font-light leading-[1.42] text-[#8E8D8D] mb-6 sm:mb-8 lg:mb-10 max-w-[420px] shrink-0">
+              <p className="text-sm sm:text-[15px] font-light leading-[1.42] text-[#8E8D8D] mb-4 sm:mb-5 lg:mb-6 max-w-[420px] shrink-0">
                 {subtitle}
               </p>
 
@@ -181,10 +183,10 @@ function Contact() {
 
               {/* ── Step 1: Project Info ── */}
               {step === 1 && (
-                <div className="lg:flex-1 lg:overflow-y-auto no-scrollbar space-y-8 sm:space-y-10 lg:space-y-12 xl:space-y-16 pr-1 pb-4">
+                <div className="lg:flex-1 lg:overflow-y-auto no-scrollbar space-y-5 sm:space-y-6 lg:space-y-7 xl:space-y-8 pr-1 pb-4">
 
                   <div>
-                    <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-4 sm:mb-5">
+                    <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-3 sm:mb-4">
                       {t('contact.interested')}
                     </p>
                     <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-3">
@@ -202,7 +204,7 @@ function Contact() {
                   </div>
 
                   <div>
-                    <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-4 sm:mb-5">
+                    <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-3 sm:mb-4">
                       {t('contact.budget.question')}
                     </p>
                     <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-3">
@@ -221,7 +223,7 @@ function Contact() {
 
                   {hasBudget === true && (
                     <div>
-                      <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-4 sm:mb-5">
+                      <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-3 sm:mb-4">
                         {t('contact.budget.range')}
                       </p>
                       <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-3">
@@ -246,7 +248,7 @@ function Contact() {
                     >
                       {t('contact.project.label')}
                     </label>
-                    <p className="text-xs sm:text-sm font-light leading-relaxed text-[#525252] mb-8 sm:mb-10 lg:mb-12">
+                    <p className="text-xs sm:text-sm font-light leading-relaxed text-[#525252] mb-5 sm:mb-6 lg:mb-7">
                       {t('contact.project.hint')}
                     </p>
                     <input
@@ -271,7 +273,7 @@ function Contact() {
                         Mobile/tablet: label stacked above input (full-width).
                         lg+: label left (44% width) | input right — matches Figma.
                       */
-                      <div key={field.id} className="py-4 sm:py-5 first:pt-0">
+                      <div key={field.id} className="py-3 sm:py-4 first:pt-0">
                         <div className="flex flex-col gap-y-2 lg:flex-row lg:items-center lg:gap-y-0 lg:gap-x-8">
                           <label
                             htmlFor={field.id}
