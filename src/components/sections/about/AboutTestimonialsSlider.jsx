@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Navigation } from 'swiper/modules'
 import 'swiper/css'
 import useTranslation from '../../../hooks/useTranslation'
+import apostropheImg from '../../../assets/images/img/apos.png'
 
 function AboutTestimonialsSlider({ testimonials }) {
   const { t } = useTranslation()
@@ -9,20 +10,13 @@ function AboutTestimonialsSlider({ testimonials }) {
   const isTestimonialLoopEnabled = safeTestimonials.length > 1
 
   return (
-    <div className="relative mt-10 px-2 pb-2 pt-10 text-center sm:mt-14 sm:px-4 sm:pt-12 xl:mt-[60px] 2xl:mt-[88px] 2xl:px-0 2xl:pt-[90px]">
-      <span
+    <div className="relative mt-10 mx-[-16px] px-[16px] pb-8 pt-10 text-center bg-brand-surface sm:mt-14 sm:mx-[-24px] sm:px-[24px] sm:pb-10 sm:pt-12 md:mx-[-32px] md:px-[32px] lg:mx-[-48px] lg:px-[48px] xl:mt-[40px] xl:mx-[-72px] xl:px-[72px] xl:pb-[60px] xl:pt-[72px] 2xl:mt-[88px] 2xl:pt-[90px]">
+      <img
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-4 -translate-x-1/2 text-brand-ink/[0.04] sm:top-6 xl:top-8 min-[1920px]:top-[20px]"
-      >
-        <svg
-          className="h-[100px] w-auto sm:h-[140px] xl:h-[200px] 2xl:h-[230px] min-[1920px]:h-[260px]"
-          viewBox="0 0 190 150"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M60 0h50L50 150H0zM140 0h50l-60 150H80z" />
-        </svg>
-      </span>
+        src={apostropheImg}
+        alt=""
+        className="pointer-events-none absolute left-1/2 top-10 -translate-x-1/2 select-none w-auto h-[280px] sm:h-[380px] xl:h-[200px] min-[1920px]:h-[200px]"
+      />
 
       <div className="relative z-10">
         {isTestimonialLoopEnabled ? (
@@ -57,37 +51,37 @@ function AboutTestimonialsSlider({ testimonials }) {
           navigation={
             isTestimonialLoopEnabled
               ? {
-                  prevEl: '.about-testimonial-prev',
-                  nextEl: '.about-testimonial-next',
-                }
+                prevEl: '.about-testimonial-prev',
+                nextEl: '.about-testimonial-next',
+              }
               : false
           }
           autoplay={
             isTestimonialLoopEnabled
               ? {
-                  delay: 3000,
-                  disableOnInteraction: false,
-                  pauseOnMouseEnter: false,
-                }
+                delay: 10000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: false,
+              }
               : false
           }
         >
           {safeTestimonials.map((testimonial) => (
             <SwiperSlide key={testimonial.id}>
-              <blockquote className="mx-auto max-w-[980px] px-10 text-base font-light italic leading-[1.6] text-brand-ink sm:px-0 sm:text-lg md:text-xl xl:max-w-[1040px] xl:text-[24px] 2xl:max-w-[1160px] 2xl:text-[26px] 2xl:leading-[1.6] min-[1920px]:max-w-[1240px] min-[1920px]:text-[32px]">
+              <blockquote className="mx-auto max-w-[980px] px-10 text-base font-inter font-normal italic leading-[1.6] text-brand-ink sm:px-0 sm:text-lg md:text-xl xl:max-w-[1040px] xl:text-[30px] xl:leading-[1.54] xl:tracking-normal 2xl:max-w-[1160px] min-[1920px]:max-w-[1240px] min-[1920px]:text-[32px]">
                 <p>"{testimonial.quoteLineOne}</p>
                 {testimonial.quoteLineTwo ? <p className="mt-4 sm:mt-5 2xl:mt-[24px]">{testimonial.quoteLineTwo}"</p> : null}
               </blockquote>
 
-              <div className="mx-auto mt-6 h-px w-[80%] bg-black/[0.15] sm:mt-8 xl:mt-[40px] xl:w-[70%] 2xl:mt-[50px] 2xl:w-[760px] min-[1920px]:w-[800px]" />
+              <div className="mx-auto mt-6 h-px w-[80%] bg-[#ACACAC] sm:mt-8 xl:mt-[40px] xl:w-[70%] 2xl:mt-[50px] 2xl:w-[760px] min-[1920px]:w-[800px]" />
 
               <div className="mt-5 inline-flex items-center gap-3 sm:mt-6 sm:gap-4 xl:mt-[32px] 2xl:mt-[42px] min-[1920px]:gap-[16px]">
                 <span className="inline-flex h-10 w-10 overflow-hidden rounded-full bg-[#D7D7D7] sm:h-12 sm:w-12 xl:h-[60px] xl:w-[60px] 2xl:h-[68px] 2xl:w-[68px] min-[1920px]:h-[80px] min-[1920px]:w-[80px]">
                   <img src={testimonial.avatar} alt="" aria-hidden="true" className="h-full w-full object-cover object-top" />
                 </span>
                 <span className="text-left">
-                  <span className="block text-sm font-medium text-brand-ink sm:text-base xl:text-[18px] 2xl:text-[20px] min-[1920px]:text-[24px]">{testimonial.name}</span>
-                  <span className="mt-0.5 block text-xs font-light text-brand-muted/80 sm:text-sm xl:text-[13px] 2xl:text-[14px] min-[1920px]:mt-[2px] min-[1920px]:text-[16px]">{testimonial.role}</span>
+                  <span className="block text-sm font-inter font-medium text-brand-ink sm:text-base xl:text-[24px] xl:leading-[1.54] xl:tracking-[0.02em] min-[1920px]:text-[24px]">{testimonial.name}</span>
+                  <span className="mt-0.5 block text-xs font-inter font-normal text-brand-muted/80 sm:text-sm xl:text-[14px] xl:leading-[1.54] xl:tracking-normal 2xl:text-[14px] min-[1920px]:mt-[2px] min-[1920px]:text-[16px]">{testimonial.role}</span>
                 </span>
               </div>
             </SwiperSlide>

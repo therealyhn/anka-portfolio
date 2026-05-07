@@ -17,10 +17,10 @@ function ProjectsSection() {
   const visibleProjects = isExpanded ? projects : projects.slice(0, INITIAL_VISIBLE_PROJECTS)
 
   return (
-    <section id="projects" className="rounded-frame bg-brand-paper px-4 py-10 sm:px-6 sm:py-12 md:px-8 md:py-14 lg:px-12 lg:py-16 xl:py-20 2xl:pt-[80px] 2xl:pb-[100px] min-[1920px]:pt-[102px] min-[1920px]:pb-[132px]" aria-label={t('projects.sectionAria')}>
+    <section id="projects" className="rounded-frame bg-brand-paper px-4 py-10 sm:px-6 sm:py-12 md:px-8 md:py-14 lg:px-12 lg:py-16 xl:px-[72px] xl:pt-20 xl:pb-[50px] 2xl:pt-[80px] 2xl:pb-[100px] min-[1920px]:pt-[102px] min-[1920px]:pb-[132px]" aria-label={t('projects.sectionAria')}>
       <div className="mx-auto max-w-[600px] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1100px] xl:max-w-[1295px] min-[1920px]:max-w-[1728px]">
         <div className="text-center">
-          <p className="inline-flex items-center gap-2 text-[13px] font-normal uppercase tracking-[0.01em] text-brand-accent sm:gap-3 sm:text-[15px] min-[1920px]:text-[24px]">
+          <p className="inline-flex items-center gap-2 font-normal uppercase tracking-[0.01em] text-brand-accent text-[13px] sm:gap-3 sm:text-[15px] xl:font-rounded xl:text-[18px] xl:leading-[1.26] xl:tracking-normal min-[1920px]:text-[24px]">
             <AccentDot />
             {t('projects.eyebrow')}
           </p>
@@ -40,7 +40,7 @@ function ProjectsSection() {
             <button
               type="button"
               onClick={() => setIsExpanded((current) => !current)}
-              className="group inline-flex items-center gap-2 text-sm font-semibold text-brand-ink transition-colors duration-300 ease-premium hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:gap-3 sm:text-base 2xl:gap-[8px]"
+              className="group inline-flex items-center gap-2 text-sm font-semibold text-brand-ink transition-colors duration-300 ease-premium hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:gap-3 sm:text-base xl:text-[14px] xl:font-medium 2xl:gap-[8px]"
             >
               <span className="2xl:text-[18px]">{isExpanded ? t('projects.seeLess') : t('projects.seeMore')}</span>
               <CircleArrowButton

@@ -129,44 +129,44 @@ function Project() {
             </div>
           </div>
 
-          <div className="mt-[64px] lg:mt-[96px] xl:mt-[96px] hidden sm:block pb-24 lg:ml-[32px] xl:ml-[64px] lg:mr-[16px] xl:mr-[-8px]">
-            <h1 className="max-w-full font-display text-[80px] md:text-[120px] lg:text-[160px] xl:text-[160px] 2xl:text-[200px] font-medium leading-[1.16] tracking-[-0.04em] xl:tracking-[-16px]">
+          <div className="mt-[64px] lg:mt-[96px] xl:mt-[96px] hidden sm:block pb-24 xl:pb-0 lg:ml-[32px] xl:ml-[64px] lg:mr-[16px] xl:mr-[-8px]">
+            <h1 className="max-w-full font-display text-[80px] md:text-[120px] lg:text-[160px] xl:text-[150px] 2xl:text-[200px] font-medium leading-[1.16] tracking-[-0.04em] xl:font-sans xl:leading-[1.26] xl:tracking-[-0.08em]">
               {projectClient}
             </h1>
 
             <div className="mt-12 lg:mt-[16px] xl:mt-[26px] flex flex-col lg:flex-row gap-12 lg:gap-[64px] xl:gap-[96px] items-start">
               <div className="w-full lg:w-[360px] xl:w-[441px] shrink-0 lg:sticky lg:top-[120px] xl:top-[96px] 2xl:top-[80px] pt-0 lg:pt-[24px]">
                 <div className="mb-12 xl:mb-[87px]">
-                  <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.overview')}</p>
-                  <p className="mt-4 xl:mt-[19px] text-lg xl:text-[21px] leading-[1.4] text-white lg:pr-0">
+                  <p className="text-base font-light leading-[1.22] text-brand-accent xl:font-rounded xl:text-[14px] xl:font-light xl:leading-[1.22]">{t('project.meta.overview')}</p>
+                  <p className="mt-4 xl:mt-[19px] text-lg xl:text-[16px] leading-[1.4] text-white xl:font-normal lg:pr-0">
                     {overview}
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-x-6 gap-y-10 xl:gap-x-9 xl:gap-y-[87px]">
+                <div className="grid grid-cols-2 gap-x-6 gap-y-10 xl:gap-x-[27px] xl:gap-y-[65px]">
                   <div>
-                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.client')}</p>
-                    <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.22] text-white break-words">{projectClient}</p>
+                    <p className="text-base font-light leading-[1.22] text-brand-accent xl:font-rounded xl:text-[14px] xl:leading-[1.22]">{t('project.meta.client')}</p>
+                    <p className="mt-2 xl:mt-0 text-lg xl:text-[16px] leading-[1.22] xl:leading-[1.4] text-white xl:font-normal break-words">{projectClient}</p>
                   </div>
                   <div>
-                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.year')}</p>
-                    <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.22] text-white">{year}</p>
+                    <p className="text-base font-light leading-[1.22] text-brand-accent xl:font-rounded xl:text-[14px] xl:leading-[1.22]">{t('project.meta.year')}</p>
+                    <p className="mt-2 xl:mt-0 text-lg xl:text-[16px] leading-[1.22] xl:leading-[1.4] text-white xl:font-normal">{year}</p>
                   </div>
                   <div>
-                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.location')}</p>
-                    <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.22] text-white">{location}</p>
+                    <p className="text-base font-light leading-[1.22] text-brand-accent xl:font-rounded xl:text-[14px] xl:leading-[1.22]">{t('project.meta.location')}</p>
+                    <p className="mt-2 xl:mt-0 text-lg xl:text-[16px] leading-[1.22] xl:leading-[1.4] text-white xl:font-normal">{location}</p>
                   </div>
                   <div>
-                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.duration')}</p>
-                    <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.22] text-white">{duration}</p>
+                    <p className="text-base font-light leading-[1.22] text-brand-accent xl:font-rounded xl:text-[14px] xl:leading-[1.22]">{t('project.meta.duration')}</p>
+                    <p className="mt-2 xl:mt-0 text-lg xl:text-[16px] leading-[1.22] xl:leading-[1.4] text-white xl:font-normal">{duration}</p>
                   </div>
                   <div>
-                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.stack')}</p>
-                    <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.25] text-white break-words">{stack}</p>
+                    <p className="text-base font-light leading-[1.22] text-brand-accent xl:font-rounded xl:text-[14px] xl:leading-[1.22]">{t('project.meta.stack')}</p>
+                    <p className="mt-2 xl:mt-0 text-lg xl:text-[16px] leading-[1.25] xl:leading-[1.4] text-white xl:font-normal break-words">{stack}</p>
                   </div>
                   <div>
-                    <p className="text-base xl:text-[19px] font-light leading-[1.22] text-brand-accent">{t('project.meta.services')}</p>
-                    <p className="mt-2 xl:mt-0 text-lg xl:text-[21px] leading-[1.25] text-white break-words">
+                    <p className="text-base font-light leading-[1.22] text-brand-accent xl:font-rounded xl:text-[14px] xl:leading-[1.22]">{t('project.meta.services')}</p>
+                    <p className="mt-2 xl:mt-0 text-lg xl:text-[16px] leading-[1.25] xl:leading-[1.4] text-white xl:font-normal break-words">
                       {services.map((service, index) => (
                         <span key={`${project.slug}-service-desktop-${index}`}>
                           {service}
@@ -196,7 +196,7 @@ function Project() {
         </div>
       </section>
 
-      <section className="w-full overflow-x-clip px-4 pb-14 pt-16 sm:px-8">
+      <section className="w-full overflow-x-clip px-4 pb-14 pt-16 sm:px-8 xl:pt-[80px] xl:pb-[80px]">
         <div className="mx-auto w-full max-w-[1920px]">
           <div className="lg:ml-[32px] xl:ml-[64px] max-w-[900px]">
             <h2 className="text-4xl sm:text-5xl font-medium tracking-tight">{t('project.meta.relatedProjects')}</h2>
@@ -238,8 +238,9 @@ function Project() {
                     </p>
                   </div>
                   <div className="mt-2 sm:mt-3">
-                    <p className="text-sm font-semibold text-white sm:text-xl">{itemTitle}</p>
-                    <p className="mt-0.5 text-xs font-medium text-white/50 sm:text-base">{itemClient}</p>
+                    <p className="text-sm font-semibold text-white sm:text-base md:text-lg xl:text-[21px] xl:font-normal xl:leading-[1.26] xl:tracking-normal">
+                      {itemTitle} <span className="font-medium xl:font-light xl:text-[17px] xl:leading-[1.26] text-white/50">| {itemClient}</span>
+                    </p>
                   </div>
                 </Link>
                 )

@@ -72,14 +72,14 @@ function HeroSection() {
         <div className="pt-32 text-center xl:absolute xl:left-1/2 xl:top-[116px] xl:mt-0 xl:w-[1100px] xl:-translate-x-1/2 xl:pt-0 2xl:w-[1228px]">
           <p className="inline-flex items-center gap-2 font-thin text-white/90 xl:gap-[10px]">
             <AccentDot className="animate-pulse" />
-            <span className="text-[14px] font-thin tracking-wide xl:text-[16px]">{t('hero.available')}</span>
+            <span className="text-[14px] font-medium tracking-wide xl:text-[16px]">{t('hero.available')}</span>
           </p>
 
-          <h1 className="mt-2 font-display text-[44px] font-thin leading-[1.05] tracking-tight sm:mt-8 sm:text-[56px] md:text-[72px] lg:text-[88px] xl:mt-[18px] xl:text-[100px] xl:leading-[0.95] xl:tracking-[-0.032em] 2xl:text-[120px]">
+          <h1 className="mt-2 font-display text-[44px] font-medium leading-[1.05] tracking-tight sm:mt-8 sm:text-[56px] md:text-[72px] lg:text-[88px] xl:mt-[18px] xl:text-[112px] xl:leading-[0.94] xl:tracking-[-0.02em] 2xl:text-[120px]">
             <span className="block mb-1">{sr(heroContent.titleLineOne, heroContent.titleLineOne_sr)}</span>
             <span className="block">
-              <em className="font-serif italic text-[1.1em] mr-2">{sr(heroContent.titleAccent, heroContent.titleAccent_sr)}</em>
-              <span>{sr(heroContent.titleLineTwo, heroContent.titleLineTwo_sr)}</span>
+              <em className="font-serif font-normal italic text-[1.1em] xl:text-[130px] mr-2">{sr(heroContent.titleAccent, heroContent.titleAccent_sr)}</em>
+              <span className="xl:text-[130px]">{sr(heroContent.titleLineTwo, heroContent.titleLineTwo_sr)}</span>
             </span>
           </h1>
         </div>
@@ -91,7 +91,7 @@ function HeroSection() {
             href="#projects"
             className="group mt-10 inline-flex items-center gap-4 text-sm font-normal text-white transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
           >
-            <span className="text-[17px] tracking-tight">{t('hero.discoverMore')}</span>
+            <span className="text-[17px] font-medium tracking-tight">{t('hero.discoverMore')}</span>
             <CircleArrowButton
               iconSrc={discoverArrow}
               iconHoverSrc={discoverArrow}
@@ -109,13 +109,13 @@ function HeroSection() {
           <div className="flex items-end justify-between">
 
             {/* Desktop description + CTA — lg+ only */}
-            <div className="hidden max-w-[260px] lg:block">
+            <div className="hidden max-w-[260px] lg:block xl:max-w-[340px]">
               <p className="text-sm leading-relaxed text-white/90 xl:text-[16px] xl:leading-[1.42]">{sr(heroContent.description, heroContent.description_sr)}</p>
               <a
                 href="#projects"
-                className="group mt-4 inline-flex items-center gap-2 text-sm font-thin text-white transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent xl:mt-8 xl:gap-2"
+                className="group mt-4 inline-flex items-center gap-2 text-sm font-medium text-white transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent xl:mt-8 xl:gap-2"
               >
-                <span className="text-[14px] tracking-wide xl:tracking-normal">{t('hero.discoverMore')}</span>
+                <span className="text-[14px] font-medium tracking-wide xl:tracking-normal">{t('hero.discoverMore')}</span>
                 <CircleArrowButton
                   iconSrc={discoverArrow}
                   iconHoverSrc={discoverArrow}
@@ -128,8 +128,10 @@ function HeroSection() {
             </div>
 
             {/* Based in Serbia */}
-            <p className="ml-auto text-right text-[14px] font-normal tracking-normal text-white/90 sm:text-[14px] lg:ml-0 xl:text-[12px] xl:leading-[1.22]">
-              {t('hero.basedIn')} <span className="text-brand-success ml-1">{belgradeTime}</span>
+            <p className="ml-auto text-right leading-[1.26] text-white/90 lg:ml-0">
+              <span className="text-[14px] font-medium tracking-[-0.03em]">{t('hero.basedIn')}</span>
+              {' '}
+              <span className="text-brand-success ml-1 text-[12px] font-normal tracking-[-0.03em]">{belgradeTime}</span>
             </p>
           </div>
         </div>

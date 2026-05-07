@@ -332,11 +332,15 @@ function PolicyPage() {
   }, [tocItems])
 
   const renderBlock = (block, blockIndex, hasHeading) => {
-    const className = `${blockIndex === 0 ? (hasHeading ? 'mt-4' : '') : 'mt-4'} text-[15px] leading-relaxed text-brand-ink/90`
+    const mtCls = blockIndex === 0 ? (hasHeading ? 'mt-4' : '') : 'mt-4'
+    const baseTextCls = 'text-[15px] leading-relaxed text-brand-ink/90'
+    const pCls = `${mtCls} ${baseTextCls} xl:text-[12px] xl:leading-[1.43]`
+    const linesCls = `${mtCls} ${baseTextCls} xl:text-[16px] xl:leading-[1.57] xl:font-medium`
+    const listCls = `${mtCls} space-y-2 ${baseTextCls} xl:text-[12px] xl:leading-[1.43]`
 
     if (block.type === 'list') {
       return (
-        <ul key={`list-${blockIndex}`} className={`${blockIndex === 0 ? (hasHeading ? 'mt-4' : '') : 'mt-4'} space-y-2 text-[15px] leading-relaxed text-brand-ink/90`}>
+        <ul key={`list-${blockIndex}`} className={listCls}>
           {block.items.map((item) => (
             <li key={item}>- {item}</li>
           ))}
@@ -346,7 +350,7 @@ function PolicyPage() {
 
     if (block.type === 'lines') {
       return (
-        <p key={`lines-${blockIndex}`} className={className}>
+        <p key={`lines-${blockIndex}`} className={linesCls}>
           {block.lines.map((line, index) => (
             <Fragment key={`${line}-${index}`}>
               {line}
@@ -358,7 +362,7 @@ function PolicyPage() {
     }
 
     return (
-      <p key={`p-${blockIndex}`} className={className}>
+      <p key={`p-${blockIndex}`} className={pCls}>
         {block.text}
       </p>
     )
@@ -366,15 +370,15 @@ function PolicyPage() {
 
   return (
     <main className="min-h-screen bg-brand-paper text-brand-ink">
-      <section className="px-4 pb-14 pt-6 sm:px-8 sm:pb-16 lg:pb-20">
+      <section className="px-4 pb-14 pt-6 sm:px-8 sm:pb-16 lg:pb-20 xl:px-[72px]">
         <div className="mx-auto w-full max-w-[1680px]">
           <Navbar hideLanguageSwitch />
 
           <div className="pt-28 sm:pt-32 lg:pt-36">
             <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-x-12 xl:grid-cols-[minmax(0,1fr)_280px]">
               <article ref={articleRef} className="max-w-[860px]">
-                <h1 className="font-serif text-5xl italic leading-[1.05] text-brand-ink sm:text-6xl">{content.title}</h1>
-                <p className="mt-6 text-sm font-light text-brand-muted">{content.updatedAt}</p>
+                <h1 className="font-serif text-5xl italic leading-[1.05] text-brand-ink sm:text-6xl xl:text-[56px] xl:leading-[1.04] xl:font-normal xl:tracking-normal">{content.title}</h1>
+                <p className="mt-6 text-sm font-light text-brand-muted xl:text-[16px] xl:font-medium xl:leading-[1.57]">{content.updatedAt}</p>
 
                 {content.sections.map((section, index) => (
                   <section
@@ -382,7 +386,7 @@ function PolicyPage() {
                     id={section.id}
                     className={`${index === 0 ? 'mt-10' : 'mt-12'} ${section.id === 'changes' ? 'pb-8' : ''}`}
                   >
-                    {section.heading ? <h2 className="text-2xl font-semibold leading-snug">{section.heading}</h2> : null}
+                    {section.heading ? <h2 className="text-2xl font-semibold leading-snug xl:text-[32px] xl:font-medium xl:leading-[1.42]">{section.heading}</h2> : null}
                     {section.blocks.map((block, blockIndex) => renderBlock(block, blockIndex, Boolean(section.heading)))}
                   </section>
                 ))}
@@ -392,7 +396,7 @@ function PolicyPage() {
                 <div className="sticky top-28">
                   <p className="mb-2 text-right text-[10px] font-medium text-brand-muted">{progress}%</p>
                   <div className="rounded-xl bg-white p-5 text-brand-ink shadow-[0_1px_2px_rgba(0,0,0,0.05)] border border-brand-ink/5">
-                    <h3 className="text-[13px] font-bold">{content.tocHeading}</h3>
+                    <h3 className="text-[13px] font-bold xl:text-[15px] xl:font-semibold xl:leading-[1.04]">{content.tocHeading}</h3>
                     <nav aria-label={content.tocAriaLabel} className="mt-4">
                       <ul className="space-y-3.5">
                         {tocItems.map((item) => {

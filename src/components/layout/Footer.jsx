@@ -66,30 +66,30 @@ function Footer() {
     : data.privacyLabel
 
   return (
-    <section id="contact" className="px-3 pb-3 sm:px-4 sm:pb-4 md:px-6 md:pb-5 lg:px-8 min-[1920px]:px-3 min-[1920px]:pb-6">
+    <section id="contact" className="px-3 pb-3 sm:px-4 sm:pb-4 md:px-6 md:pb-5 lg:px-8 xl:px-[13px] xl:pt-[13px] xl:pb-[13px] min-[1920px]:px-3 min-[1920px]:pt-6 min-[1920px]:pb-6">
       <div
-        className="relative min-h-[84svh] rounded-[10px] border border-white/10 bg-brand-charcoal px-4 text-white sm:rounded-[14px] sm:px-6 md:px-8 lg:px-12 min-[1920px]:rounded-[20px]"
+        className="relative min-h-[84svh] rounded-[10px] border border-white/10 bg-brand-charcoal px-4 text-white sm:rounded-[14px] sm:px-6 md:px-8 lg:px-12 xl:px-[72px] min-[1920px]:rounded-[20px]"
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.48), rgba(0,0,0,0.48)), url(${footerBackground})`,
           backgroundSize: 'cover',
           backgroundPosition: 'left',
         }}
       >
-        <div className="mx-auto flex min-h-[84svh] max-w-[600px] flex-col text-center sm:max-w-[800px] lg:max-w-[1280px] min-[1920px]:max-w-[1700px]">
+        <div className="mx-auto flex min-h-[84svh] max-w-[600px] flex-col text-center sm:max-w-[800px] lg:max-w-[1280px] xl:max-w-none min-[1920px]:max-w-[1700px]">
           <div className="flex flex-1 flex-col items-center justify-center py-12 sm:py-16">
             <p className="inline-flex items-center gap-2 font-medium text-white/90 xl:gap-[10px]">
               <AccentDot />
               <span className="text-xs font-thin tracking-wide sm:text-sm xl:text-[16px]">{availabilityLabel}</span>
             </p>
-            <h2 className="mt-2 text-4xl font-semibold sm:mt-3 sm:text-5xl md:text-6xl lg:text-7xl min-[1920px]:mt-4 min-[1920px]:text-[105px] min-[1920px]:leading-[1.03]">
-              {titleLineOne} <em className="font-serif text-[1.08em] font-normal italic">{titleAccent}</em>
+            <h2 className="mt-2 text-4xl font-semibold sm:mt-3 sm:text-5xl md:text-6xl lg:text-7xl xl:font-normal xl:text-[112px] xl:leading-[1.03] xl:tracking-[-0.03em] min-[1920px]:mt-4 min-[1920px]:text-[105px] min-[1920px]:leading-[1.03]">
+              {titleLineOne} <em className="font-serif text-[1.08em] font-normal italic xl:text-[122px] xl:leading-[1.03] xl:tracking-[-0.03em]">{titleAccent}</em>
             </h2>
-            <p className="mx-auto mt-3 max-w-[250px] text-sm leading-relaxed text-white/80 sm:mt-4 sm:max-w-[300px] sm:text-sm md:text-sm lg:text-sm min-[1920px]:mt-[30px] min-[1920px]:max-w-[300px] min-[1920px]:text-[18px] min-[1920px]:leading-[1.36]">
+            <p className="mx-auto mt-3 max-w-[250px] text-sm leading-relaxed text-white/80 sm:mt-4 sm:max-w-[300px] sm:text-sm md:text-sm lg:text-sm xl:mt-[24px] xl:text-[16px] xl:leading-[1.42] xl:tracking-normal xl:max-w-[300px] min-[1920px]:mt-[30px] min-[1920px]:max-w-[300px] min-[1920px]:text-[18px] min-[1920px]:leading-[1.36]">
               {description}
             </p>
             <FooterLink
               href={data.ctaHref}
-              className="group mt-6 inline-flex items-center gap-2 text-lg font-thin text-white transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:mt-8 sm:gap-3 sm:text-xl md:text-2xl min-[1920px]:mt-[44px] min-[1920px]:text-[28px]"
+              className="group mt-6 inline-flex items-center gap-2 text-lg font-thin text-white transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:mt-8 sm:gap-3 sm:text-xl md:text-2xl xl:mt-[40px] xl:text-[14px] xl:font-medium xl:leading-[1.26] xl:gap-2 min-[1920px]:mt-[44px] min-[1920px]:text-[28px]"
             >
               <span>{ctaLabel}</span>
               <CircleArrowButton
@@ -109,7 +109,7 @@ function Footer() {
             {privacyLabel}
           </FooterLink>
 
-          <div className="flex flex-col gap-4 border-t border-white/15 py-6 sm:py-8">
+          <div className="flex flex-col gap-4 py-6 sm:py-8">
             <div className="flex flex-col items-center justify-between gap-4 text-sm sm:flex-row sm:text-base lg:text-lg min-[1920px]:text-[21px]">
               <div className="flex flex-col items-center gap-1 text-white/80 sm:items-start">
                 <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:justify-start">
@@ -136,7 +136,7 @@ function Footer() {
                 </p>
               </div>
 
-              <div className="flex items-center justify-center gap-3 sm:justify-end">
+              <div className="flex items-center justify-center gap-3 sm:justify-end xl:gap-[20px]">
                 {data.socials.map((social) => {
                   const platform = normalizePlatform(social.platform)
                   const icon = SOCIAL_ICON_MAP[platform]
@@ -152,7 +152,7 @@ function Footer() {
                       aria-label={platform}
                       className="inline-flex h-7 w-7 items-center justify-center rounded-full text-white/80 transition-colors duration-300 ease-premium hover:text-white"
                     >
-                      <img src={icon} alt="" aria-hidden="true" className="h-[18px] w-[18px] object-contain" />
+                      <img src={icon} alt="" aria-hidden="true" className="h-[18px] w-[18px] xl:h-[20px] xl:w-[20px] object-contain" />
                     </a>
                   )
                 })}

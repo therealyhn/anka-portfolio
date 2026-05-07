@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import logoWhiteText from '../assets/images/logo/SVG white text.svg'
 import heroBackground from '../assets/images/img/Background.png'
@@ -23,20 +24,20 @@ function normalizePlatform(platform) {
   return String(platform || '').toLowerCase().trim()
 }
 
-const BTN_BASE = 'transition-all duration-300 rounded-[2px] text-[13px] sm:text-[14px] leading-none border'
+const BTN_BASE = 'transition-all duration-300 rounded-[2px] text-[13px] sm:text-[14px] leading-none border xl:py-2'
 const BTN_ACTIVE = 'border-white bg-white text-brand-ink'
 const BTN_INACTIVE = 'border-[#525252] text-[#8E8D8D] hover:border-white/50 hover:text-white'
 
 function Stepper({ step }) {
   const dotCls = (n) =>
-    `h-[9px] w-[9px] shrink-0 rounded-full transition-colors duration-300 ${n <= step ? 'bg-white' : 'bg-[#525252]'}`
+    `h-[11px] w-[11px] shrink-0 rounded-full transition-colors duration-300 ${n <= step ? 'bg-white' : 'bg-[#525252]'}`
   const lineCls = (afterStep) =>
     `h-[1px] transition-colors duration-300 ${afterStep < step ? 'bg-white/60' : 'bg-white/20'}`
 
   return (
-    <div className="flex items-center w-full mb-5 sm:mb-6 lg:mb-8 xl:mb-10 shrink-0">
+    <div className="flex items-center w-full mb-5 sm:mb-6 lg:mb-8 xl:mb-7 shrink-0">
       <span className={dotCls(1)} />
-      <span className={`${lineCls(1)} w-[35%]`} />
+      <span className={`${lineCls(1)} flex-1`} />
       <span className={dotCls(2)} />
       <span className={`${lineCls(2)} flex-1`} />
       <span className={dotCls(3)} />
@@ -85,6 +86,13 @@ function Contact() {
     reset,
   } = useContactForm()
 
+  const budgetRangeRef = useRef(null)
+  useEffect(() => {
+    if (hasBudget === true) {
+      budgetRangeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    }
+  }, [hasBudget])
+
   const subtitle =
     step === 3
       ? t('contact.step3')
@@ -115,7 +123,7 @@ function Contact() {
           Outer container: flex column so footer always sticks to bottom.
           Padding scales per breakpoint. max-w-[1440px] handles FHD/2K centering.
         */}
-        <div className="relative z-10 flex lg:h-full flex-col px-5 py-6 sm:px-10 sm:py-10 md:px-14 lg:px-[80px] lg:pt-[70px] lg:pb-[50px] xl:px-[120px] max-w-[1440px] mx-auto">
+        <div className="relative z-10 flex lg:h-full flex-col px-5 py-6 sm:px-10 sm:py-10 md:px-14 lg:px-[80px] lg:pt-[70px] lg:pb-[50px] xl:pl-[141px] xl:pr-[120px] max-w-[1440px] mx-auto">
 
           {/*
             Main content area.
@@ -141,7 +149,7 @@ function Contact() {
               {/* Contact info: hidden below lg — no vertical space wasted on mobile */}
               <div className="flex flex-col gap-y-4 mt-2 lg:gap-y-8 xl:gap-y-[32px]">
                 <div>
-                  <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide uppercase">{t('contact.info.email')}</p>
+                  <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide">{t('contact.info.email')}</p>
                   <a
                     href="mailto:hello@ankaljusic.com"
                     className="block text-sm xl:text-[15px] font-light text-white/80 transition-colors duration-300 hover:text-white"
@@ -150,7 +158,7 @@ function Contact() {
                   </a>
                 </div>
                 <div>
-                  <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide uppercase">{t('contact.info.phone')}</p>
+                  <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide">{t('contact.info.phone')}</p>
                   <a
                     href="tel:+381691411117"
                     className="block text-sm xl:text-[15px] font-light text-white/80 transition-colors duration-300 hover:text-white"
@@ -159,7 +167,7 @@ function Contact() {
                   </a>
                 </div>
                 <div>
-                  <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide uppercase">{t('contact.info.location')}</p>
+                  <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide">{t('contact.info.location')}</p>
                   <p className="text-sm xl:text-[15px] font-light text-white/80">{t('contact.info.locationValue')}</p>
                 </div>
               </div>
@@ -169,24 +177,26 @@ function Contact() {
             <section className="lg:flex-1 lg:min-h-0 w-full max-w-[800px] lg:pt-[10px] flex flex-col">
 
               {/* Title — font scales across all breakpoints */}
-              <h1 className="font-display text-[38px] font-thin leading-[0.95] tracking-tight sm:text-[52px] md:text-[66px] lg:text-[72px] xl:text-[86px] xl:tracking-[-0.032em] text-white mb-3 sm:mb-4 lg:mb-5 xl:mb-6 shrink-0">
-                {t('contact.title1')} <em className="hero-accent-word inline-block text-[1em] xl:text-[1.12em]">{t('contact.titleAccent1')}</em>
+              <h1 className="font-display text-[38px] font-thin leading-[0.95] tracking-tight sm:text-[52px] md:text-[66px] lg:text-[72px] xl:font-sans xl:text-[48px] xl:font-normal xl:leading-[0.88] xl:tracking-[-0.03em] text-white mb-3 sm:mb-4 lg:mb-5 xl:mb-4 shrink-0">
+                {t('contact.title1')} <em className="hero-accent-word inline-block text-[1em] xl:text-[59px] xl:font-serif">{t('contact.titleAccent1')}</em>
                 <br />
-                {t('contact.title2')} <em className="hero-accent-word inline-block text-[1em] xl:text-[1.12em]">{t('contact.titleAccent2')}</em>{t('contact.title3') ? ` ${t('contact.title3')}` : ''}
+                {t('contact.title2')} <em className="hero-accent-word inline-block text-[1em] xl:text-[59px] xl:font-serif">{t('contact.titleAccent2')}</em>{t('contact.title3') ? ` ${t('contact.title3')}` : ''}
               </h1>
 
-              <p className="text-sm sm:text-[15px] font-light leading-[1.42] text-[#8E8D8D] mb-4 sm:mb-5 lg:mb-6 max-w-[420px] shrink-0">
-                {subtitle}
+              <p className="text-sm sm:text-[15px] font-light leading-[1.42] text-[#8E8D8D] mb-4 sm:mb-5 lg:mb-6 xl:mb-4 max-w-[420px] shrink-0">
+                {subtitle.split('\n').map((line, i) => (
+                  <span key={i} className="block">{line}</span>
+                ))}
               </p>
 
               <Stepper step={step} />
 
               {/* ── Step 1: Project Info ── */}
               {step === 1 && (
-                <div className="lg:flex-1 lg:overflow-y-auto no-scrollbar space-y-5 sm:space-y-6 lg:space-y-7 xl:space-y-8 pr-1 pb-4">
+                <div className="lg:flex-1 lg:overflow-y-auto no-scrollbar space-y-5 sm:space-y-6 lg:space-y-7 xl:space-y-6 pr-1 pb-4 xl:pb-2">
 
                   <div>
-                    <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-3 sm:mb-4">
+                    <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-3 sm:mb-4 xl:mb-3 xl:text-[15px] xl:font-normal">
                       {t('contact.interested')}
                     </p>
                     <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-3">
@@ -195,7 +205,7 @@ function Contact() {
                           key={option}
                           type="button"
                           onClick={() => toggleInterest(option)}
-                          className={`${BTN_BASE} px-3.5 py-2 sm:px-5 sm:py-2 lg:px-6 lg:py-2.5 ${interests.includes(option) ? BTN_ACTIVE : BTN_INACTIVE}`}
+                          className={`${BTN_BASE} px-3.5 py-2 sm:px-5 sm:py-2 lg:px-6 lg:py-2.5 xl:font-inter xl:text-[15px] xl:leading-[1.5] xl:font-normal ${interests.includes(option) ? BTN_ACTIVE : BTN_INACTIVE}`}
                         >
                           {t(`contact.interest.${option}`)}
                         </button>
@@ -204,7 +214,7 @@ function Contact() {
                   </div>
 
                   <div>
-                    <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-3 sm:mb-4">
+                    <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-3 sm:mb-4 xl:mb-3">
                       {t('contact.budget.question')}
                     </p>
                     <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-3">
@@ -222,8 +232,8 @@ function Contact() {
                   </div>
 
                   {hasBudget === true && (
-                    <div>
-                      <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-3 sm:mb-4">
+                    <div ref={budgetRangeRef}>
+                      <p className="text-[14px] sm:text-[15px] lg:text-[16px] font-medium leading-snug text-white/90 mb-3 sm:mb-4 xl:mb-3">
                         {t('contact.budget.range')}
                       </p>
                       <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-3">
@@ -248,7 +258,7 @@ function Contact() {
                     >
                       {t('contact.project.label')}
                     </label>
-                    <p className="text-xs sm:text-sm font-light leading-relaxed text-[#525252] mb-5 sm:mb-6 lg:mb-7">
+                    <p className="text-xs sm:text-sm font-light leading-relaxed text-[#525252] mb-5 sm:mb-6 lg:mb-7 xl:mb-5">
                       {t('contact.project.hint')}
                     </p>
                     <input
@@ -256,7 +266,7 @@ function Contact() {
                       type="text"
                       value={projectDetails}
                       onChange={(e) => setProjectDetails(e.target.value)}
-                      className="w-full border-b border-[#525252] bg-transparent pb-3 text-[14px] sm:text-[15px] lg:text-[16px] text-white outline-none placeholder:text-white/20 focus:border-white transition-colors duration-300"
+                      className="w-full border-b border-[#525252] bg-transparent pb-3 text-[14px] sm:text-[15px] lg:text-[16px] text-white outline-none placeholder:text-white/20 focus:border-white transition-colors duration-300 xl:border-b-[0.5px] xl:border-white"
                       placeholder={t('contact.project.placeholder')}
                     />
                   </div>
@@ -267,17 +277,13 @@ function Contact() {
               {/* ── Step 2: Contact Info ── */}
               {step === 2 && (
                 <div className="lg:flex-1 lg:overflow-y-auto no-scrollbar">
-                  <div className="divide-y divide-[#2a2a2a]">
+                  <div>
                     {contactFields.map((field) => (
-                      /*
-                        Mobile/tablet: label stacked above input (full-width).
-                        lg+: label left (44% width) | input right — matches Figma.
-                      */
                       <div key={field.id} className="py-3 sm:py-4 first:pt-0">
                         <div className="flex flex-col gap-y-2 lg:flex-row lg:items-center lg:gap-y-0 lg:gap-x-8">
                           <label
                             htmlFor={field.id}
-                            className="text-[14px] sm:text-[15px] font-medium text-white/90 lg:w-[44%] lg:shrink-0"
+                            className="text-[14px] sm:text-[15px] font-medium text-white/90 lg:w-[44%] lg:shrink-0 xl:font-normal xl:text-[15px] xl:leading-[1.22]"
                           >
                             {field.label}
                             {field.required && <span className="text-brand-accent ml-0.5">*</span>}
@@ -288,7 +294,7 @@ function Contact() {
                             value={field.value}
                             onChange={(e) => field.onChange(e.target.value)}
                             placeholder={field.placeholder}
-                            className="flex-1 bg-transparent border-b border-[#525252] pb-1.5 text-[14px] sm:text-[15px] text-white outline-none placeholder:text-white/25 focus:border-white/60 transition-colors duration-300"
+                            className="flex-1 bg-transparent border-b border-[#525252] pb-1.5 text-[14px] sm:text-[15px] text-white outline-none placeholder:text-white/25 focus:border-white/60 transition-colors duration-300 xl:text-[15px] xl:leading-[1.22] xl:placeholder:font-light xl:placeholder:text-[15px] xl:placeholder:leading-[1.22]"
                           />
                         </div>
                       </div>
@@ -323,7 +329,7 @@ function Contact() {
           </div>
 
           {/* Footer bar */}
-          <div className="mt-4 sm:mt-6 lg:mt-8 shrink-0 border-t border-white/10">
+          <div className="mt-4 sm:mt-6 lg:mt-8 shrink-0">
 
             {/* Row: copyright (desktop only) + action buttons */}
             <div className="pt-4 sm:pt-5 flex items-end justify-between w-full">

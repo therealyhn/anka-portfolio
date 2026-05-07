@@ -11,7 +11,7 @@ export default {
           surface: '#F3F3F3',
           line: '#B5B5B5',
           muted: '#6F6F6F',
-          accent: '#FF6A2E',
+          accent: '#FF6632',
           success: '#31D65B',
         },
       },
@@ -19,6 +19,8 @@ export default {
         sans: ['SF Pro Text', 'SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
         display: ['SF Pro Display', 'SF Pro Text', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
         serif: ['Amiri', 'ui-serif', 'Georgia', 'serif'],
+        rounded: ['ui-rounded', 'SF Pro Rounded', 'SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        inter: ['Inter', 'SF Pro Text', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       maxWidth: {
         frame: '1280px',

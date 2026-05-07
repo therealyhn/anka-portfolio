@@ -49,7 +49,7 @@ function Navbar({ hideLanguageSwitch = false }) {
   return (
     <header className="relative inset-x-0">
       <div className="relative mx-auto flex max-w-[1400px] items-center justify-center">
-        <nav className="fixed top-6 z-50 flex w-[calc(100%-40px)] items-center justify-between rounded-xl bg-brand-surface px-3 py-2.5 shadow-lg sm:top-8 sm:w-[calc(100%-44px)] sm:px-4 sm:py-3 md:top-6 md:w-[calc(100%-56px)] md:px-3 md:py-3 lg:h-[52px] lg:w-[571px] lg:rounded-[10px] lg:px-[15px] lg:py-0">
+        <nav className="fixed top-6 z-50 flex w-[calc(100%-40px)] items-center justify-between rounded-xl bg-brand-paper px-3 py-2.5 shadow-lg sm:top-8 sm:w-[calc(100%-44px)] sm:px-4 sm:py-3 md:top-6 md:w-[calc(100%-56px)] md:px-3 md:py-3 lg:h-[52px] lg:w-[571px] lg:rounded-[10px] lg:px-[15px] lg:py-0">
           {/* Logo */}
           <a
             href={isHomePage ? '#hero' : '/'}
@@ -66,7 +66,7 @@ function Navbar({ hideLanguageSwitch = false }) {
               <li key={item.label}>
                 <a
                   href={getSectionHref(item.sectionId)}
-                  className="group relative inline-flex h-[15px] items-center overflow-hidden font-sans text-[14px] font-medium leading-[1.26] text-brand-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface"
+                  className="group relative inline-flex h-[15px] items-center overflow-hidden font-sans text-[14px] font-medium leading-[1.26] text-brand-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface lg:text-[15px] xl:text-[14px]"
                 >
                   <span className="transition-transform duration-500 ease-premium group-hover:-translate-y-full">{item.label}</span>
                   <span
@@ -83,7 +83,7 @@ function Navbar({ hideLanguageSwitch = false }) {
           {/* Desktop CTA */}
           <Link
             to="/contact"
-            className="group hidden items-center gap-[5px] font-sans text-[14px] font-medium leading-[1.26] text-brand-ink transition-colors duration-500 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface lg:inline-flex"
+            className="group hidden items-center gap-[5px] font-sans text-[14px] font-medium leading-[1.26] text-brand-ink transition-colors duration-500 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface lg:inline-flex lg:text-[15px] xl:text-[14px]"
           >
             <span className="hidden sm:inline">{t('nav.letsTalk')}</span>
             <CircleArrowButton
@@ -91,6 +91,7 @@ function Navbar({ hideLanguageSwitch = false }) {
               iconHoverSrc={navArrowHover}
               centerFillOnHover
               className="!h-7 !w-7"
+              iconClassName="!h-2 !w-2"
             />
           </Link>
 
@@ -139,7 +140,7 @@ function Navbar({ hideLanguageSwitch = false }) {
 
         {/* Mobile dropdown menu */}
         <div
-          className={`fixed left-1/2 top-[80px] z-[55] w-[calc(100%-32px)] -translate-x-1/2 overflow-hidden rounded-2xl border border-brand-line/40 bg-brand-surface px-5 pb-6 pt-4 shadow-edge transition-all duration-300 ease-premium sm:top-[100px] sm:w-[calc(100%-40px)] md:top-[100px] md:w-[calc(100%-56px)] lg:hidden ${isMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'}`}
+          className={`fixed left-1/2 top-[80px] z-[55] w-[calc(100%-32px)] -translate-x-1/2 overflow-hidden rounded-2xl border border-brand-line/40 bg-brand-paper px-5 pb-6 pt-4 shadow-edge transition-all duration-300 ease-premium sm:top-[100px] sm:w-[calc(100%-40px)] md:top-[100px] md:w-[calc(100%-56px)] lg:hidden ${isMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'}`}
         >
           <ul className="flex flex-col">
             {NAV_ITEMS.map((item) => (

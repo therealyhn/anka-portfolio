@@ -25,7 +25,7 @@ function ProjectCard({ project }) {
             alt={`${title} ${previewAltLabel}`}
             loading="lazy"
             decoding="async"
-            className="h-[200px] w-full object-cover transition-transform duration-500 ease-premium group-hover/project:scale-[1.03] sm:h-[220px] md:h-[250px] lg:h-[240px] xl:h-[285px] 2xl:h-[306px] min-[1920px]:h-[364px]"
+            className="h-[200px] w-full object-cover transition-transform duration-500 ease-premium group-hover/project:scale-[1.03] sm:h-[220px] md:h-[250px] lg:h-[240px] xl:h-[306px] 2xl:h-[340px] min-[1920px]:h-[364px]"
           />
           <div className="pointer-events-none absolute inset-0 bg-brand-ink/45 opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100" />
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-premium group-hover/project:opacity-100">
@@ -45,8 +45,8 @@ function ProjectCard({ project }) {
           </p>
         </div>
 
-        <h3 className="mt-2 text-sm font-semibold text-brand-ink sm:mt-3 sm:text-base md:text-lg xl:text-xl 2xl:mt-[8px] 2xl:text-[21px] 2xl:leading-[1.26]">
-          {title} <span className="font-medium text-brand-muted">| {client}</span>
+        <h3 className="mt-2 text-sm font-semibold text-brand-ink sm:mt-3 sm:text-base md:text-lg xl:text-[21px] xl:font-normal xl:leading-[1.26] xl:tracking-normal 2xl:mt-[8px]">
+          {title} <span className="font-medium xl:font-light xl:text-[17px] xl:leading-[1.26] text-brand-muted">| {client}</span>
         </h3>
       </article>
     </Link>

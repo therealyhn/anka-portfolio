@@ -58,23 +58,23 @@ function ServicesSection() {
       <div className="mx-auto max-w-[600px] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1100px] xl:max-w-[1300px] 2xl:max-w-[1500px] min-[1920px]:max-w-[1776px]">
         <div className="flex flex-col gap-5 sm:gap-6 md:gap-8 min-[1200px]:flex-row min-[1200px]:items-start min-[1200px]:justify-between">
           <div className="min-[1200px]:w-[55%] xl:w-[50%] 2xl:w-[55%] min-[1920px]:w-[1040px]">
-            <p className="inline-flex items-center gap-2 text-[13px] font-normal uppercase tracking-[0.01em] text-brand-accent sm:gap-3 sm:text-[15px] xl:text-[20px] 2xl:text-[22px] min-[1920px]:text-[22px]">
+            <p className="inline-flex items-center gap-2 text-[13px] font-normal uppercase tracking-[0.01em] text-brand-accent sm:gap-3 sm:text-[15px] xl:font-rounded xl:text-[18px] xl:leading-[1.26] xl:tracking-normal min-[1920px]:text-[24px]">
               <AccentDot className="h-4 w-4 xl:h-2 xl:w-2 min-[1920px]:h-2.5 min-[1920px]:w-2.5" />
               {sr(servicesContent?.eyebrowLabel, servicesContent?.eyebrowLabel_sr) || t('services.fallback.eyebrow')}
             </p>
-            <h2 className="mt-3 max-w-[250px] text-[28px] leading-tight text-brand-ink sm:mt-4 sm:text-4xl md:text-5xl lg:text-6xl xl:mt-[12px] xl:max-w-[700px] xl:text-[56px] 2xl:mt-[16px] 2xl:text-[60px] min-[1920px]:mt-[18px] min-[1920px]:max-w-[600px] min-[1920px]:text-[56px] min-[1920px]:leading-[1.1] min-[1920px]:tracking-[-0.04em]">
+            <h2 className="mt-3 max-w-[250px] text-[28px] leading-tight text-brand-ink sm:mt-4 sm:text-4xl md:text-5xl lg:text-6xl xl:mt-[12px] xl:max-w-[700px] xl:text-[48px] xl:leading-[1.26] xl:tracking-[-0.03em] 2xl:mt-[16px] 2xl:text-[60px] min-[1920px]:mt-[18px] min-[1920px]:max-w-[600px] min-[1920px]:text-[56px] min-[1920px]:leading-[1.1] min-[1920px]:tracking-[-0.04em]">
               {sr(servicesContent?.titleLineOne, servicesContent?.titleLineOne_sr) || t('services.fallback.titleLineOne')}{' '}
-              <em className="font-serif text-[1.3em] font-normal italic">{sr(servicesContent?.titleAccent, servicesContent?.titleAccent_sr) || t('services.fallback.titleAccent')}</em>{' '}
+              <em className="font-serif text-[1.3em] font-normal italic lg:text-[82px] xl:text-[61px]">{sr(servicesContent?.titleAccent, servicesContent?.titleAccent_sr) || t('services.fallback.titleAccent')}</em>{' '}
               {sr(servicesContent?.titleLineTwo, servicesContent?.titleLineTwo_sr) || t('services.fallback.titleLineTwo')}
             </h2>
           </div>
 
-          <p className="max-w-[1000px] text-md leading-relaxed font-thin text-black/70 sm:text-base min-[1200px]:w-[42%] min-[1200px]:self-end xl:w-[45%] xl:text-[18px] 2xl:w-[42%] 2xl:text-[20px] min-[1920px]:w-[640px] min-[1920px]:text-[20px] min-[1920px]:leading-[1.6] pb-2">
+          <p className="max-w-[1000px] text-md leading-relaxed font-extralight text-black/70 sm:text-base min-[1200px]:w-[42%] min-[1200px]:self-end xl:w-[45%] xl:text-[18px] xl:leading-[1.5] xl:tracking-normal 2xl:w-[42%] 2xl:text-[20px] min-[1920px]:w-[640px] min-[1920px]:text-[20px] min-[1920px]:leading-[1.6] pb-2">
             {sr(servicesContent?.description, servicesContent?.description_sr)}
           </p>
         </div>
 
-        <ul className="mt-8 border-t border-black/35 sm:mt-10 xl:mt-[48px] 2xl:mt-[56px] min-[1920px]:mt-[62px]">
+        <ul className="mt-8 border-t border-[#6E6E6E] sm:mt-10 xl:mt-[48px] 2xl:mt-[56px] min-[1920px]:mt-[62px]">
           {serviceItems.map((item) => {
             const isOpen = openServiceId === item.id
             const tags = lang === 'sr' && Array.isArray(item.tags_sr) && item.tags_sr.length > 0
@@ -82,7 +82,7 @@ function ServicesSection() {
               : item.tags
 
             return (
-              <li key={item.id} className="border-b border-black/35">
+              <li key={item.id} className="border-b border-[#6E6E6E]">
                 <div className="px-2 py-4 sm:px-4 sm:py-5 xl:px-[40px] xl:py-[24px] 2xl:px-[50px] 2xl:py-[28px] min-[1920px]:px-[60px] min-[1920px]:py-[32px]">
                   <button
                     type="button"
@@ -92,17 +92,17 @@ function ServicesSection() {
                     aria-label={item.label}
                   >
                     {isOpen ? (
-                      <span className="block flex-1 pr-4 text-base leading-[1.1] text-brand-ink sm:pr-6 sm:text-lg md:text-xl lg:text-[24px] xl:pr-[60px] xl:text-[30px] 2xl:text-[34px] min-[1920px]:pr-[72px] min-[1920px]:text-[38px]">
+                      <span className="block flex-1 pr-4 text-base leading-[1.1] text-brand-ink font-inter sm:pr-6 sm:text-lg md:text-xl lg:text-[24px] xl:pr-[60px] xl:text-[26px] 2xl:text-[34px] min-[1920px]:pr-[72px] min-[1920px]:text-[38px]">
                         {item.label}
                       </span>
                     ) : (
-                      <span className="relative flex h-[1.3em] flex-1 flex-col overflow-hidden pr-4 text-base leading-[1.3] text-brand-ink sm:pr-6 sm:text-lg md:text-xl lg:text-[24px] xl:pr-[60px] xl:text-[30px] 2xl:text-[34px] min-[1920px]:pr-[72px] min-[1920px]:text-[38px]">
+                      <span className="relative flex h-[1.3em] flex-1 flex-col overflow-hidden pr-4 text-base leading-[1.3] text-brand-ink font-inter sm:pr-6 sm:text-lg md:text-xl lg:text-[24px] xl:pr-[60px] xl:text-[26px] 2xl:text-[34px] min-[1920px]:pr-[72px] min-[1920px]:text-[38px]">
                         <span className="flex h-full w-full shrink-0 items-center whitespace-nowrap transition-transform duration-500 ease-premium group-hover:-translate-y-full">
                           {item.label}
                         </span>
                         <span
                           aria-hidden="true"
-                          className="flex h-full w-full shrink-0 items-center whitespace-nowrap font-light text-brand-ink/80 transition-transform duration-500 ease-premium group-hover:-translate-y-full"
+                          className="flex h-full w-full shrink-0 items-center whitespace-nowrap text-brand-ink transition-transform duration-500 ease-premium group-hover:-translate-y-full"
                         >
                           {item.hoverLabel}
                         </span>
