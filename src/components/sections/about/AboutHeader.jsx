@@ -9,7 +9,7 @@ function AboutHeader({ data }) {
       </p>
       <h2 className="mt-3 text-[28px] font-normal leading-tight text-brand-ink sm:mt-4 sm:text-4xl md:text-5xl lg:text-6xl xl:mt-[12px] xl:text-[48px] xl:leading-[49px] xl:tracking-[-0.03em] 2xl:mt-[10px] 2xl:text-[66px] 2xl:leading-[1.08]">
         {data.titleLineOne}{' '}
-        <span className="font-serif text-[1.3em] font-normal italic lg:text-[82px] xl:text-[61px]">{data.titleAccent}</span>{' '}
+        <span className="font-serif text-[1.3em] font-normal italic lg:text-[102px] xl:text-[61px] 2xl:text-[82px]">{data.titleAccent}</span>{' '}
         {data.titleLineTwo}
       </h2>
       <p className="mx-auto mt-2 max-w-[760px] text-xs font-extralight leading-[1.45] text-brand-muted sm:mt-3 sm:text-sm md:text-base xl:mt-[10px] xl:max-w-[384px] xl:text-[18px] xl:leading-[1.4] xl:tracking-normal 2xl:mt-[12px] 2xl:max-w-[720px] 2xl:text-[20px] 2xl:leading-[1.35]">
