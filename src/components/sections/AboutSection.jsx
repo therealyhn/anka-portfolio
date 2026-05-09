@@ -41,10 +41,10 @@ function AboutSection() {
   return (
     <section
       id="about"
-      className="rounded-frame bg-brand-paper px-4 pt-10 sm:px-6 sm:pt-12 md:px-8 md:pt-14 lg:px-12 lg:pt-16 xl:pt-20 xl:px-12 2xl:pt-[84px]"
+      className="rounded-frame bg-brand-paper px-4 pt-10 sm:px-6 sm:pt-12 md:px-[72px] md:pt-14 lg:pt-16 xl:pt-20 2xl:pt-[84px]"
       aria-label={t('about.sectionAria')}
     >
-      <div className="mx-auto max-w-[600px] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1200px] xl:max-w-[1440px] min-[1920px]:max-w-[1776px]">
+      <div className="w-full">
         <AboutHeader data={resolvedData} />
         <AboutBentoGrid data={resolvedData} />
         <AboutToolsRow tools={resolvedData.tools} />

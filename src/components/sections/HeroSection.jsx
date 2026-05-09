@@ -66,7 +66,7 @@ function HeroSection() {
       />
 
       {/* Content wrapper — flex column on mobile, positioned layer on xl */}
-      <div className="relative z-20 flex flex-1 flex-col px-6 sm:px-8 md:px-10 xl:p-0">
+      <div className="relative z-20 flex flex-1 flex-col px-6 sm:px-8 md:px-[62px] lg:px-[59px] xl:p-0">
 
         {/* Heading block — centered on mobile, absolute on xl */}
         <div className="pt-32 text-center xl:absolute xl:left-1/2 xl:top-[116px] xl:mt-0 xl:w-[1100px] xl:-translate-x-1/2 xl:pt-0 2xl:w-[1228px]">

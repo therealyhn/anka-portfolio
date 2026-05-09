@@ -68,14 +68,14 @@ function Footer() {
   return (
     <section id="contact" className="px-3 pb-3 sm:px-4 sm:pb-4 md:px-6 md:pb-5 lg:px-8 xl:px-[13px] xl:pt-[13px] xl:pb-[13px] min-[1920px]:px-3 min-[1920px]:pt-6 min-[1920px]:pb-6">
       <div
-        className="relative min-h-[84svh] rounded-[10px] border border-white/10 bg-brand-charcoal px-4 text-white sm:rounded-[14px] sm:px-6 md:px-8 lg:px-12 xl:px-[72px] min-[1920px]:rounded-[20px]"
+        className="relative min-h-[84svh] rounded-[10px] border border-white/10 bg-brand-charcoal px-4 text-white sm:rounded-[14px] sm:px-6 md:px-[72px] min-[1920px]:rounded-[20px]"
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.48), rgba(0,0,0,0.48)), url(${footerBackground})`,
           backgroundSize: 'cover',
           backgroundPosition: 'left',
         }}
       >
-        <div className="mx-auto flex min-h-[84svh] max-w-[600px] flex-col text-center sm:max-w-[800px] lg:max-w-[1280px] xl:max-w-none min-[1920px]:max-w-[1700px]">
+        <div className="flex min-h-[84svh] flex-col text-center">
           <div className="flex flex-1 flex-col items-center justify-center py-12 sm:py-16">
             <p className="inline-flex items-center gap-2 font-medium text-white/90 xl:gap-[10px]">
               <AccentDot />

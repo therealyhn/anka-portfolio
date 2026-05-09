@@ -18,7 +18,7 @@ function AboutToolsRow({ tools }) {
         {loopTools.map((item, index) => (
           <article
             key={`${item.id}-${index}`}
-            className="about-tools-card border border-black/5 flex min-h-[72px] w-[72px] flex-col items-center justify-center rounded-[8px] bg-white shadow-[0_2px_10px_rgba(0,0,0,0.02)] sm:min-h-[140px] sm:w-[276px] sm:items-start sm:justify-center sm:rounded-[10px] sm:px-5 sm:py-5 xl:w-[367px] xl:h-[121px] xl:min-h-0 xl:rounded-[10px] xl:border-[0.5px] xl:px-[24px] xl:py-[24px] xl:justify-start 2xl:w-[400px]"
+            className="about-tools-card border border-black/5 flex min-h-[72px] w-[72px] flex-col items-center justify-center rounded-[8px] bg-white shadow-[0_2px_10px_rgba(0,0,0,0.02)] sm:min-h-[140px] sm:w-[276px] sm:items-start sm:justify-center sm:rounded-[10px] sm:px-5 sm:py-5 xl:w-[367px] xl:min-h-[121px] xl:rounded-[10px] xl:border-[0.5px] xl:px-[24px] xl:py-[24px] xl:justify-start 2xl:w-[400px]"
           >
             <div className="flex items-center gap-2 sm:w-full sm:items-start sm:justify-between sm:gap-3">
               <h3 className="hidden sm:block text-base font-semibold text-brand-ink sm:text-lg xl:text-[22px] xl:leading-[1.54] xl:tracking-normal min-[1920px]:text-[22px]">{item.title}</h3>

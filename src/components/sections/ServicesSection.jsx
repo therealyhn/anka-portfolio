@@ -54,17 +54,17 @@ function ServicesSection() {
   }
 
   return (
-    <section id="services" className="rounded-frame bg-brand-paper px-4 py-10 sm:px-6 sm:py-12 md:px-8 md:py-14 lg:px-12 lg:py-16 xl:px-[48px] xl:py-[80px] 2xl:px-[60px] 2xl:py-[100px] min-[1920px]:px-[72px] min-[1920px]:pt-[86px] min-[1920px]:pb-[118px]" aria-label={t('services.sectionAria')}>
-      <div className="mx-auto max-w-[600px] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1100px] xl:max-w-[1300px] 2xl:max-w-[1500px] min-[1920px]:max-w-[1776px]">
+    <section id="services" className="rounded-frame bg-brand-paper px-4 py-10 sm:px-6 sm:py-12 md:px-[72px] md:py-14 lg:py-16 xl:py-[80px] 2xl:py-[100px] min-[1920px]:pt-[86px] min-[1920px]:pb-[118px]" aria-label={t('services.sectionAria')}>
+      <div className="w-full">
         <div className="flex flex-col gap-5 sm:gap-6 md:gap-8 min-[1200px]:flex-row min-[1200px]:items-start min-[1200px]:justify-between">
           <div className="min-[1200px]:w-[55%] xl:w-[50%] 2xl:w-[55%] min-[1920px]:w-[1040px]">
             <p className="inline-flex items-center gap-2 text-[13px] font-normal uppercase tracking-[0.01em] text-brand-accent sm:gap-3 sm:text-[15px] xl:font-rounded xl:text-[18px] xl:leading-[1.26] xl:tracking-normal min-[1920px]:text-[24px]">
               <AccentDot className="h-4 w-4 xl:h-2 xl:w-2 min-[1920px]:h-2.5 min-[1920px]:w-2.5" />
               {sr(servicesContent?.eyebrowLabel, servicesContent?.eyebrowLabel_sr) || t('services.fallback.eyebrow')}
             </p>
-            <h2 className="mt-3 max-w-[250px] text-[28px] leading-tight text-brand-ink sm:mt-4 sm:text-4xl md:text-5xl lg:text-6xl xl:mt-[12px] xl:max-w-[700px] xl:text-[48px] xl:leading-[1.26] xl:tracking-[-0.03em] 2xl:mt-[16px] 2xl:text-[60px] min-[1920px]:mt-[18px] min-[1920px]:max-w-[600px] min-[1920px]:text-[56px] min-[1920px]:leading-[1.1] min-[1920px]:tracking-[-0.04em]">
+            <h2 className="mt-3 max-w-[250px] text-[28px] leading-tight text-brand-ink sm:mt-4 sm:text-4xl md:text-5xl lg:text-6xl xl:mt-[12px] xl:max-w-[700px] 2xl:mt-[16px] 2xl:text-[51px] 2xl:leading-[1.26] 2xl:tracking-[-0.04em] min-[1920px]:mt-[18px] min-[1920px]:max-w-[600px]">
               {sr(servicesContent?.titleLineOne, servicesContent?.titleLineOne_sr) || t('services.fallback.titleLineOne')}{' '}
-              <em className="font-serif text-[1.3em] font-normal italic lg:text-[82px] xl:text-[61px]">{sr(servicesContent?.titleAccent, servicesContent?.titleAccent_sr) || t('services.fallback.titleAccent')}</em>{' '}
+              <em className="font-serif text-[1.3em] font-normal italic">{sr(servicesContent?.titleAccent, servicesContent?.titleAccent_sr) || t('services.fallback.titleAccent')}</em>{' '}
               {sr(servicesContent?.titleLineTwo, servicesContent?.titleLineTwo_sr) || t('services.fallback.titleLineTwo')}
             </h2>
           </div>

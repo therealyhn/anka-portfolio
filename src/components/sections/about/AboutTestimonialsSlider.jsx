@@ -10,7 +10,7 @@ function AboutTestimonialsSlider({ testimonials }) {
   const isTestimonialLoopEnabled = safeTestimonials.length > 1
 
   return (
-    <div className="relative mt-10 mx-[-16px] px-[16px] pb-8 pt-10 text-center bg-brand-surface sm:mt-14 sm:mx-[-24px] sm:px-[24px] sm:pb-10 sm:pt-12 md:mx-[-32px] md:px-[32px] lg:mx-[-48px] lg:px-[48px] xl:mt-[40px] xl:mx-[-72px] xl:px-[72px] xl:pb-[100px] xl:pt-[100px] 2xl:mt-[88px] 2xl:pt-[90px]">
+    <div className="relative mt-10 mx-[-16px] px-[16px] pb-8 pt-10 text-center bg-brand-surface sm:mt-14 sm:mx-[-24px] sm:px-[24px] sm:pb-10 sm:pt-12 md:mx-[-72px] md:px-[72px] xl:mt-[40px] xl:pb-[100px] xl:pt-[100px] 2xl:mt-[88px] 2xl:pt-[90px]">
       <img
         aria-hidden="true"
         src={apostropheImg}
