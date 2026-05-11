@@ -4,7 +4,8 @@ import AccentDot from '../ui/AccentDot'
 import CircleArrowButton from '../ui/CircleArrowButton'
 import discoverArrow from '../../assets/images/arrows/Discover more (hero section).svg'
 import heroBackground from '../../assets/images/img/Background.webp'
-import ankaPortrait from '../../assets/images/img/anka_4x.webp'
+import ankaPortraitDesktop from '../../assets/images/img/anka_hero_desktop.webp'
+import ankaPortraitMobile from '../../assets/images/img/anka_hero_mobile.webp'
 import useHeroContent from '../../hooks/useHeroContent'
 import useTranslation from '../../hooks/useTranslation'
 import { useLang } from '../../context/LangContext'
@@ -55,19 +56,23 @@ function HeroSection() {
 
       {/* Desktop portrait - lg+ only */}
       <img
-        src={ankaPortrait}
+        src={ankaPortraitDesktop}
         alt="Anka portrait"
+        width="1400"
+        height="1029"
         fetchPriority="high"
-        decoding="sync"
+        decoding="async"
         className="pointer-events-none absolute bottom-0 left-1/2 z-30 hidden w-[620px] -translate-x-1/2 object-contain lg:block lg:w-[520px] xl:w-[680px] 2xl:w-[780px] min-[1920px]:w-[920px]"
       />
 
       {/* Mobile portrait - direct child of section so width is unconstrained by wrapper padding */}
       <img
-        src={ankaPortrait}
+        src={ankaPortraitMobile}
         alt="Anka portrait"
+        width="760"
+        height="559"
         fetchPriority="high"
-        decoding="sync"
+        decoding="async"
         className="pointer-events-none absolute bottom-0 left-1/2 md:z-30 z-10 w-[500px] -translate-x-1/2 object-contain md:w-[540px] lg:hidden"
       />
 

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { sanityClient } from '../lib/sanityClient'
 
 const HERO_QUERY = `
   coalesce(
@@ -39,6 +38,7 @@ function useHeroContent() {
     async function loadHeroContent() {
       try {
         setLoading(true)
+        const { sanityClient } = await import('../lib/sanityClient')
         const heroData = await sanityClient.fetch(HERO_QUERY)
         if (!isMounted) return
 

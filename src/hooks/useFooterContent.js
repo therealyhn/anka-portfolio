@@ -1,5 +1,4 @@
 ﻿import { useEffect, useState } from 'react'
-import { sanityClient } from '../lib/sanityClient'
 
 const FOOTER_QUERY = `
   coalesce(
@@ -115,6 +114,7 @@ function useFooterContent() {
     async function loadFooterContent() {
       try {
         setLoading(true)
+        const { sanityClient } = await import('../lib/sanityClient')
         const footerData = await sanityClient.fetch(FOOTER_QUERY)
         if (!isMounted) return
 

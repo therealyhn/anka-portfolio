@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { sanityClient } from '../lib/sanityClient'
 import projectPlaceholder from '../assets/images/projects/project-placeholder.svg'
 
 const SERVICES_QUERY = `
@@ -173,6 +172,7 @@ function useServicesContent() {
     async function loadServicesContent() {
       try {
         setLoading(true)
+        const { sanityClient } = await import('../lib/sanityClient')
         const servicesData = await sanityClient.fetch(SERVICES_QUERY)
         if (!isMounted) return
 

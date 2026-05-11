@@ -1,4 +1,4 @@
-﻿import { Helmet } from 'react-helmet-async'
+import { useEffect } from 'react'
 
 export const SITE_URL = 'https://ljsc-design.com'
 export const SITE_NAME = 'Anka Ljusic'
@@ -17,28 +17,53 @@ function SEO({
   const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} - Digital Designer`
   const fullUrl = url.startsWith('http') ? url : `${SITE_URL}${url}`
 
-  return (
-    <Helmet>
-      <title>{fullTitle}</title>
-      <meta name="description" content={description} />
-      <meta name="robots" content={noIndex ? 'noindex, nofollow' : 'index, follow'} />
-      <link rel="canonical" href={fullUrl} />
+  useEffect(() => {
+    document.title = fullTitle
 
-      <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:url" content={fullUrl} />
-      <meta property="og:type" content={type} />
-      <meta property="og:site_name" content={SITE_NAME} />
+    setMeta('name', 'description', description)
+    setMeta('name', 'robots', noIndex ? 'noindex, nofollow' : 'index, follow')
+    setLink('canonical', fullUrl)
 
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
-    </Helmet>
-  )
+    setMeta('property', 'og:title', fullTitle)
+    setMeta('property', 'og:description', description)
+    setMeta('property', 'og:image', image)
+    setMeta('property', 'og:image:width', '1200')
+    setMeta('property', 'og:image:height', '630')
+    setMeta('property', 'og:url', fullUrl)
+    setMeta('property', 'og:type', type)
+    setMeta('property', 'og:site_name', SITE_NAME)
+
+    setMeta('name', 'twitter:card', 'summary_large_image')
+    setMeta('name', 'twitter:title', fullTitle)
+    setMeta('name', 'twitter:description', description)
+    setMeta('name', 'twitter:image', image)
+  }, [description, fullTitle, fullUrl, image, noIndex, type])
+
+  return null
 }
 
 export default SEO
+
+function setMeta(attribute, key, content) {
+  let element = document.head.querySelector(`meta[${attribute}="${key}"]`)
+
+  if (!element) {
+    element = document.createElement('meta')
+    element.setAttribute(attribute, key)
+    document.head.appendChild(element)
+  }
+
+  element.setAttribute('content', content)
+}
+
+function setLink(rel, href) {
+  let element = document.head.querySelector(`link[rel="${rel}"]`)
+
+  if (!element) {
+    element = document.createElement('link')
+    element.setAttribute('rel', rel)
+    document.head.appendChild(element)
+  }
+
+  element.setAttribute('href', href)
+}

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { sanityClient } from '../lib/sanityClient'
 import { sanityImg } from '../lib/sanityImage'
 import earthImageFallback from '../assets/images/img/Background_aboutme.webp'
 import ankaImageFallback from '../assets/images/img/anka_4x.webp'
@@ -267,6 +266,7 @@ function useAboutContent() {
     async function loadAboutContent() {
       try {
         setLoading(true)
+        const { sanityClient } = await import('../lib/sanityClient')
         const aboutData = await sanityClient.fetch(ABOUT_QUERY)
         if (!isMounted) return
 

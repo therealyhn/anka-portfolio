@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { sanityClient } from '../lib/sanityClient'
 import { projectsData } from '../lib/projectsData'
 import { sanityImg } from '../lib/sanityImage'
 
@@ -105,6 +104,7 @@ function useProjectsContent() {
     async function loadProjects() {
       try {
         setLoading(true)
+        const { sanityClient } = await import('../lib/sanityClient')
         const sanityProjects = await sanityClient.fetch(PROJECTS_QUERY)
         if (!isMounted) return
 
