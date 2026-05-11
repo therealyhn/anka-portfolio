@@ -1,6 +1,14 @@
 ﻿User-agent: *
 Allow: /
-
 Disallow: /api/
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
 
 Sitemap: https://ljsc-design.com/sitemap.xml

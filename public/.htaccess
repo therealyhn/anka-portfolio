@@ -1,5 +1,12 @@
 ﻿Options -Indexes
 
+# ─── Allow social media crawlers ──────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit|Facebot|Twitterbot|LinkedInBot|WhatsApp) [NC]
+  RewriteRule .* - [L]
+</IfModule>
+
 # ─── HTTPS + www → non-www canonical redirect ────────────────────────────────
 <IfModule mod_rewrite.c>
   RewriteEngine On

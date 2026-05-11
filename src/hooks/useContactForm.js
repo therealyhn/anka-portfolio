@@ -67,13 +67,11 @@ export function useContactForm() {
     setSubmitError(null)
 
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('/api/contact.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: import.meta.env.VITE_WEB3FORMS_KEY,
-          subject: lang === 'sr' ? `Novi upit od ${name}` : `New project inquiry from ${name}`,
-          from_name: name,
+          name,
           email,
           company: company || '-',
           phone: phone || '-',
@@ -82,6 +80,7 @@ export function useContactForm() {
             ? (BUDGET_LABELS_EN[budgetRange] || budgetRange)
             : t('contact.budget.noMind'),
           project_details: projectDetails,
+          lang,
         }),
       })
 
