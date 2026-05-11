@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap');
+/* Fonts loaded as non-blocking <link> in index.html */
 
 @import "tailwindcss/base";
 @import "tailwindcss/components";

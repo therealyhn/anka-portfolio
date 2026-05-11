@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import Navbar from '../layout/Navbar'
 import AccentDot from '../ui/AccentDot'
 import CircleArrowButton from '../ui/CircleArrowButton'
@@ -53,7 +53,7 @@ function HeroSection() {
 
       <Navbar />
 
-      {/* Desktop portrait — lg+ only */}
+      {/* Desktop portrait - lg+ only */}
       <img
         src={ankaPortrait}
         alt="Anka portrait"
@@ -62,7 +62,7 @@ function HeroSection() {
         className="pointer-events-none absolute bottom-0 left-1/2 z-30 hidden w-[620px] -translate-x-1/2 object-contain lg:block lg:w-[520px] xl:w-[680px] 2xl:w-[780px] min-[1920px]:w-[920px]"
       />
 
-      {/* Mobile portrait — direct child of section so width is unconstrained by wrapper padding */}
+      {/* Mobile portrait - direct child of section so width is unconstrained by wrapper padding */}
       <img
         src={ankaPortrait}
         alt="Anka portrait"
@@ -71,10 +71,10 @@ function HeroSection() {
         className="pointer-events-none absolute bottom-0 left-1/2 md:z-30 z-10 w-[500px] -translate-x-1/2 object-contain md:w-[540px] lg:hidden"
       />
 
-      {/* Content wrapper — flex column on mobile, positioned layer on xl */}
+      {/* Content wrapper - flex column on mobile, positioned layer on xl */}
       <div className="relative z-20 flex flex-1 flex-col px-6 sm:px-8 md:px-[62px] lg:px-[59px] xl:p-0">
 
-        {/* Heading block — centered on mobile, absolute on xl */}
+        {/* Heading block - centered on mobile, absolute on xl */}
         <div className="pt-32 text-center xl:absolute xl:left-1/2 xl:top-[116px] xl:mt-0 xl:w-[1100px] xl:-translate-x-1/2 xl:pt-0 2xl:w-[1228px]">
           <p className="inline-flex items-center gap-2 font-medium text-white/90 xl:gap-[10px]">
             <AccentDot />
@@ -110,11 +110,11 @@ function HeroSection() {
           </a>
         </div>
 
-        {/* Bottom bar — flex row on all breakpoints, absolute on xl */}
+        {/* Bottom bar - flex row on all breakpoints, absolute on xl */}
         <div className="relative z-20 mt-auto pb-8 xl:absolute xl:bottom-[28px] xl:left-[59px] xl:right-[59px] xl:pb-0">
           <div className="flex items-end justify-between">
 
-            {/* Desktop description + CTA — lg+ only */}
+            {/* Desktop description + CTA - lg+ only */}
             <div className="hidden max-w-[260px] lg:block xl:max-w-[340px]">
               <p className="text-sm leading-relaxed text-white/90 xl:text-[16px] xl:leading-[1.42]">{sr(heroContent.description, heroContent.description_sr)}</p>
               <a

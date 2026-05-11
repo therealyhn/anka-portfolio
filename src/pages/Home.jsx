@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+﻿import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import SiteShell from '../components/layout/SiteShell'
 import HeroSection from '../components/sections/HeroSection'
@@ -12,12 +12,12 @@ import { useLang } from '../context/LangContext'
 
 const SEO_COPY = {
   en: {
-    title: 'Anka Ljusic — Digital Designer | Brand, Web & UI Design',
+    title: 'Anka Ljusic - Digital Designer | Brand, Web & UI Design',
     description:
       'Anka Ljusic is a digital designer based in Belgrade, specializing in brand identity, web & product UI, and marketing visuals. Available for freelance projects worldwide.',
   },
   sr: {
-    title: 'Anka Ljusić — Digitalni dizajner | Brand, web i UI dizajn',
+    title: 'Anka Ljusić - Digitalni dizajner | Brand, web i UI dizajn',
     description:
       'Anka Ljusić je digitalni dizajner iz Beograda. Specijalizovana za brand identitet, web i UI dizajn i marketing materijale. Dostupna za projekte širom sveta.',
   },

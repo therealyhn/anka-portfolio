@@ -39,7 +39,7 @@ export function WebSiteSchema() {
     name: SITE_NAME,
     url: SITE_URL,
     description:
-      'Portfolio of Anka Ljusic — digital designer based in Belgrade, Serbia.',
+      'Portfolio of Anka Ljusic - digital designer based in Belgrade, Serbia.',
     author: {
       '@type': 'Person',
       name: 'Anka Ljusic',

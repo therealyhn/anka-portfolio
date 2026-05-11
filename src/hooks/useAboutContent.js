@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { sanityClient } from '../lib/sanityClient'
+import { sanityImg } from '../lib/sanityImage'
 import earthImageFallback from '../assets/images/img/Background_aboutme.webp'
 import ankaImageFallback from '../assets/images/img/anka_4x.webp'
 import afterEffectsIcon from '../assets/images/icons/After Effects icon (about me).svg'
@@ -246,9 +247,9 @@ function normalizeAboutContent(rawContent) {
     testimonialName: rawContent?.testimonialName || fallback.testimonialName,
     testimonialRole: rawContent?.testimonialRole || fallback.testimonialRole,
     portraitImage: rawContent?.portraitImage?.url
-      ? rawContent.portraitImage
+      ? { ...rawContent.portraitImage, url: sanityImg(rawContent.portraitImage.url, { w: 900 }) }
       : fallback.portraitImage,
-    earthImage: rawContent?.earthImage || fallback.earthImage,
+    earthImage: sanityImg(rawContent?.earthImage, { w: 900 }) || fallback.earthImage,
     testimonialAvatar: rawContent?.testimonialAvatar || fallback.testimonialAvatar,
     testimonials: normalizeTestimonials(rawContent?.testimonials, rawContent, fallback.testimonials),
     tools: normalizeTools(rawContent?.tools, fallback.tools),

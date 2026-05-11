@@ -126,12 +126,12 @@ function Footer() {
                 <p className="text-xs text-white/55 sm:text-sm">
                   {t('footer.developedBy')}{' '}
                   <a
-                    href="https://jovanljusic.com"
+                    href="https://maestro-solutions.org"
                     target="_blank"
                     rel="noreferrer"
                     className="text-white/70 transition-colors duration-300 ease-premium hover:text-brand-paper"
                   >
-                    Jovan Ljusic
+                    Maestro Solutions
                   </a>
                 </p>
               </div>

@@ -111,8 +111,8 @@ function Contact() {
   ]
 
   const contactDescription = lang === 'sr'
-    ? 'Pokrenite projekat sa Ankom Ljusić — digitalnim dizajnerom iz Beograda. Dostupna za brand, web, UI i marketing projekte.'
-    : 'Start a project with Anka Ljusic — digital designer based in Belgrade, Serbia. Available for brand, web, UI design, and marketing projects worldwide.'
+    ? 'Pokrenite projekat sa Ankom Ljusić - digitalnim dizajnerom iz Beograda. Dostupna za brand, web, UI i marketing projekte.'
+    : 'Start a project with Anka Ljusic - digital designer based in Belgrade, Serbia. Available for brand, web, UI design, and marketing projects worldwide.'
 
   return (
     <>
@@ -138,8 +138,8 @@ function Contact() {
 
           {/*
             Main content area.
-            Mobile/tablet: flex column — aside (logo) → form section.
-            lg+: 2-column grid — left sidebar | form.
+            Mobile/tablet: flex column - aside (logo) → form section.
+            lg+: 2-column grid - left sidebar | form.
             min-h-0 is required for flex children to scroll correctly.
           */}
           <div className="lg:flex-1 lg:min-h-0 flex flex-col lg:grid lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-x-16 xl:gap-x-24 w-full">
@@ -157,7 +157,7 @@ function Contact() {
                 </Link>
               </header>
 
-              {/* Contact info: hidden below lg — no vertical space wasted on mobile */}
+              {/* Contact info: hidden below lg - no vertical space wasted on mobile */}
               <div className="flex flex-col gap-y-4 mt-2 lg:gap-y-8 xl:gap-y-[32px]">
                 <div>
                   <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide">{t('contact.info.email')}</p>
@@ -187,7 +187,7 @@ function Contact() {
             {/* Right column: Title + Stepper + Form content */}
             <section className="lg:flex-1 lg:min-h-0 w-full max-w-[800px] lg:pt-[10px] flex flex-col">
 
-              {/* Title — font scales across all breakpoints */}
+              {/* Title - font scales across all breakpoints */}
               <h1 className="font-display text-[38px] font-thin leading-[0.95] tracking-tight sm:text-[52px] md:text-[66px] lg:text-[72px] xl:font-sans xl:text-[48px] xl:font-normal xl:leading-[0.88] xl:tracking-[-0.03em] text-white mb-3 sm:mb-4 lg:mb-5 xl:mb-4 shrink-0">
                 {t('contact.title1')} <em className="hero-accent-word inline-block text-[1em] xl:text-[59px] xl:font-serif">{t('contact.titleAccent1')}</em>
                 <br />

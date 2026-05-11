@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { sanityClient } from '../lib/sanityClient'
 import { projectsData } from '../lib/projectsData'
+import { sanityImg } from '../lib/sanityImage'
 
 const PROJECTS_QUERY = `
   *[_type in ["project", "projects"]] | order(sortOrder asc, _createdAt desc){
@@ -75,7 +76,7 @@ function normalizeProject(rawProject, fallbackProject) {
     client_sr: rawProject?.client_sr || null,
     role: rawProject?.role || fallback.role || 'Design',
     role_sr: rawProject?.role_sr || null,
-    image: rawProject?.image || fallback.image || projectsData[0]?.image,
+    image: sanityImg(rawProject?.image || fallback.image || projectsData[0]?.image, { w: 900 }),
     overview: rawProject?.overview || fallback.overview,
     overview_sr: rawProject?.overview_sr || null,
     year: rawProject?.year || fallback.year,
@@ -88,7 +89,7 @@ function normalizeProject(rawProject, fallbackProject) {
     services: normalizeServices(rawProject?.services) || fallback.services,
     services_sr: normalizeServices(rawProject?.services_sr) || null,
     galleryImages: Array.isArray(rawProject?.galleryImages) && rawProject.galleryImages.length > 0
-      ? rawProject.galleryImages
+      ? rawProject.galleryImages.map((img) => sanityImg(img, { w: 1600, q: 85 }))
       : fallback.galleryImages,
   }
 }

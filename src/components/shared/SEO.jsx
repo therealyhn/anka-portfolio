@@ -14,7 +14,7 @@ function SEO({
   type = 'website',
   noIndex = false,
 }) {
-  const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} — Digital Designer`
+  const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} - Digital Designer`
   const fullUrl = url.startsWith('http') ? url : `${SITE_URL}${url}`
 
   return (

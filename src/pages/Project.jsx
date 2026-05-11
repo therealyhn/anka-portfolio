@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+﻿import { useEffect, useRef } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import CircleArrowButton from '../components/ui/CircleArrowButton'
 import Footer from '../components/layout/Footer'
@@ -70,12 +70,12 @@ function Project() {
 
   const seoDescription = overview
     ? overview.slice(0, 155).trimEnd() + (overview.length > 155 ? '…' : '')
-    : `${projectClient} project by Anka Ljusic — digital designer based in Belgrade.`
+    : `${projectClient} project by Anka Ljusic - digital designer based in Belgrade.`
 
   return (
     <>
       <SEO
-        title={`${projectClient} — ${projectTitle}`}
+        title={`${projectClient} - ${projectTitle}`}
         description={seoDescription}
         image={project.image}
         url={`/projects/${project.slug}`}
