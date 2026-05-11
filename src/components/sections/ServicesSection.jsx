@@ -97,12 +97,12 @@ function ServicesSection() {
                       </span>
                     ) : (
                       <span className="relative flex h-[1.3em] flex-1 flex-col overflow-hidden pr-4 text-base leading-[1.3] text-brand-ink font-inter sm:pr-6 sm:text-lg md:text-xl lg:text-[24px] xl:pr-[60px] xl:text-[26px] 2xl:text-[34px] min-[1920px]:pr-[72px] min-[1920px]:text-[38px]">
-                        <span className="flex h-full w-full shrink-0 items-center whitespace-nowrap transition-transform duration-500 ease-premium group-hover:-translate-y-full">
+                        <span className="flex h-full w-full shrink-0 items-center whitespace-nowrap transition-transform duration-500 ease-premium sm:group-hover:-translate-y-full">
                           {item.label}
                         </span>
                         <span
                           aria-hidden="true"
-                          className="flex h-full w-full shrink-0 items-center whitespace-nowrap text-brand-ink transition-transform duration-500 ease-premium group-hover:-translate-y-full"
+                          className="flex h-full w-full shrink-0 items-center whitespace-nowrap text-brand-ink transition-transform duration-500 ease-premium sm:group-hover:-translate-y-full"
                         >
                           {item.hoverLabel}
                         </span>

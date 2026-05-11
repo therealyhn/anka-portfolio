@@ -1,0 +1,12 @@
+{
+  "name": "Anka Ljusic — Digital Designer",
+  "short_name": "Anka Ljusic",
+  "description": "Portfolio of Anka Ljusic, digital designer based in Belgrade.",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ],
+  "theme_color": "#FF6632",
+  "background_color": "#FAFAFA",
+  "display": "standalone",
+  "start_url": "/"
+}

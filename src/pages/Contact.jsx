@@ -1,7 +1,8 @@
-import { useRef, useEffect } from 'react'
+﻿import { useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import SEO from '../components/shared/SEO'
 import logoWhiteText from '../assets/images/logo/SVG white text.svg'
-import heroBackground from '../assets/images/img/Background.png'
+import heroBackground from '../assets/images/img/Background.webp'
 import { useContactForm, INTEREST_OPTIONS, BUDGET_RANGES } from '../hooks/useContactForm'
 import useFooterContent from '../hooks/useFooterContent'
 import useTranslation from '../hooks/useTranslation'
@@ -109,7 +110,17 @@ function Contact() {
     { id: 'phone', label: t('contact.phone.label'), required: false, type: 'tel', value: phone, onChange: setPhone, placeholder: t('contact.phone.placeholder') },
   ]
 
+  const contactDescription = lang === 'sr'
+    ? 'Pokrenite projekat sa Ankom Ljusić — digitalnim dizajnerom iz Beograda. Dostupna za brand, web, UI i marketing projekte.'
+    : 'Start a project with Anka Ljusic — digital designer based in Belgrade, Serbia. Available for brand, web, UI design, and marketing projects worldwide.'
+
   return (
+    <>
+      <SEO
+        title={lang === 'sr' ? 'Kontakt' : 'Start a Project'}
+        description={contactDescription}
+        url="/contact"
+      />
     <main className="min-h-screen lg:h-[100svh] bg-brand-paper p-1.5 sm:p-2.5 font-sans lg:overflow-hidden">
       <section
         className="relative lg:h-full w-full overflow-hidden rounded-[16px] border border-white/10 bg-brand-charcoal text-white sm:rounded-[18px]"
@@ -151,10 +162,10 @@ function Contact() {
                 <div>
                   <p className="text-[11px] xl:text-[13px] font-medium text-brand-accent mb-0.5 tracking-wide">{t('contact.info.email')}</p>
                   <a
-                    href="mailto:hello@ankaljusic.com"
+                    href="mailto:hello@ljsc-design.com"
                     className="block text-sm xl:text-[15px] font-light text-white/80 transition-colors duration-300 hover:text-white"
                   >
-                    hello@ankaljusic.com
+                    hello@ljsc-design.com
                   </a>
                 </div>
                 <div>
@@ -414,6 +425,7 @@ function Contact() {
         </div>
       </section>
     </main>
+    </>
   )
 }
 

@@ -46,7 +46,7 @@ function ProjectCard({ project }) {
         </div>
 
         <h3 className="mt-2 text-sm font-semibold text-brand-ink sm:mt-3 sm:text-base md:text-lg xl:text-[21px] xl:font-normal xl:leading-[1.26] xl:tracking-normal 2xl:mt-[8px]">
-          {title} <span className="font-medium xl:font-light xl:text-[17px] xl:leading-[1.26] text-brand-muted">| {client}</span>
+          {title} <span className="font-medium xl:font-light xl:leading-[1.26] text-brand-muted">| {client}</span>
         </h3>
       </article>
     </Link>

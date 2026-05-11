@@ -2,6 +2,7 @@ import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import Footer from '../components/layout/Footer'
 import Navbar from '../components/layout/Navbar'
 import { useLang } from '../context/LangContext'
+import SEO from '../components/shared/SEO'
 
 const POLICY_CONTENT = {
   en: {
@@ -369,6 +370,16 @@ function PolicyPage() {
   }
 
   return (
+    <>
+      <SEO
+        title={lang === 'sr' ? 'Politika privatnosti' : 'Privacy Policy'}
+        description={
+          lang === 'sr'
+            ? 'Politika privatnosti portfolio sajta Anke Ljusić. Saznajte kako se lični podaci prikupljaju i štite.'
+            : 'Privacy Policy for Anka Ljusic\'s portfolio website. Learn how personal data is collected and protected.'
+        }
+        url="/privacy"
+      />
     <main className="min-h-screen bg-brand-paper text-brand-ink">
       <section className="px-4 pb-14 pt-6 sm:px-8 sm:pb-16 lg:pb-20 xl:px-[72px]">
         <div className="mx-auto w-full max-w-[1680px]">
@@ -434,6 +445,7 @@ function PolicyPage() {
 
       <Footer />
     </main>
+    </>
   )
 }
 

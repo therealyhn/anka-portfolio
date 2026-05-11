@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { sanityClient } from '../lib/sanityClient'
-import earthImageFallback from '../assets/images/img/Background_aboutme.png'
-import ankaImageFallback from '../assets/images/img/anka_4x.png'
+import earthImageFallback from '../assets/images/img/Background_aboutme.webp'
+import ankaImageFallback from '../assets/images/img/anka_4x.webp'
 import afterEffectsIcon from '../assets/images/icons/After Effects icon (about me).svg'
 import lightroomIcon from '../assets/images/icons/Lightroom icon (about me).svg'
-import davinciIcon from '../assets/images/icons/DaVinci Resolve icon (about me).svg'
-import figmaIcon from '../assets/images/icons/Figma icon (about me).svg'
+import davinciIcon from '../assets/images/icons/davinci-icon.webp'
+import figmaIcon from '../assets/images/icons/figma-icon.webp'
 import photoshopIcon from '../assets/images/icons/Photoshop icon (about me).svg'
 
 const ABOUT_QUERY = `

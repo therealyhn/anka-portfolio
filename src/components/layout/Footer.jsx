@@ -2,7 +2,7 @@
 import CircleArrowButton from '../ui/CircleArrowButton'
 import navArrow from '../../assets/images/arrows/Nav bar.svg'
 import navArrowHover from '../../assets/images/arrows/Nav bar HOVER.svg'
-import footerBackground from '../../assets/images/img/Background.png'
+import footerBackground from '../../assets/images/img/Background.webp'
 import AccentDot from '../ui/AccentDot'
 import useFooterContent from '../../hooks/useFooterContent'
 import { useLang } from '../../context/LangContext'

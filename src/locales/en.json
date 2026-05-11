@@ -1,4 +1,4 @@
-{
+﻿{
   "nav.projects": "Projects",
   "nav.services": "Services",
   "nav.about": "About me",
@@ -10,7 +10,7 @@
   "nav.openMenu": "Open menu",
   "nav.closeMenu": "Close menu",
   "nav.closeMenuBackdrop": "Close menu",
-  "nav.contactEmail": "hello@ankaljusic.com",
+  "nav.contactEmail": "hello@ljsc-design.com",
   "hero.available": "Available for work",
   "hero.discoverMore": "Discover more",
   "hero.basedIn": "Based in Serbia",

@@ -8,6 +8,8 @@ import useTranslation from '../hooks/useTranslation'
 import { useLang } from '../context/LangContext'
 import navArrow from '../assets/images/arrows/Nav bar.svg'
 import navArrowHover from '../assets/images/arrows/Nav bar HOVER.svg'
+import SEO from '../components/shared/SEO'
+import { ProjectSchema, BreadcrumbSchema } from '../components/shared/SchemaOrg'
 
 const DEFAULT_OVERVIEW =
   'Designed the advertiser analytics dashboard for the House of Summary platform, focusing on clear data hierarchy and scannable performance insights. Structured key metrics such as clicks, views, CPC, audience demographics, and geographic data into modular components, enabling advertisers to quickly understand campaign performance and identify trends.'
@@ -66,7 +68,32 @@ function Project() {
     ? project.galleryImages
     : [project.image, project.image, project.image]
 
+  const seoDescription = overview
+    ? overview.slice(0, 155).trimEnd() + (overview.length > 155 ? '…' : '')
+    : `${projectClient} project by Anka Ljusic — digital designer based in Belgrade.`
+
   return (
+    <>
+      <SEO
+        title={`${projectClient} — ${projectTitle}`}
+        description={seoDescription}
+        image={project.image}
+        url={`/projects/${project.slug}`}
+        type="article"
+      />
+      <ProjectSchema
+        title={projectTitle}
+        client={projectClient}
+        description={seoDescription}
+        image={project.image}
+        slug={project.slug}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: '/' },
+          { name: projectClient, url: `/projects/${project.slug}` },
+        ]}
+      />
     <main className="min-h-screen overflow-x-clip bg-brand-charcoal text-white">
       <section className="w-full overflow-x-clip px-4 sm:px-8">
         <div className="mx-auto w-full max-w-[1920px]">
@@ -266,6 +293,7 @@ function Project() {
 
       <Footer />
     </main>
+    </>
   )
 }
 

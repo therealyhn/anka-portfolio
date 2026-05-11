@@ -1,4 +1,4 @@
-{
+﻿{
   "nav.projects": "Projekti",
   "nav.services": "Usluge",
   "nav.about": "O meni",
@@ -10,7 +10,7 @@
   "nav.openMenu": "Otvori meni",
   "nav.closeMenu": "Zatvori meni",
   "nav.closeMenuBackdrop": "Zatvori meni",
-  "nav.contactEmail": "hello@ankaljusic.com",
+  "nav.contactEmail": "hello@ljsc-design.com",
   "hero.available": "Available for work",
   "hero.discoverMore": "Pogledajte projekte",
   "hero.basedIn": "Beograd, Srbija",

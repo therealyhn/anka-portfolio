@@ -6,9 +6,27 @@ import ProjectsSection from '../components/sections/ProjectsSection'
 import ServicesSection from '../components/sections/ServicesSection'
 import AboutSection from '../components/sections/AboutSection'
 import Footer from '../components/layout/Footer'
+import SEO from '../components/shared/SEO'
+import { PersonSchema, WebSiteSchema } from '../components/shared/SchemaOrg'
+import { useLang } from '../context/LangContext'
+
+const SEO_COPY = {
+  en: {
+    title: 'Anka Ljusic — Digital Designer | Brand, Web & UI Design',
+    description:
+      'Anka Ljusic is a digital designer based in Belgrade, specializing in brand identity, web & product UI, and marketing visuals. Available for freelance projects worldwide.',
+  },
+  sr: {
+    title: 'Anka Ljusić — Digitalni dizajner | Brand, web i UI dizajn',
+    description:
+      'Anka Ljusić je digitalni dizajner iz Beograda. Specijalizovana za brand identitet, web i UI dizajn i marketing materijale. Dostupna za projekte širom sveta.',
+  },
+}
 
 function Home() {
   const { hash } = useLocation()
+  const { lang } = useLang()
+  const copy = SEO_COPY[lang] || SEO_COPY.en
 
   useEffect(() => {
     if (!hash) return
@@ -27,15 +45,20 @@ function Home() {
   }, [hash])
 
   return (
-    <SiteShell>
-      <main className="">
-        <HeroSection />
-        <ProjectsSection />
-        <ServicesSection />
-        <AboutSection />
-        <Footer />
-      </main>
-    </SiteShell>
+    <>
+      <SEO title={null} description={copy.description} url="/" />
+      <PersonSchema />
+      <WebSiteSchema />
+      <SiteShell>
+        <main>
+          <HeroSection />
+          <ProjectsSection />
+          <ServicesSection />
+          <AboutSection />
+          <Footer />
+        </main>
+      </SiteShell>
+    </>
   )
 }
 

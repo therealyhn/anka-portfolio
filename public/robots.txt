@@ -1,0 +1,6 @@
+﻿User-agent: *
+Allow: /
+
+Disallow: /api/
+
+Sitemap: https://ljsc-design.com/sitemap.xml

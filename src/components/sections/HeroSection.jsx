@@ -3,8 +3,8 @@ import Navbar from '../layout/Navbar'
 import AccentDot from '../ui/AccentDot'
 import CircleArrowButton from '../ui/CircleArrowButton'
 import discoverArrow from '../../assets/images/arrows/Discover more (hero section).svg'
-import heroBackground from '../../assets/images/img/Background.png'
-import ankaPortrait from '../../assets/images/img/anka_4x.png'
+import heroBackground from '../../assets/images/img/Background.webp'
+import ankaPortrait from '../../assets/images/img/anka_4x.webp'
 import useHeroContent from '../../hooks/useHeroContent'
 import useTranslation from '../../hooks/useTranslation'
 import { useLang } from '../../context/LangContext'
@@ -45,6 +45,8 @@ function HeroSection() {
         src={heroBackground}
         alt=""
         aria-hidden="true"
+        fetchPriority="high"
+        decoding="sync"
         className="absolute inset-0 h-full w-full object-cover object-left"
       />
       <div aria-hidden="true" className="absolute inset-0 bg-black/35" />
@@ -55,6 +57,8 @@ function HeroSection() {
       <img
         src={ankaPortrait}
         alt="Anka portrait"
+        fetchPriority="high"
+        decoding="sync"
         className="pointer-events-none absolute bottom-0 left-1/2 z-30 hidden w-[620px] -translate-x-1/2 object-contain lg:block lg:w-[520px] xl:w-[680px] 2xl:w-[780px] min-[1920px]:w-[920px]"
       />
 
@@ -62,6 +66,8 @@ function HeroSection() {
       <img
         src={ankaPortrait}
         alt="Anka portrait"
+        fetchPriority="high"
+        decoding="sync"
         className="pointer-events-none absolute bottom-0 left-1/2 md:z-30 z-10 w-[500px] -translate-x-1/2 object-contain md:w-[540px] lg:hidden"
       />
 
@@ -70,9 +76,9 @@ function HeroSection() {
 
         {/* Heading block — centered on mobile, absolute on xl */}
         <div className="pt-32 text-center xl:absolute xl:left-1/2 xl:top-[116px] xl:mt-0 xl:w-[1100px] xl:-translate-x-1/2 xl:pt-0 2xl:w-[1228px]">
-          <p className="inline-flex items-center gap-2 font-thin text-white/90 xl:gap-[10px]">
-            <AccentDot className="animate-pulse" />
-            <span className="text-[14px] font-medium tracking-wide xl:text-[16px]">{t('hero.available')}</span>
+          <p className="inline-flex items-center gap-2 font-medium text-white/90 xl:gap-[10px]">
+            <AccentDot />
+            <span className="text-xs font-thin tracking-wide sm:text-sm xl:text-[16px]">{t('hero.available')}</span>
           </p>
 
           <h1 className="mt-2 font-display text-[44px] font-medium leading-[1.05] tracking-tight sm:mt-8 sm:text-[56px] md:text-[72px] lg:text-[88px] xl:mt-[18px] xl:text-[112px] xl:leading-[0.94] xl:tracking-[-0.02em] 2xl:text-[120px]">

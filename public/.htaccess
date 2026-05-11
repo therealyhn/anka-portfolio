@@ -1,8 +1,12 @@
-# ─── HTTPS Redirect ────────────────────────────────────────────────────────────
+﻿Options -Indexes
+
+# ─── HTTPS + www → non-www canonical redirect ────────────────────────────────
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteCond %{HTTPS} off
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  RewriteCond %{HTTP_HOST} ^www\.ljsc-design\.com [NC]
+  RewriteRule ^(.*)$ https://ljsc-design.com/$1 [R=301,L]
 </IfModule>
 
 # ─── SPA Fallback (React Router) ───────────────────────────────────────────────
