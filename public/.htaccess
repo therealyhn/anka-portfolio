@@ -1,11 +1,5 @@
 ﻿Options -Indexes
-
-# ─── Allow social media crawlers ──────────────────────────────────────────────
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit|Facebot|Twitterbot|LinkedInBot|WhatsApp) [NC]
-  RewriteRule .* - [L]
-</IfModule>
+DirectorySlash Off
 
 # ─── HTTPS + www → non-www canonical redirect ────────────────────────────────
 <IfModule mod_rewrite.c>
@@ -21,6 +15,13 @@
   RewriteEngine On
   RewriteBase /
   RewriteRule ^index\.html$ - [L]
+
+  # Serve a prerendered route's index.html for its clean path (no trailing-slash redirect)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
+  RewriteRule ^(.*[^/])$ $1/index.html [L]
+
+  # SPA fallback for any other client-side route
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
