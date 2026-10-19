@@ -41,10 +41,13 @@ async function fetchProjects() {
   }
 }
 
+// Sanity slugs can contain & or quotes (e.g. social-posts-&-ads); XML needs them as entities.
+const escapeXml = (value) => String(value).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[ch])
+
 function urlEntry({ loc, lastmod, changefreq, priority }) {
   return [
     '  <url>',
-    `    <loc>${loc}</loc>`,
+    `    <loc>${escapeXml(loc)}</loc>`,
     `    <lastmod>${lastmod}</lastmod>`,
     `    <changefreq>${changefreq}</changefreq>`,
     `    <priority>${priority}</priority>`,
