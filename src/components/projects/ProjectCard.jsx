@@ -4,7 +4,7 @@ import { useLang } from '../../context/LangContext'
 import navArrow from '../../assets/images/arrows/Nav bar.svg'
 import navArrowHover from '../../assets/images/arrows/Nav bar HOVER.svg'
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, displayClass = 'block' }) {
   const { lang } = useLang()
   const sr = (en, srVal) => lang === 'sr' ? (srVal || en) : en
 
@@ -16,7 +16,7 @@ function ProjectCard({ project }) {
   return (
     <Link
       to={`/projects/${project.slug}`}
-      className="group/project block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-paper"
+      className={`group/project ${displayClass} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-paper`}
     >
       <article>
         <div className="relative overflow-hidden rounded-[8px] sm:rounded-[10px]">

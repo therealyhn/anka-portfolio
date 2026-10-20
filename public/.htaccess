@@ -10,6 +10,14 @@ DirectorySlash Off
   RewriteRule ^(.*)$ https://ljsc-design.com/$1 [R=301,L]
 </IfModule>
 
+# ─── Old project addresses → current ones (SEO-025) ──────────────────────────
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^projects/?$ https://ljsc-design.com/#projects [R=301,L,NE]
+  RewriteRule ^projects/media-kit/?$ https://ljsc-design.com/projects/media-kit-house-of-summary [R=301,L]
+  RewriteRule ^projects/(instagram-posts-multiple-brands|social-posts-&-ads)/?$ https://ljsc-design.com/projects/social-posts-and-ads [R=301,L]
+</IfModule>
+
 # ─── SPA Fallback (React Router) ───────────────────────────────────────────────
 <IfModule mod_rewrite.c>
   RewriteEngine On

@@ -7,14 +7,23 @@ import useTranslation from '../../hooks/useTranslation'
 import seeMoreArrow from '../../assets/images/arrows/See more projects (projects section).svg'
 import seeMoreArrowHover from '../../assets/images/arrows/See more projects (projects section) HOVER.svg'
 
+// Every card is in the HTML so crawlers reach every project; until "See more" the CSS
+// shows the first 3 below lg and the first 6 from lg on (SEO-025).
+const VISIBLE_BELOW_LG = 3
+const VISIBLE_FROM_LG = 6
+
+function cardDisplay(index, isExpanded) {
+  if (isExpanded || index < VISIBLE_BELOW_LG) return 'block'
+  return index < VISIBLE_FROM_LG ? 'hidden lg:block' : 'hidden'
+}
+
 function ProjectsSection() {
-  const INITIAL_VISIBLE_PROJECTS = window.matchMedia('(max-width: 1023px)').matches ? 3 : 6
   const [isExpanded, setIsExpanded] = useState(false)
   const { data: projects } = useProjectsContent()
   const { t } = useTranslation()
 
-  const hasHiddenProjects = projects.length > INITIAL_VISIBLE_PROJECTS
-  const visibleProjects = isExpanded ? projects : projects.slice(0, INITIAL_VISIBLE_PROJECTS)
+  const hasHiddenBelowLg = projects.length > VISIBLE_BELOW_LG
+  const hasHiddenFromLg = projects.length > VISIBLE_FROM_LG
 
   return (
     <section id="projects" className="rounded-frame bg-brand-paper px-4 py-10 sm:px-6 sm:py-12 md:px-[72px] md:py-14 lg:py-16 xl:pt-20 xl:pb-[50px] 2xl:pt-[80px] 2xl:pb-[100px] min-[1920px]:pt-[102px] min-[1920px]:pb-[132px]" aria-label={t('projects.sectionAria')}>
@@ -32,13 +41,14 @@ function ProjectsSection() {
         </div>
 
         <div className="mt-8 sm:mt-10 md:mt-12 2xl:mt-[53px]">
-          <ProjectsGrid projects={visibleProjects} />
+          <ProjectsGrid projects={projects} cardDisplay={(index) => cardDisplay(index, isExpanded)} />
         </div>
 
-        {hasHiddenProjects ? (
-          <div className="mt-8 flex justify-center sm:mt-10 md:mt-12 2xl:mt-[74px]">
+        {hasHiddenBelowLg ? (
+          <div className={`mt-8 justify-center sm:mt-10 md:mt-12 2xl:mt-[74px] ${hasHiddenFromLg ? 'flex' : 'flex lg:hidden'}`}>
             <button
               type="button"
+              aria-expanded={isExpanded}
               onClick={() => setIsExpanded((current) => !current)}
               className="group inline-flex items-center gap-2 text-sm font-semibold text-brand-ink transition-colors duration-300 ease-premium hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent sm:gap-3 sm:text-base xl:text-[14px] xl:font-medium 2xl:gap-[8px]"
             >

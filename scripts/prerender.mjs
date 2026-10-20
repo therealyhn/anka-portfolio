@@ -51,8 +51,9 @@ function outputPath(route) {
   return outPath
 }
 
-// Removed from the snapshot so the hidden copy never loads players or runs scripts.
-const STRIPPED_ELEMENTS = 'iframe, video, audio, canvas, script, noscript'
+// Removed from the snapshot so the hidden copy never loads players or runs scripts; JSON-LD
+// stays, so crawlers read the structured data without running JavaScript (SEO-025).
+const STRIPPED_ELEMENTS = 'iframe, video, audio, canvas, script:not([type="application/ld+json"]), noscript'
 
 // Head tags taken from the rendered page; every other head tag stays as in the template.
 const SNAPSHOT_HEAD_SELECTORS = [

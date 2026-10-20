@@ -9,6 +9,7 @@ import { useLang } from '../context/LangContext'
 import navArrow from '../assets/images/arrows/Nav bar.svg'
 import navArrowHover from '../assets/images/arrows/Nav bar HOVER.svg'
 import SEO from '../components/shared/SEO'
+import { toMetaDescription } from '../lib/metaDescription'
 import { ProjectSchema, BreadcrumbSchema } from '../components/shared/SchemaOrg'
 
 const DEFAULT_OVERVIEW =
@@ -69,7 +70,7 @@ function Project() {
     : [project.image, project.image, project.image]
 
   const seoDescription = overview
-    ? overview.slice(0, 155).trimEnd() + (overview.length > 155 ? '…' : '')
+    ? toMetaDescription(overview)
     : `${projectClient} project by Anka Ljusic - digital designer based in Belgrade.`
 
   return (
