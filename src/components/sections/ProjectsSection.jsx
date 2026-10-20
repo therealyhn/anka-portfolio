@@ -2,8 +2,8 @@ import { useState } from 'react'
 import AccentDot from '../ui/AccentDot'
 import CircleArrowButton from '../ui/CircleArrowButton'
 import ProjectsGrid from '../projects/ProjectsGrid'
-import useProjectsContent from '../../hooks/useProjectsContent'
 import useTranslation from '../../hooks/useTranslation'
+import { projects } from '../../lib/cms'
 import seeMoreArrow from '../../assets/images/arrows/See more projects (projects section).svg'
 import seeMoreArrowHover from '../../assets/images/arrows/See more projects (projects section) HOVER.svg'
 
@@ -19,7 +19,6 @@ function cardDisplay(index, isExpanded) {
 
 function ProjectsSection() {
   const [isExpanded, setIsExpanded] = useState(false)
-  const { data: projects } = useProjectsContent()
   const { t } = useTranslation()
 
   const hasHiddenBelowLg = projects.length > VISIBLE_BELOW_LG

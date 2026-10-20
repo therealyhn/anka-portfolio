@@ -12,18 +12,18 @@ const port = 4324
 const origin = `http://127.0.0.1:${port}`
 
 const LINK = 'a[href="https://maestro-solutions.org"]'
-const SANITY_IMAGE = 'img[src^="https://cdn.sanity.io/"]'
+const CMS_IMAGE = 'img[src*="/public/media/"]'
 const PROJECT_ROUTE = /^\/projects\/[^/]+$/
 
-// A route's snapshot is written only when all of these exist: the footer link, the h1 and the content
-// that arrives from Sanity. Hero, services and footer text have local defaults, so on `/` the Sanity
-// proof is the project and about images; a project page renders its h1 only once Sanity returns the
-// project. /contact has its own bottom bar without the footer link (owner decision in SEO-021).
+// A route's snapshot is written only when all of these exist: the footer link, the h1 and the images
+// from the CMS public media. The text comes from the CMS at build time (src/lib/cms.js) and renders
+// with its section, so on `/` the project and about images show that the CMS content rendered.
+// /contact has its own bottom bar without the footer link (owner decision in SEO-021).
 const REQUIRED_SELECTORS = {
-  '/': [LINK, 'h1', `#projects ${SANITY_IMAGE}`, `#about ${SANITY_IMAGE}`],
+  '/': [LINK, 'h1', `#projects ${CMS_IMAGE}`, `#about ${CMS_IMAGE}`],
   '/contact': ['h1'],
   '/privacy': [LINK, 'h1'],
-  '/projects/:slug': [LINK, 'h1', `main ${SANITY_IMAGE}`],
+  '/projects/:slug': [LINK, 'h1', `main ${CMS_IMAGE}`],
 }
 
 function requiredSelectors(route) {
@@ -32,7 +32,7 @@ function requiredSelectors(route) {
   return selectors
 }
 
-// Every <loc> of dist/sitemap.xml, which scripts/generate-sitemap.mjs builds from the Sanity projects.
+// Every <loc> of dist/sitemap.xml, which scripts/generate-sitemap.mjs builds from the CMS projects.
 async function readRoutes() {
   const sitemap = await readFile(path.join(distDir, 'sitemap.xml'), 'utf8')
   const entities = { '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&apos;': "'" }
@@ -67,9 +67,6 @@ const SNAPSHOT_HEAD_SELECTORS = [
 
 const ROOT_PLACEHOLDER = '<div id="root"></div>'
 const HEAD_PLACEHOLDER = '<!--prerender-head-->'
-
-// Sanity accepts browser requests only from its CORS origins, so its API calls are sent from Node.
-const SANITY_API = /^https:\/\/[a-z0-9-]+\.api(cdn)?\.sanity\.io\//
 
 const mimeTypes = {
   '.html': 'text/html; charset=UTF-8',
@@ -126,21 +123,6 @@ function startServer(template) {
   })
 }
 
-async function proxySanity(request) {
-  try {
-    const response = await fetch(request.url())
-    await request.respond({
-      status: response.status,
-      contentType: response.headers.get('content-type') ?? 'application/json',
-      headers: { 'Access-Control-Allow-Origin': origin },
-      body: Buffer.from(await response.arrayBuffer()),
-    })
-  } catch (error) {
-    console.error(`Sanity request failed: ${request.url()}`, error)
-    await request.abort()
-  }
-}
-
 // The site sets `scroll-behavior: smooth`, so every step jumps instantly; otherwise the scroll lags
 // behind the loop and the deferred sections near the bottom (footer included) never mount.
 async function scrollThrough(page) {
@@ -159,14 +141,6 @@ async function renderRoute(browser, route) {
   try {
     await page.setViewport({ width: 1440, height: 900 })
     await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }])
-    await page.setRequestInterception(true)
-    page.on('request', (request) => {
-      if (request.method() === 'GET' && SANITY_API.test(request.url())) {
-        proxySanity(request)
-      } else {
-        request.continue()
-      }
-    })
 
     await page.goto(`${origin}${route}`, { waitUntil: 'domcontentloaded' })
     await scrollThrough(page)
@@ -182,7 +156,7 @@ async function renderRoute(browser, route) {
     } catch {
       console.warn(`Warning: network did not go idle on route ${route}; writing the snapshot anyway.`)
     }
-    // A slug Sanity no longer knows redirects to `/`; its snapshot would duplicate the home page.
+    // A slug the CMS no longer has redirects to `/`; its snapshot would duplicate the home page.
     const landedOn = await page.evaluate(() => location.pathname)
     if (landedOn !== route) throw new Error(`Route ${route} redirected to ${landedOn}`)
 

@@ -31,6 +31,8 @@ function AboutBentoGrid({ data }) {
       <article className="relative min-h-[380px] overflow-hidden rounded-[8px] sm:min-h-[440px] sm:rounded-[10px] xl:min-h-0 xl:col-start-1 xl:row-start-2 xl:rounded-[12px]">
         <img
           src={data.portraitImage.url}
+          srcSet={data.portraitImage.srcSet}
+          sizes="(min-width: 1280px) 40vw, (min-width: 768px) 50vw, 100vw"
           alt="Anka portrait"
           width={data.portraitImage.width ?? undefined}
           height={data.portraitImage.height ?? undefined}

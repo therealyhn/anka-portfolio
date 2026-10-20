@@ -22,6 +22,8 @@ function ProjectCard({ project, displayClass = 'block' }) {
         <div className="relative overflow-hidden rounded-[8px] sm:rounded-[10px]">
           <img
             src={project.image}
+            srcSet={project.imageSrcSet}
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             alt={`${title} ${previewAltLabel}`}
             loading="lazy"
             decoding="async"

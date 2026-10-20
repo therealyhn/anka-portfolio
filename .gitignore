@@ -10,7 +10,9 @@ lerna-debug.log*
 node_modules
 dist
 .env
+*.local
 public/api/config.php
+src/generated/
 sanity/node_modules
 sanity/dist
 sanity/.env

@@ -1,23 +1,17 @@
 ﻿/**
- * Generates public/sitemap.xml by fetching all project slugs from Sanity.
+ * Generates public/sitemap.xml from the project entries of the Maestro CMS, which
+ * scripts/fetch-cms-content.mjs wrote to src/generated/cms-content.json.
  * Run: npm run sitemap
  * Called automatically before: npm run build
  */
-import { createClient } from '@sanity/client'
-import { writeFileSync } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 import { resolve } from 'path'
 import { fileURLToPath } from 'url'
 
 const ROOT = resolve(fileURLToPath(new URL('.', import.meta.url)), '..')
 const SITE_URL = process.env.VITE_SITE_URL || 'https://ljsc-design.com'
 const TODAY = new Date().toISOString().split('T')[0]
-
-const client = createClient({
-  projectId: process.env.VITE_SANITY_PROJECT_ID || 'v69k4zml',
-  dataset: process.env.VITE_SANITY_DATASET || 'production',
-  apiVersion: '2025-01-01',
-  useCdn: true,
-})
+const CONTENT = resolve(ROOT, 'src/generated/cms-content.json')
 
 const STATIC_PAGES = [
   { url: '/',        priority: '1.0', changefreq: 'weekly'  },
@@ -25,23 +19,22 @@ const STATIC_PAGES = [
   { url: '/privacy', priority: '0.3', changefreq: 'yearly'  },
 ]
 
-async function fetchProjects() {
+// `publishedAt` of the CMS public API is `YYYY-MM-DD HH:MM:SS`; the newest publication comes first.
+function readProjects() {
+  let content
   try {
-    const projects = await client.fetch(
-      `*[_type == "project" && defined(slug)] | order(_updatedAt desc) { "slug": slug.current, "lastmod": _updatedAt }`
-    )
-    return Array.isArray(projects)
-      ? projects
-          .filter((p) => p.slug)
-          .map((p) => ({ slug: p.slug, lastmod: p.lastmod ? p.lastmod.split('T')[0] : TODAY }))
-      : []
+    content = JSON.parse(readFileSync(CONTENT, 'utf8'))
   } catch {
-    console.warn('⚠  Could not fetch Sanity projects — generating sitemap without project pages.')
-    return []
+    throw new Error('src/generated/cms-content.json is missing or invalid: run node scripts/fetch-cms-content.mjs first.')
   }
+
+  return content.projekti.map(({ slug, publishedAt }) => ({
+    slug,
+    lastmod: /^\d{4}-\d{2}-\d{2}/.test(publishedAt ?? '') ? publishedAt.slice(0, 10) : TODAY,
+  }))
 }
 
-// Sanity slugs can contain & or quotes (e.g. social-posts-&-ads); XML needs them as entities.
+// CMS slugs are lowercase letters, digits and hyphens; escaping still keeps any other value valid XML.
 const escapeXml = (value) => String(value).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[ch])
 
 function urlEntry({ loc, lastmod, changefreq, priority }) {
@@ -55,7 +48,7 @@ function urlEntry({ loc, lastmod, changefreq, priority }) {
   ].join('\n')
 }
 
-const projects = await fetchProjects()
+const projects = readProjects()
 
 const entries = [
   ...STATIC_PAGES.map((p) =>

@@ -6,13 +6,12 @@ import discoverArrow from '../../assets/images/arrows/Discover more (hero sectio
 import heroBackground from '../../assets/images/img/Background.webp'
 import ankaPortraitDesktop from '../../assets/images/img/anka_hero_desktop.webp'
 import ankaPortraitMobile from '../../assets/images/img/anka_hero_mobile.webp'
-import useHeroContent from '../../hooks/useHeroContent'
 import useTranslation from '../../hooks/useTranslation'
 import { useLang } from '../../context/LangContext'
+import { heroContent } from '../../lib/cms'
 
 function HeroSection() {
   const [belgradeTime, setBelgradeTime] = useState('')
-  const { data: heroContent } = useHeroContent()
   const { t } = useTranslation()
   const { lang } = useLang()
 

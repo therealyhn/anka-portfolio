@@ -4,9 +4,9 @@ import SEO from '../components/shared/SEO'
 import logoWhiteText from '../assets/images/logo/SVG white text.svg'
 import heroBackground from '../assets/images/img/Background.webp'
 import { useContactForm, INTEREST_OPTIONS, BUDGET_RANGES } from '../hooks/useContactForm'
-import useFooterContent from '../hooks/useFooterContent'
 import useTranslation from '../hooks/useTranslation'
 import { useLang } from '../context/LangContext'
+import { footerContent } from '../lib/cms'
 import linkedinIcon from '../assets/images/icons/Linekdin icon (footer).svg'
 import upworkIcon from '../assets/images/icons/Upwork icon (footer).svg'
 import fiverrIcon from '../assets/images/icons/Fiver icon (footer).svg'
@@ -47,10 +47,9 @@ function Stepper({ step }) {
 }
 
 function Contact() {
-  const { data: footerData } = useFooterContent()
+  const footerData = footerContent
   const { t } = useTranslation()
   const { lang } = useLang()
-  const sr = (en, srVal) => (lang === 'sr' ? (srVal || en) : en)
 
   const portfolioLabel = lang === 'sr'
     ? (footerData?.portfolioLabel_sr || t('contact.footer.portfolio'))

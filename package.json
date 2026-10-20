@@ -4,16 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "node scripts/generate-sitemap.mjs && vite build && node scripts/prerender.mjs",
+    "dev": "node scripts/fetch-cms-content.mjs && vite",
+    "build": "node scripts/fetch-cms-content.mjs && node scripts/generate-sitemap.mjs && vite build && node scripts/prerender.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
-    "sitemap": "node scripts/generate-sitemap.mjs",
+    "sitemap": "node scripts/fetch-cms-content.mjs && node scripts/generate-sitemap.mjs",
     "og:cover": "node scripts/generate-og-cover.mjs",
     "optimize:images": "node scripts/to-webp.mjs"
   },
   "dependencies": {
-    "@sanity/client": "^7.16.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.3.0",

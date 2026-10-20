@@ -3,13 +3,13 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import CircleArrowButton from '../components/ui/CircleArrowButton'
 import Footer from '../components/layout/Footer'
 import Navbar from '../components/layout/Navbar'
-import useProjectsContent from '../hooks/useProjectsContent'
 import useTranslation from '../hooks/useTranslation'
 import { useLang } from '../context/LangContext'
 import navArrow from '../assets/images/arrows/Nav bar.svg'
 import navArrowHover from '../assets/images/arrows/Nav bar HOVER.svg'
 import SEO from '../components/shared/SEO'
 import { toMetaDescription } from '../lib/metaDescription'
+import { projects } from '../lib/cms'
 import { ProjectSchema, BreadcrumbSchema } from '../components/shared/SchemaOrg'
 
 const DEFAULT_OVERVIEW =
@@ -17,7 +17,6 @@ const DEFAULT_OVERVIEW =
 
 function Project() {
   const { slug } = useParams()
-  const { loading, data: projects } = useProjectsContent()
   const { t } = useTranslation()
   const { lang } = useLang()
 
@@ -38,10 +37,6 @@ function Project() {
     })
   }, [slug])
 
-
-  if (!project && loading) {
-    return <main className="min-h-screen bg-brand-charcoal" />
-  }
 
   if (!project) {
     return <Navigate to="/" replace />
@@ -243,6 +238,8 @@ function Project() {
                   <div className="relative overflow-hidden rounded-[10px]">
                     <img
                       src={item.image}
+                      srcSet={item.imageSrcSet}
+                      sizes="(min-width: 960px) 440px, 50vw"
                       alt={`${itemTitle} ${previewAltLabel}`}
                       loading="lazy"
                       decoding="async"

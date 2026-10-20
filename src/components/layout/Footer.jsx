@@ -4,9 +4,9 @@ import navArrow from '../../assets/images/arrows/Nav bar.svg'
 import navArrowHover from '../../assets/images/arrows/Nav bar HOVER.svg'
 import footerBackground from '../../assets/images/img/Background.webp'
 import AccentDot from '../ui/AccentDot'
-import useFooterContent from '../../hooks/useFooterContent'
 import { useLang } from '../../context/LangContext'
 import useTranslation from '../../hooks/useTranslation'
+import { footerContent } from '../../lib/cms'
 import linkedinIcon from '../../assets/images/icons/Linekdin icon (footer).svg'
 import upworkIcon from '../../assets/images/icons/Upwork icon (footer).svg'
 import fiverrIcon from '../../assets/images/icons/Fiver icon (footer).svg'
@@ -48,7 +48,7 @@ function FooterLink({ href, className, children }) {
 }
 
 function Footer() {
-  const { data } = useFooterContent()
+  const data = footerContent
   const { lang } = useLang()
   const { t } = useTranslation()
   const sr = (en, srVal) => (lang === 'sr' ? (srVal || en) : en)

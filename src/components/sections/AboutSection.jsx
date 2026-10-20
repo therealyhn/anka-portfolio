@@ -1,13 +1,13 @@
-import useAboutContent from '../../hooks/useAboutContent'
 import useTranslation from '../../hooks/useTranslation'
 import { useLang } from '../../context/LangContext'
+import { aboutContent } from '../../lib/cms'
 import AboutHeader from './about/AboutHeader'
 import AboutBentoGrid from './about/AboutBentoGrid'
 import AboutToolsRow from './about/AboutToolsRow'
 import AboutTestimonialsSlider from './about/AboutTestimonialsSlider'
 
 function AboutSection() {
-  const { data } = useAboutContent()
+  const data = aboutContent
   const { t } = useTranslation()
   const { lang } = useLang()
 

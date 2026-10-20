@@ -1,20 +1,10 @@
 import { useMemo, useState } from 'react'
 import AccentDot from '../ui/AccentDot'
-import useServicesContent from '../../hooks/useServicesContent'
-import useProjectsContent from '../../hooks/useProjectsContent'
 import useTranslation from '../../hooks/useTranslation'
 import { useLang } from '../../context/LangContext'
-
-const SERVICE_PREVIEW_SLUGS = {
-  'brand-visual': 'logo-design',
-  'web-product': 'media-website',
-  marketing: 'instagram-posts',
-  presentations: 'newsletter',
-}
+import { projects, servicesContent } from '../../lib/cms'
 
 function ServicesSection() {
-  const { data: servicesContent } = useServicesContent()
-  const { data: projects } = useProjectsContent()
   const { t } = useTranslation()
   const { lang } = useLang()
   const [openServiceId, setOpenServiceId] = useState(null)
@@ -35,18 +25,14 @@ function ServicesSection() {
       }
       return acc
     }, {})
-  ), [projects])
+  ), [])
 
   const resolvePreviewImage = (item) => {
     const hasRealImage = typeof item?.previewImage === 'string' && !item.previewImage.includes('project-placeholder')
     if (hasRealImage) return item.previewImage
 
     const previewProjectImage = item?.previewProjectSlug ? projectImageBySlug[item.previewProjectSlug] : null
-    if (previewProjectImage) return previewProjectImage
-
-    const fallbackSlug = SERVICE_PREVIEW_SLUGS[item?.id]
-    const fallbackImage = fallbackSlug ? projectImageBySlug[fallbackSlug] : null
-    return fallbackImage || item?.previewImage
+    return previewProjectImage || item?.previewImage
   }
 
   const handleToggleService = (serviceId) => {

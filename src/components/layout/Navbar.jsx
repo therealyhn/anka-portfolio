@@ -43,6 +43,8 @@ function Navbar({ hideLanguageSwitch = false }) {
   }, [isMenuOpen])
 
   useEffect(() => {
+    // Navigation closes the mobile menu: one extra render per route change, not a render loop.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     closeMenu()
   }, [pathname])
 

@@ -18,6 +18,12 @@ DirectorySlash Off
   RewriteRule ^projects/(instagram-posts-multiple-brands|social-posts-&-ads)/?$ https://ljsc-design.com/projects/social-posts-and-ads [R=301,L]
 </IfModule>
 
+# ─── Project addresses the Maestro CMS import lowercased (MS.11a) ─────────────
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^projects/Talenska-landing-page-redesign/?$ /projects/talenska-landing-page-redesign [R=301,L]
+</IfModule>
+
 # ─── SPA Fallback (React Router) ───────────────────────────────────────────────
 <IfModule mod_rewrite.c>
   RewriteEngine On
