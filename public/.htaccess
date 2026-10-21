@@ -1,4 +1,4 @@
-﻿Options -Indexes
+Options -Indexes
 DirectorySlash Off
 
 # ─── HTTPS + www → non-www canonical redirect ────────────────────────────────
@@ -18,7 +18,7 @@ DirectorySlash Off
   RewriteRule ^projects/(instagram-posts-multiple-brands|social-posts-&-ads)/?$ https://ljsc-design.com/projects/social-posts-and-ads [R=301,L]
 </IfModule>
 
-# ─── SPA Fallback (React Router) ───────────────────────────────────────────────
+# ─── Prerendered routes, no SPA fallback (client-seo O11) ───────────────
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
@@ -28,12 +28,11 @@ DirectorySlash Off
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
   RewriteRule ^(.*[^/])$ $1/index.html [L]
-
-  # SPA fallback for any other client-side route
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
 </IfModule>
+
+# Every other address is a real 404 with 404.html (noindex)
+ErrorDocument 404 /404.html
+AddDefaultCharset UTF-8
 
 # ─── Security Headers ──────────────────────────────────────────────────────────
 <IfModule mod_headers.c>

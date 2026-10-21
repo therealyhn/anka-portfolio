@@ -1,4 +1,4 @@
-﻿User-agent: *
+User-agent: *
 Allow: /
 Disallow: /api/
 
@@ -10,5 +10,14 @@ Allow: /
 
 User-agent: LinkedInBot
 Allow: /
+
+# AI: pretraga i posete na zahtev korisnika su dozvoljene kroz grupe iznad;
+# treniranje modela nije (client-seo O02).
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: CCBot
+User-agent: Applebot-Extended
+User-agent: Meta-ExternalAgent
+Disallow: /
 
 Sitemap: https://ljsc-design.com/sitemap.xml

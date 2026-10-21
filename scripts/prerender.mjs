@@ -6,6 +6,7 @@ import { createServer } from 'node:http'
 import { readFile, writeFile, mkdir, stat } from 'node:fs/promises'
 import path from 'node:path'
 import puppeteer from 'puppeteer'
+import { OWNER_EMAIL, OWNER_NAME, OWNER_PHONE, PROFILE_LINKS } from '../src/lib/siteProfileData.js'
 
 const distDir = path.resolve('dist')
 const port = 4324
@@ -36,12 +37,13 @@ function requiredSelectors(route) {
 async function readRoutes() {
   const sitemap = await readFile(path.join(distDir, 'sitemap.xml'), 'utf8')
   const entities = { '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&apos;': "'" }
-  const routes = [...sitemap.matchAll(/<loc>\s*([^<]+?)\s*<\/loc>/g)].map(
-    (match) => new URL(match[1].replace(/&(amp|lt|gt|quot|apos);/g, (entity) => entities[entity])).pathname,
+  const urls = [...sitemap.matchAll(/<loc>\s*([^<]+?)\s*<\/loc>/g)].map(
+    (match) => new URL(match[1].replace(/&(amp|lt|gt|quot|apos);/g, (entity) => entities[entity])),
   )
+  const routes = urls.map((url) => url.pathname)
   if (!routes.includes('/')) throw new Error('dist/sitemap.xml has no / route')
   routes.forEach(requiredSelectors)
-  return [...new Set(routes)]
+  return { routes: [...new Set(routes)], siteOrigin: urls[0].origin }
 }
 
 function outputPath(route) {
@@ -193,7 +195,12 @@ async function renderRoute(browser, route) {
         const head = headSelectors.flatMap((selector) =>
           [...document.head.querySelectorAll(selector)].map((element) => element.outerHTML),
         )
-        return { body: root.innerHTML, head }
+        return {
+          body: root.innerHTML,
+          head,
+          title: document.title,
+          description: document.querySelector('meta[name="description"]')?.content ?? '',
+        }
       },
       STRIPPED_ELEMENTS,
       SNAPSHOT_HEAD_SELECTORS,
@@ -251,12 +258,44 @@ function buildHtml(template, snapshot) {
   )
 }
 
+// 404.html (client-seo O11): the homepage snapshot without canonical and with `noindex`; Apache serves
+// it for every unknown address through `ErrorDocument 404`.
+function toNotFoundPage(html) {
+  const withoutCanonical = html.replace(/\s*<link rel="canonical"[^>]*>/, '')
+  const notFoundHtml = withoutCanonical.replace(
+    /<meta name="robots" content="[^"]*"\s*\/?>/,
+    '<meta name="robots" content="noindex" />',
+  )
+  if (withoutCanonical === html || notFoundHtml === withoutCanonical) {
+    throw new Error('404.html: canonical or robots tag not found in the homepage snapshot')
+  }
+  return notFoundHtml
+}
+
+// llms.txt (client-seo 4.6): the routes of the sitemap with the title and description each page
+// shows to crawlers; the summary is the description of the home page.
+function buildLlms(rendered, siteOrigin) {
+  const pages = [...rendered].map(([route, page]) => `- [${page.title}](${siteOrigin}${route}): ${page.description}`)
+  return [
+    `# ${OWNER_NAME}`,
+    '',
+    `> ${rendered.get('/').description}`,
+    '',
+    `Contact: ${OWNER_EMAIL}, ${OWNER_PHONE}`,
+    `Profiles: ${PROFILE_LINKS.join(', ')}`,
+    '',
+    '## Pages',
+    ...pages,
+    '',
+  ].join('\n')
+}
+
 async function main() {
   const template = await readFile(path.join(distDir, 'index.html'), 'utf8')
   if (template.split(ROOT_PLACEHOLDER).length !== 2) {
     throw new Error(`dist/index.html must contain exactly one ${ROOT_PLACEHOLDER}`)
   }
-  const routes = await readRoutes()
+  const { routes, siteOrigin } = await readRoutes()
 
   const server = await startServer(template)
   const browser = await puppeteer.launch({ headless: true })
@@ -264,7 +303,8 @@ async function main() {
 
   try {
     for (const route of routes) {
-      rendered.set(route, buildHtml(template, await renderRoute(browser, route)))
+      const snapshot = await renderRoute(browser, route)
+      rendered.set(route, { html: buildHtml(template, snapshot), title: snapshot.title, description: snapshot.description })
       console.log(`prerendered ${route}`)
     }
   } finally {
@@ -272,13 +312,16 @@ async function main() {
     server.close()
   }
 
-  for (const [route, html] of rendered) {
+  for (const [route, { html }] of rendered) {
     const outPath = outputPath(route)
     await mkdir(path.dirname(outPath), { recursive: true })
     await writeFile(outPath, html, 'utf8')
   }
 
-  console.log(`Prerendered ${rendered.size} route(s) into dist/.`)
+  await writeFile(path.join(distDir, '404.html'), toNotFoundPage(rendered.get('/').html), 'utf8')
+  await writeFile(path.join(distDir, 'llms.txt'), buildLlms(rendered, siteOrigin), 'utf8')
+
+  console.log(`Prerendered ${rendered.size} route(s), 404.html and llms.txt into dist/.`)
 }
 
 main().catch((error) => {

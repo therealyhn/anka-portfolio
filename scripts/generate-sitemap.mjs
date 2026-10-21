@@ -10,7 +10,6 @@ import { fileURLToPath } from 'url'
 
 const ROOT = resolve(fileURLToPath(new URL('.', import.meta.url)), '..')
 const SITE_URL = process.env.VITE_SITE_URL || 'https://ljsc-design.com'
-const TODAY = new Date().toISOString().split('T')[0]
 
 const client = createClient({
   projectId: process.env.VITE_SANITY_PROJECT_ID || 'v69k4zml',
@@ -19,11 +18,8 @@ const client = createClient({
   useCdn: true,
 })
 
-const STATIC_PAGES = [
-  { url: '/',        priority: '1.0', changefreq: 'weekly'  },
-  { url: '/contact', priority: '0.8', changefreq: 'monthly' },
-  { url: '/privacy', priority: '0.3', changefreq: 'yearly'  },
-]
+// No lastmod for these: their content has no reliable change date (client-seo 4.4).
+const STATIC_PAGES = ['/', '/contact', '/privacy']
 
 async function fetchProjects() {
   try {
@@ -33,7 +29,7 @@ async function fetchProjects() {
     return Array.isArray(projects)
       ? projects
           .filter((p) => p.slug)
-          .map((p) => ({ slug: p.slug, lastmod: p.lastmod ? p.lastmod.split('T')[0] : TODAY }))
+          .map((p) => ({ slug: p.slug, lastmod: p.lastmod ? p.lastmod.split('T')[0] : null }))
       : []
   } catch {
     console.warn('⚠  Could not fetch Sanity projects — generating sitemap without project pages.')
@@ -44,13 +40,11 @@ async function fetchProjects() {
 // Sanity slugs can contain & or quotes (e.g. social-posts-&-ads); XML needs them as entities.
 const escapeXml = (value) => String(value).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[ch])
 
-function urlEntry({ loc, lastmod, changefreq, priority }) {
+function urlEntry({ loc, lastmod }) {
   return [
     '  <url>',
     `    <loc>${escapeXml(loc)}</loc>`,
-    `    <lastmod>${lastmod}</lastmod>`,
-    `    <changefreq>${changefreq}</changefreq>`,
-    `    <priority>${priority}</priority>`,
+    ...(lastmod ? [`    <lastmod>${lastmod}</lastmod>`] : []),
     '  </url>',
   ].join('\n')
 }
@@ -58,12 +52,8 @@ function urlEntry({ loc, lastmod, changefreq, priority }) {
 const projects = await fetchProjects()
 
 const entries = [
-  ...STATIC_PAGES.map((p) =>
-    urlEntry({ loc: `${SITE_URL}${p.url}`, lastmod: TODAY, changefreq: p.changefreq, priority: p.priority })
-  ),
-  ...projects.map(({ slug, lastmod }) =>
-    urlEntry({ loc: `${SITE_URL}/projects/${slug}`, lastmod, changefreq: 'monthly', priority: '0.7' })
-  ),
+  ...STATIC_PAGES.map((url) => urlEntry({ loc: `${SITE_URL}${url}` })),
+  ...projects.map(({ slug, lastmod }) => urlEntry({ loc: `${SITE_URL}/projects/${slug}`, lastmod })),
 ]
 
 const xml = [
