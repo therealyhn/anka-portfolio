@@ -10,7 +10,9 @@ declare(strict_types=1);
  * `servicesSection`, `aboutSection`, `footerSection` i `project`, a prenos sa Sanity-ja je u
  * `cms/sanity-map.json`. Sajt ima dva jezika u zasebnim poljima: `<ime>` je engleski tekst, a
  * `<ime>_sr` srpski, koji sajt prikazuje na srpskoj verziji kad nije prazan (Dopuna 3.12 od
- * 20.10.2026). Granice dužine i obavezna polja su kao u Sanity šemi sajta. Sajt ove podatke čita pri
+ * 20.10.2026). Granice dužine i obavezna polja su kao u Sanity šemi sajta. Opis slike u unosu (`alt: true`,
+ * ugovor 3.12, Dopuna 12.11.2026, kartica SN.06) imaju slika kartice i slike galerije projekta, kao podpolje
+ * `alt` u Sanity-ju; granica opisa je 200 znakova iz ugovora, ne 120 iz Sanity-ja. Sajt ove podatke čita pri
  * izradi (`scripts/fetch-cms-content.mjs`), pa ključ tipa ili polja ne menjaj bez izmene `src/lib/cms.js`.
  */
 
@@ -204,7 +206,7 @@ return [
             ['key' => 'client_sr', 'type' => 'text', 'label' => 'Klijent (srpski)', 'maxLength' => 80],
             ['key' => 'role', 'type' => 'text', 'label' => 'Uloga (engleski)', 'maxLength' => 60],
             ['key' => 'role_sr', 'type' => 'text', 'label' => 'Uloga (srpski)', 'maxLength' => 60],
-            ['key' => 'thumbnail', 'type' => 'media', 'label' => 'Slika kartice', 'required' => true, 'kinds' => ['image']],
+            ['key' => 'thumbnail', 'type' => 'media', 'label' => 'Slika kartice', 'required' => true, 'kinds' => ['image'], 'alt' => true],
             ['key' => 'overview', 'type' => 'textarea', 'label' => 'Pregled (engleski)', 'maxLength' => 900],
             ['key' => 'overview_sr', 'type' => 'textarea', 'label' => 'Pregled (srpski)', 'maxLength' => 900],
             ['key' => 'year', 'type' => 'text', 'label' => 'Godina', 'maxLength' => 30],
@@ -222,7 +224,7 @@ return [
                 'label' => 'Galerija',
                 'help' => 'Slike na stranici projekta, istim redom.',
                 'fields' => [
-                    ['key' => 'image', 'type' => 'media', 'label' => 'Slika', 'required' => true, 'kinds' => ['image']],
+                    ['key' => 'image', 'type' => 'media', 'label' => 'Slika', 'required' => true, 'kinds' => ['image'], 'alt' => true],
                 ],
             ],
             ['key' => 'sort_order', 'type' => 'number', 'label' => 'Redosled', 'help' => 'Manji broj je ranije u listi projekata.', 'min' => 0],
