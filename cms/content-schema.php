@@ -21,6 +21,7 @@ return [
         'key' => 'uvod',
         'name' => 'Uvod',
         'kind' => 'single',
+        'icon' => 'house',
         'titleField' => 'title_line_one',
         'fields' => [
             ['key' => 'title_line_one', 'type' => 'text', 'label' => 'Naslov, prvi red (engleski)', 'required' => true, 'maxLength' => 60],
@@ -38,6 +39,7 @@ return [
         'key' => 'usluge',
         'name' => 'Usluge',
         'kind' => 'single',
+        'icon' => 'palette',
         'titleField' => 'title_line_one',
         'fields' => [
             ['key' => 'eyebrow_label', 'type' => 'text', 'label' => 'Natpis iznad naslova (engleski)', 'required' => true, 'maxLength' => 40],
@@ -78,6 +80,7 @@ return [
         'key' => 'o-meni',
         'name' => 'O meni',
         'kind' => 'single',
+        'icon' => 'user-round',
         'titleField' => 'title_line_one',
         'fields' => [
             ['key' => 'eyebrow_label', 'type' => 'text', 'label' => 'Natpis iznad naslova (engleski)', 'required' => true, 'maxLength' => 40],
@@ -147,6 +150,7 @@ return [
         'key' => 'podnozje',
         'name' => 'Podnožje',
         'kind' => 'single',
+        'icon' => 'panel-bottom',
         'titleField' => 'title_line_one',
         'fields' => [
             ['key' => 'availability_label', 'type' => 'text', 'label' => 'Natpis o dostupnosti (engleski)', 'required' => true, 'maxLength' => 60],
@@ -198,6 +202,7 @@ return [
         'key' => 'projekti',
         'name' => 'Projekti',
         'kind' => 'collection',
+        'icon' => 'briefcase',
         'titleField' => 'title',
         'fields' => [
             ['key' => 'title', 'type' => 'text', 'label' => 'Naslov (engleski)', 'required' => true, 'maxLength' => 80],
