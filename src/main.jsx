@@ -4,6 +4,9 @@ import { BrowserRouter } from 'react-router-dom'
 import { LangProvider } from './context/LangContext'
 import './styles/global.css'
 import App from './App.jsx'
+import { installReloadAfterDeploy } from './lib/reloadAfterDeploy.js'
+
+installReloadAfterDeploy()
 
 // scripts/prerender.mjs leaves a snapshot for crawlers without JavaScript; React starts from an empty root
 const root = document.getElementById('root')
