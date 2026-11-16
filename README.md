@@ -49,8 +49,8 @@ The schema is `cms/content-schema.php`; the instance gets it as its `content-sch
 - The contact form posts to `public/api/contact.php`, which reads `public/api/config.php` on the server (template `config.example.php`, never in git).
 - Old project addresses redirect to the current ones with 301 rules in `public/.htaccess`.
 
-## Sanity (until 16.12.2026)
-`sanity/` and the Sanity project stay for 30 days after the switch (16.11.2026), as the way back; the site no longer reads them. The way back is commit `2511f29`, the last one that reads Sanity, built and uploaded the way the site was published before the switch; the DNS name `cms.ljsc-design.com` does not get in the way. After 30 days a separate card removes `sanity/` from the repository (the owner decides when the Sanity project is shut down). `cms/sanity-map.json` maps the Sanity export to the CMS types for `bin/import-sanity.php` in Maestro CMS.
+## Before the CMS (Sanity)
+Until the switch on 16.11.2026 the site read its content from Sanity. The Sanity Studio (`sanity/`) and the import map (`cms/sanity-map.json`) were removed from the repository after the switch. The way back is commit `2511f29`, the last one that reads Sanity, built and uploaded the way the site was published before the switch, while the Sanity project still exists (the owner decides when it is shut down); the DNS name `cms.ljsc-design.com` does not get in the way.
 
 ## Other scripts
 - `npm run og:cover`: social share cover image (`scripts/generate-og-cover.mjs`).
