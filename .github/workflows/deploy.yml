@@ -1,9 +1,12 @@
 name: Objava na hosting
 
 # Sadržaj dolazi iz Maestro CMS instance klijenta u trenutku izrade. Instanca pokreće ovaj workflow
-# posle objave (workflow_dispatch, plan.md §3.19 u maestro-cms), a ručno pokretanje služi za ponovnu
-# objavu bez izmene. `push` na main ulazi u `on:` tek posle prelaska u produkciji (kartica MS.11b).
+# posle objave (workflow_dispatch, plan.md §3.19 u maestro-cms), ručno pokretanje služi za ponovnu
+# objavu bez izmene, a `push` na main objavljuje izmenu koda (od prelaska u produkciji 16.11.2026,
+# kartica MS.11b u maestro-cms).
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:

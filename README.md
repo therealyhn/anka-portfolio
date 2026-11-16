@@ -2,6 +2,8 @@
 
 Portfolio site of Anka Ljusic, digital designer (ljsc-design.com), in English and Serbian. Content comes from the client's Maestro CMS instance and enters the site at build time.
 
+Production since 16.11.2026: the CMS instance is `https://cms.ljsc-design.com/dashboard/` (Maestro CMS card MS.11b), and its public API `https://cms.ljsc-design.com/dashboard/api/v1` is the repository variable `CMS_API_URL`.
+
 ## Tech
 - React + Vite
 - Tailwind CSS
@@ -43,12 +45,12 @@ The schema is `cms/content-schema.php`; the instance gets it as its `content-sch
 
 ## Build and deploy
 - `npm run build`: CMS content, `public/sitemap.xml` from the CMS projects, Vite build, then the prerender of every sitemap route into `dist/`.
-- `.github/workflows/deploy.yml`: manual run (`workflow_dispatch`) until the site switches to the CMS in production; the CMS instance starts it after every publish (`siteBuild` in the instance `client.php`). It needs the repository variables `CMS_API_URL` (https) and `FTP_SERVER_DIR`, and the secrets `FTP_SERVER`, `FTP_USERNAME` and `FTP_PASSWORD`.
+- `.github/workflows/deploy.yml`: runs on every push to `main`, after every CMS publish (the instance starts it through `workflow_dispatch`, `siteBuild` in the instance `client.php`) and manually from the Actions tab. Runs queue instead of cancelling each other. It needs the repository variables `CMS_API_URL` (https) and `FTP_SERVER_DIR`, and the secrets `FTP_SERVER`, `FTP_USERNAME` and `FTP_PASSWORD`.
 - The contact form posts to `public/api/contact.php`, which reads `public/api/config.php` on the server (template `config.example.php`, never in git).
 - Old project addresses redirect to the current ones with 301 rules in `public/.htaccess`.
 
-## Sanity (until the switch)
-`sanity/` and the Sanity project stay for 30 days after the switch, as the way back; the site no longer reads them. `cms/sanity-map.json` maps the Sanity export to the CMS types for `bin/import-sanity.php` in Maestro CMS.
+## Sanity (until 16.12.2026)
+`sanity/` and the Sanity project stay for 30 days after the switch (16.11.2026), as the way back; the site no longer reads them. The way back is commit `2511f29`, the last one that reads Sanity, built and uploaded the way the site was published before the switch; the DNS name `cms.ljsc-design.com` does not get in the way. After 30 days a separate card removes `sanity/` from the repository (the owner decides when the Sanity project is shut down). `cms/sanity-map.json` maps the Sanity export to the CMS types for `bin/import-sanity.php` in Maestro CMS.
 
 ## Other scripts
 - `npm run og:cover`: social share cover image (`scripts/generate-og-cover.mjs`).
