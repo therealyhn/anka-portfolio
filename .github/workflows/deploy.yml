@@ -90,7 +90,7 @@ jobs:
       - name: Provera izlaza
         run: |
           fail=0
-          for file in .htaccess index.html robots.txt sitemap.xml api/contact.php; do
+          for file in .htaccess index.html 404.html robots.txt sitemap.xml llms.txt api/contact.php; do
             test -f "dist/$file" || { echo "::error::dist/$file ne postoji."; fail=1; }
           done
           if ! grep -q 'data-prerendered' dist/index.html; then
