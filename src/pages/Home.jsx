@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import SiteShell from '../components/layout/SiteShell'
 import HeroSection from '../components/sections/HeroSection'
 import SEO from '../components/shared/SEO'
-import { PersonSchema, WebSiteSchema } from '../components/shared/SchemaOrg'
+import { HomeSchema } from '../components/shared/SchemaOrg'
 import { useLang } from '../context/LangContext'
 
 const ProjectsSection = lazy(() => import('../components/sections/ProjectsSection'))
@@ -15,7 +15,7 @@ const SEO_COPY = {
   en: {
     title: 'Anka Ljusic - Digital Designer | Brand, Web & UI Design',
     description:
-      'Anka Ljusic is a digital designer based in Belgrade, specializing in brand identity, web & product UI, and marketing visuals. Available for freelance projects worldwide.',
+      'Anka Ljusic is a digital designer in Belgrade specializing in brand identity, web & product UI, and marketing visuals. Available for freelance work worldwide.',
   },
   sr: {
     title: 'Anka Ljusić - Digitalni dizajner | Brand, web i UI dizajn',
@@ -58,8 +58,7 @@ function Home() {
   return (
     <>
       <SEO title={null} description={copy.description} url="/" />
-      <PersonSchema />
-      <WebSiteSchema />
+      <HomeSchema />
       <SiteShell>
         <main>
           <HeroSection />
