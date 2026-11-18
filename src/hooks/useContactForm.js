@@ -32,7 +32,6 @@ export function useContactForm() {
   const [email, setEmail] = useState('')
   const [company, setCompany] = useState('')
   const [phone, setPhone] = useState('')
-  const [website, setWebsite] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState(null)
 
@@ -70,7 +69,7 @@ export function useContactForm() {
     try {
       const res = await fetch('/api/contact.php', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name,
           email,
@@ -81,13 +80,12 @@ export function useContactForm() {
             ? (BUDGET_LABELS_EN[budgetRange] || budgetRange)
             : t('contact.budget.noMind'),
           project_details: projectDetails,
-          website,
           lang,
         }),
       })
 
-      const data = await res.json().catch(() => null)
-      if (res.ok && data?.success === true) {
+      const data = await res.json()
+      if (data.success) {
         setStep(3)
       } else {
         setSubmitError(t('contact.error.submit'))
@@ -109,7 +107,6 @@ export function useContactForm() {
     setEmail('')
     setCompany('')
     setPhone('')
-    setWebsite('')
     setSubmitError(null)
   }
 
@@ -123,7 +120,6 @@ export function useContactForm() {
     email,
     company,
     phone,
-    website,
     isSubmitting,
     submitError,
     isStep1Valid,
@@ -136,7 +132,6 @@ export function useContactForm() {
     setEmail,
     setCompany,
     setPhone,
-    setWebsite,
     handleNext,
     handlePrev,
     handleSubmit,

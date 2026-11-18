@@ -68,7 +68,6 @@ function Contact() {
     email,
     company,
     phone,
-    website,
     isSubmitting,
     submitError,
     isStep1Valid,
@@ -81,7 +80,6 @@ function Contact() {
     setEmail,
     setCompany,
     setPhone,
-    setWebsite,
     handleNext,
     handlePrev,
     handleSubmit,
@@ -312,16 +310,6 @@ function Contact() {
                       </div>
                     ))}
                   </div>
-                  <input
-                    type="text"
-                    name="website"
-                    value={website}
-                    onChange={(e) => setWebsite(e.target.value)}
-                    tabIndex={-1}
-                    autoComplete="off"
-                    aria-hidden="true"
-                    className="sr-only"
-                  />
                   {submitError && (
                     <p className="mt-6 text-sm text-red-400">{submitError}</p>
                   )}

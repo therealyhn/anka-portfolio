@@ -98,7 +98,7 @@
   "contact.success.titleAccent": "sent",
   "contact.success.text": "You can expect a reply within 1\u20132 business days.",
   "contact.success.newRequest": "+ Make new request.",
-  "contact.error.submit": "Something went wrong. Please try again. You can also write to hello@ljsc-design.com.",
+  "contact.error.submit": "Something went wrong. Please try again.",
   "contact.info.email": "email",
   "contact.info.phone": "phone",
   "contact.info.location": "location",
