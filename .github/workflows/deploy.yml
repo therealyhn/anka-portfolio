@@ -107,8 +107,10 @@ jobs:
 
       - name: Endpoint forme
         # Vite kopira public/api u dist/api; vendor ide pored njega, a api/.htaccess ga zatvara za posetioce.
+        # get_oauth_token.php je primer stranica iz PHPMailer paketa; endpoint je ne koristi, pa ne ide na server.
         run: |
           cp -R server/vendor dist/api/vendor
+          rm -f dist/api/vendor/phpmailer/phpmailer/get_oauth_token.php
           php -l dist/api/contact.php
           php -l dist/api/lib/kontakt.php
 
