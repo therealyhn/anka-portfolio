@@ -39,7 +39,7 @@ return [
         'key' => 'usluge',
         'name' => 'Usluge',
         'kind' => 'single',
-        'icon' => 'palette',
+        'icon' => 'briefcase',
         'titleField' => 'title_line_one',
         'fields' => [
             ['key' => 'eyebrow_label', 'type' => 'text', 'label' => 'Natpis iznad naslova (engleski)', 'required' => true, 'maxLength' => 40],
@@ -202,7 +202,7 @@ return [
         'key' => 'projekti',
         'name' => 'Projekti',
         'kind' => 'collection',
-        'icon' => 'briefcase',
+        'icon' => 'folder',
         'titleField' => 'title',
         'fields' => [
             ['key' => 'title', 'type' => 'text', 'label' => 'Naslov (engleski)', 'required' => true, 'maxLength' => 80],
