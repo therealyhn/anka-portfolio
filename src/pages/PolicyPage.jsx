@@ -37,6 +37,7 @@ const POLICY_CONTENT = {
             items: ['Name', 'Company name (optional)', 'Email address', 'Phone number (optional)', 'Message content'],
           },
           { type: 'p', text: 'This data is sent directly to our email inbox and is not stored in a database on the website.' },
+          { type: 'p', text: 'To prevent abuse, the form keeps a hash of the IP address (not the address itself) for at most 24 hours.' },
         ],
       },
       {
@@ -172,6 +173,7 @@ const POLICY_CONTENT = {
             items: ['Ime i prezime', 'Naziv kompanije (opciono)', 'Email adresa', 'Broj telefona (opciono)', 'Sadrzaj poruke'],
           },
           { type: 'p', text: 'Ovi podaci se salju direktno na nas email i ne cuvaju se u bazi podataka na sajtu.' },
+          { type: 'p', text: 'Radi zaštite od zloupotrebe forma čuva heš IP adrese (ne samu adresu) najduže 24 sata.' },
         ],
       },
       {
