@@ -37,7 +37,6 @@ function kontakt_handle(array $site, string $base): never
         'X-Content-Type-Options: nosniff',
         'Cache-Control: no-store',
         'Vary: Origin',
-        "Content-Security-Policy: default-src 'none'; frame-ancestors 'none'",
     ];
     if ($originAllowed) {
         $headers[] = 'Access-Control-Allow-Origin: ' . $origin;
@@ -101,8 +100,7 @@ function kontakt_handle(array $site, string $base): never
     }
 
     $ip = (string) ($_SERVER['REMOTE_ADDR'] ?? '');
-    $ipHash = hash_hmac('sha256', kontakt_rate_subject($ip), $config['rate_secret']);
-    $retryAfter = kontakt_rate_check($stateDir, $ipHash, time());
+    $retryAfter = kontakt_rate_check($stateDir, hash_hmac('sha256', $ip, $config['rate_secret']), time());
     if ($retryAfter > 0) {
         kontakt_respond(429, [...$headers, 'Retry-After: ' . $retryAfter], 'Previše poruka, pokušajte kasnije.');
     }
@@ -290,24 +288,8 @@ function kontakt_validate(array $fields, array $input): array|string
 }
 
 /**
- * Šta ulazi u heš limita po IP-ju: IPv4 cela adresa, IPv6 prvih 64 bita (jedan priključak dobija ceo /64 i menja
- * adresu po volji). Adrese iz ::/64 (::ffff:a.b.c.d, ::1) nisu prefiks jednog priključka i ostaju cele.
- */
-function kontakt_rate_subject(string $ip): string
-{
-    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) === false) {
-        return $ip;
-    }
-    $prefix = substr((string) inet_pton($ip), 0, 8);
-
-    return $prefix === str_repeat("\0", 8) ? $ip : bin2hex($prefix) . '::/64';
-}
-
-/**
  * Limit O06: 5 po satu po IP-ju (klizni prozor) i 100 po UTC danu po sajtu.
  * Vraća 0 kad je zahtev prihvaćen i upisan, inače broj sekundi za Retry-After.
- * Zaključavanje je svuda redom dan pa IP, a fajl IP-ja nastaje samo dok dnevni limit ima mesta: novih fajlova
- * ima najviše KONTAKT_DAY_LIMIT na dan, ma koliko adresa pošiljalac menjao.
  */
 function kontakt_rate_check(string $stateDir, string $ipHash, int $now): int
 {
@@ -322,44 +304,43 @@ function kontakt_rate_check(string $stateDir, string $ipHash, int $now): int
     if (is_file($ipFile) && (int) filemtime($ipFile) < $now - KONTAKT_STATE_TTL) {
         @unlink($ipFile);
     }
-
-    $dayHandle = fopen($stateDir . '/dan-' . gmdate('Ymd', $now) . '.txt', 'c+');
-    if ($dayHandle === false || !flock($dayHandle, LOCK_EX)) {
-        throw new RuntimeException('stanje: dnevni brojač nije dostupan');
+    $ipHandle = fopen($ipFile, 'c+');
+    if ($ipHandle === false || !flock($ipHandle, LOCK_EX)) {
+        throw new RuntimeException('stanje: fajl limita po IP-ju nije dostupan');
     }
 
     try {
-        $count = (int) trim((string) stream_get_contents($dayHandle));
-        if ($count >= KONTAKT_DAY_LIMIT) {
-            return KONTAKT_DAY_SECONDS - ($now % KONTAKT_DAY_SECONDS);
+        $stored = json_decode((string) stream_get_contents($ipHandle), true);
+        $times = array_values(array_filter(
+            is_array($stored) ? $stored : [],
+            static fn (mixed $time): bool => is_int($time) && $time > $now - KONTAKT_IP_WINDOW,
+        ));
+        if (count($times) >= KONTAKT_IP_LIMIT) {
+            return max(1, min($times) + KONTAKT_IP_WINDOW - $now);
         }
 
-        $ipHandle = fopen($ipFile, 'c+');
-        if ($ipHandle === false || !flock($ipHandle, LOCK_EX)) {
-            throw new RuntimeException('stanje: fajl limita po IP-ju nije dostupan');
+        $dayHandle = fopen($stateDir . '/dan-' . gmdate('Ymd', $now) . '.txt', 'c+');
+        if ($dayHandle === false || !flock($dayHandle, LOCK_EX)) {
+            throw new RuntimeException('stanje: dnevni brojač nije dostupan');
         }
         try {
-            $stored = json_decode((string) stream_get_contents($ipHandle), true);
-            $times = array_values(array_filter(
-                is_array($stored) ? $stored : [],
-                static fn (mixed $time): bool => is_int($time) && $time > $now - KONTAKT_IP_WINDOW,
-            ));
-            if (count($times) >= KONTAKT_IP_LIMIT) {
-                return max(1, min($times) + KONTAKT_IP_WINDOW - $now);
+            $count = (int) trim((string) stream_get_contents($dayHandle));
+            if ($count >= KONTAKT_DAY_LIMIT) {
+                return KONTAKT_DAY_SECONDS - ($now % KONTAKT_DAY_SECONDS);
             }
-            $times[] = $now;
-            $write($ipHandle, json_encode($times, JSON_THROW_ON_ERROR));
+            $write($dayHandle, (string) ($count + 1));
         } finally {
-            flock($ipHandle, LOCK_UN);
-            fclose($ipHandle);
+            flock($dayHandle, LOCK_UN);
+            fclose($dayHandle);
         }
 
-        $write($dayHandle, (string) ($count + 1));
+        $times[] = $now;
+        $write($ipHandle, json_encode($times, JSON_THROW_ON_ERROR));
 
         return 0;
     } finally {
-        flock($dayHandle, LOCK_UN);
-        fclose($dayHandle);
+        flock($ipHandle, LOCK_UN);
+        fclose($ipHandle);
     }
 }
 
@@ -447,8 +428,7 @@ function kontakt_log(string $stateDir, string $site, string $message): void
 }
 
 /**
- * Pri svakom 50. zahtevu briše brojače starije od 24 h. Rok iz pravnog teksta na sajtu bez poruka drži cron na
- * nalogu hostinga (plan kontakt-forma, O13).
+ * Pri svakom 50. zahtevu briše brojače starije od 24 h (heš IP-ja se ne čuva duže).
  */
 function kontakt_cleanup(string $stateDir, int $now): void
 {
