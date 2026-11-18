@@ -12,6 +12,8 @@ dist
 .env
 *.local
 public/api/config.php
+kontakt-config.php
+server/vendor/
 src/generated/
 
 # Editor directories and files
